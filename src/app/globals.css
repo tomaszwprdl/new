@@ -1,0 +1,102 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import '@fortawesome/fontawesome-free/css/all.min.css';
+
+:root {
+  --foreground-rgb: 0, 38, 66; /* deep blue for text */
+  --background-start-rgb: 255, 248, 237; /* cream */
+  --background-end-rgb: 255, 248, 237;   /* cream */
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: linear-gradient(
+    to bottom,
+    rgb(var(--background-start-rgb)),
+    rgb(var(--background-end-rgb))
+  );
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    background-color: theme('colors.cream');
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply rounded-md bg-primary text-white px-3.5 py-2.5 text-sm font-semibold shadow-sm hover:bg-accent transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary;
+  }
+  
+  .btn-secondary {
+    @apply text-primary border border-primary bg-cream px-3.5 py-2.5 rounded-md text-sm font-semibold hover:bg-accent hover:text-white transition-colors;
+  }
+}
+
+/* From Uiverse.io by aadium */
+.card {
+  position: relative;
+  width: 100%;
+  max-width: 4xl;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 40px 0 rgba(31, 38, 135, 0.45);
+}
+
+.card__content {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+}
+
+.card-details {
+  position: relative;
+  z-index: 2;
+}
+
+.sunsetsvg {
+  fill: url(#MyGradient);
+  filter: drop-shadow(0 0 10px rgba(255, 215, 1, 0.5));
+  animation: float 6s ease-in-out infinite;
+}
+
+.text-title {
+  background: linear-gradient(90deg, #FFD701, #FD2E24, #ca1eb3);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  font-weight: 700;
+}
+
+.text-body {
+  color: #2d3748;
+  line-height: 1.6;
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+#sun {
+  fill: url(#MyGradient);
+} 
