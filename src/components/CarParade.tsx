@@ -6,23 +6,23 @@ import { useLanguage } from '@/context/LanguageContext';
 
 const cars = [
   {
-    src: "/images/cars/car1..png",
+    src: "/images/cars/suv.png",
     category: { pl: "SUV", en: "SUV" }
   },
   {
-    src: "/images/cars/car2.png",
+    src: "/images/cars/kompaktowy.png",
     category: { pl: "Kompaktowe", en: "Compact" }
   },
   {
-    src: "/images/cars/car3.png",
+    src: "/images/cars/luksusowy.png",
     category: { pl: "Premium", en: "Premium" }
   },
   {
-    src: "/images/cars/car4.png",
+    src: "/images/cars/eco.png",
     category: { pl: "Ekonomiczny", en: "Economy" }
   },
   {
-    src: "/images/cars/car5.png",
+    src: "/images/cars/van.png",
     category: { pl: "Van", en: "Van" }
   }
 ];
