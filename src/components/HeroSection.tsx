@@ -48,7 +48,7 @@ export default function HeroSection() {
         className="absolute inset-0 w-full h-full z-0"
       >
         <OptimizedImage
-          src="/images/hero image.jpg"
+          src="/images/hero-image.png"
           alt="Scenic view of a car by the sea in Spain"
           fill
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 70vw"

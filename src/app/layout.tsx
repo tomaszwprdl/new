@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     siteName: 'NowRent',
     images: [
       {
-        url: '/images/hero image.jpg',
+        url: '/images/hero-image.png',
         width: 1200,
         height: 630,
         alt: 'NowRent Car Rental Service',
@@ -39,7 +39,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'NowRent - Car Rental in Spain',
     description: 'Premium car rental service in Spain. Choose from our wide range of vehicles.',
-    images: ['/images/hero image.jpg'],
+    images: ['/images/hero-image.png'],
   },
   robots: {
     index: true,
