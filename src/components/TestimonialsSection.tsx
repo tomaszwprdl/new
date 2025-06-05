@@ -248,10 +248,10 @@ export default function TestimonialsSection() {
                       </div>
                     </div>
                     <div className="relative">
-                      <h4 className="text-lg font-semibold text-[#FFD700] mb-2">
+                      <h4 className="text-xl font-bold text-white mb-2">
                         {testimonial.headline[language]}
                       </h4>
-                      <p className="text-lg text-gray-600 italic">
+                      <p className="text-white/90 italic">
                         &ldquo;{testimonial.review[language]}&rdquo;
                       </p>
                       <div className="absolute -left-2 -top-2 text-[#FFD700]/20 transform -rotate-12">
