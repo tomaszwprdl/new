@@ -485,11 +485,6 @@ export default function ClientFeatures() {
             ))}
           </div>
         </div>
-
-        {/* Additional gradient to blend the illustration */}
-        {/* Removing the white gradient overlay */}
-
-        {/* Removed <style jsx> for .hide-scrollbar, migrated to globals.css */}
       </div>
     </section>
   );

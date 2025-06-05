@@ -251,8 +251,8 @@ export default function TestimonialsSection() {
                       <h4 className="text-lg font-semibold text-[#FFD700] mb-2">
                         {testimonial.headline[language]}
                       </h4>
-                      <p className="text-white/80 italic">
-                        "{testimonial.review[language]}"
+                      <p className="text-lg text-gray-600 italic">
+                        &ldquo;{testimonial.review[language]}&rdquo;
                       </p>
                       <div className="absolute -left-2 -top-2 text-[#FFD700]/20 transform -rotate-12">
                         <svg className="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
