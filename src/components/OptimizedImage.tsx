@@ -13,6 +13,7 @@ interface OptimizedImageProps {
   quality?: number;
   objectFit?: 'contain' | 'cover' | 'fill' | 'none' | 'scale-down';
   objectPosition?: string;
+  loading?: 'lazy' | 'eager';
 }
 
 export default function OptimizedImage({
@@ -27,9 +28,21 @@ export default function OptimizedImage({
   quality = 75,
   objectFit = 'cover',
   objectPosition = 'center',
+  loading = 'lazy'
 }: OptimizedImageProps) {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(false);
+
+  // Determine if the image should be eagerly loaded
+  const shouldEagerLoad = priority || loading === 'eager';
+
+  // Default sizes based on common breakpoints
+  const defaultSizes = fill ? '100vw' : `
+    (max-width: 640px) 100vw,
+    (max-width: 768px) 75vw,
+    (max-width: 1024px) 50vw,
+    33vw
+  `;
 
   return (
     <div className={`relative ${className}`}>
@@ -44,9 +57,10 @@ export default function OptimizedImage({
           width={width}
           height={height}
           fill={fill}
-          priority={priority}
-          sizes={sizes}
+          priority={shouldEagerLoad}
+          sizes={sizes || defaultSizes}
           quality={quality}
+          loading={shouldEagerLoad ? 'eager' : 'lazy'}
           className={`
             duration-700 ease-in-out
             ${isLoading ? 'scale-110 blur-2xl grayscale' : 'scale-100 blur-0 grayscale-0'}

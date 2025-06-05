@@ -4,125 +4,152 @@ import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
-import { PhoneIcon } from '@heroicons/react/24/solid';
+import { PhoneIcon, ChatBubbleLeftIcon, Bars3Icon, XMarkIcon, EllipsisHorizontalIcon } from '@heroicons/react/24/solid';
+import { useLanguage } from '@/context/LanguageContext';
 
 const navigation = [
-  { name: 'Home', href: '#home' },
-  { name: 'About', href: '#about' },
-  { name: 'How It Works', href: '#how-it-works' },
-  { name: 'Testimonials', href: '#testimonials' },
-  { name: 'Contact', href: '#contact' },
+  { name: { pl: 'Strona główna', en: 'Home' }, href: '#home' },
+  { name: { pl: 'Samochody', en: 'Cars' }, href: '#cars' },
+  { name: { pl: 'Jak to działa', en: 'How It Works' }, href: '#how-it-works' },
+  { name: { pl: 'O nas', en: 'About' }, href: '#features' },
+  { name: { pl: 'Kontakt', en: 'Contact' }, href: '#booking' },
 ];
 
 const socialLinks = [
-  { name: 'Facebook', href: '#', icon: 'fa-facebook' },
-  { name: 'WhatsApp', href: '#', icon: 'fa-whatsapp' },
-  { name: 'Instagram', href: '#', icon: 'fa-instagram' },
-  { name: 'TikTok', href: '#', icon: 'fa-tiktok' },
+  { name: 'Facebook', href: 'https://www.facebook.com/share/1EGhm46q8X/', icon: 'fa-facebook' },
+  { name: 'WhatsApp', href: 'https://wa.me/34694229035', icon: 'fa-whatsapp' },
+  { name: 'Instagram', href: 'https://www.instagram.com/nowrente/', icon: 'fa-instagram' },
+  { name: 'TikTok', href: 'https://tiktok.com/@nowrentes', icon: 'fa-tiktok' },
 ];
 
 export default function MobileNavigation() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { language, setLanguage } = useLanguage();
+  const [showMenu, setShowMenu] = useState(false);
+  const [menuType, setMenuType] = useState<'nav' | 'quick' | null>(null);
 
   return (
     <>
-      {/* Logo at top */}
-      <div className="lg:hidden flex justify-center py-4 bg-primary">
-        <Link href="/">
-          <Image
-            src="/images/logo.png"
-            alt="NowRent Logo"
-            width={80}
-            height={80}
-            className="h-20 w-auto"
-          />
-        </Link>
+      {/* Floating Language Switcher */}
+      <div className="fixed top-4 right-4 z-[100000] lg:hidden">
+        <motion.div
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          className="flex items-center gap-2 px-4 py-2 bg-white/90 backdrop-blur-md rounded-full shadow-lg border border-gray-100"
+        >
+          <button
+            onClick={() => setLanguage('pl')}
+            className={`text-sm font-bold transition-all ${
+              language === 'pl'
+                ? 'text-[#FFD700]'
+                : 'text-gray-600'
+            }`}
+          >
+            PL
+          </button>
+          <span className="text-gray-300">|</span>
+          <button
+            onClick={() => setLanguage('en')}
+            className={`text-sm font-bold transition-all ${
+              language === 'en'
+                ? 'text-[#FFD700]'
+                : 'text-gray-600'
+            }`}
+          >
+            EN
+          </button>
+        </motion.div>
       </div>
 
-      {/* Sticky bottom bar */}
-      <div className="lg:hidden fixed bottom-0 left-0 right-0 w-screen bg-primary/95 shadow-lg z-[1002] flex flex-row items-center px-4 py-3">
-        {/* Phone button */}
-        <a
-          href="tel:+34694229035"
-          className="flex items-center justify-center w-12 h-12 rounded-full bg-accent text-white shadow-lg flex-shrink-0"
-        >
-          <PhoneIcon className="h-6 w-6" />
-        </a>
+      {/* Mobile Menu Button */}
+      <button
+        onClick={() => { setShowMenu(true); setMenuType('nav'); }}
+        className="fixed top-4 left-4 z-[100000] p-2 bg-white/90 backdrop-blur-md rounded-full shadow-lg border border-gray-100 lg:hidden"
+        aria-label="Open menu"
+      >
+        <Bars3Icon className="w-6 h-6 text-primary" />
+      </button>
 
-        <div className="flex-1" />
-
-        {/* Hamburger button */}
-        <button
-          onClick={() => setIsMenuOpen(true)}
-          className="flex flex-col justify-center items-center gap-1.5 w-12 h-12 z-[10050] flex-shrink-0"
-          aria-label="Open menu"
+      {/* Sticky Bar for Mobile Only */}
+      <div className="fixed bottom-0 left-0 right-0 z-[100000] lg:hidden">
+        <motion.div
+          initial={{ y: 100 }}
+          animate={{ y: 0 }}
+          transition={{ type: "spring", stiffness: 300, damping: 30 }}
+          className="flex items-center justify-between px-4 py-3 bg-white/95 backdrop-blur-sm border-t border-gray-100 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.1)]"
         >
-          <span className="w-6 h-0.5 bg-white rounded-full" />
-          <span className="w-6 h-0.5 bg-white rounded-full" />
-          <span className="w-6 h-0.5 bg-white rounded-full" />
-        </button>
+          {/* Book Now Button - Primary Action */}
+          <motion.a
+            href="#cars"
+            className="flex-1 mx-2 px-4 py-3 bg-gradient-to-r from-[#FFD700] to-[#FFB300] text-primary font-bold rounded-full text-center shadow-lg hover:shadow-xl transition-all active:scale-95"
+            whileTap={{ scale: 0.95 }}
+            style={{ WebkitTapHighlightColor: 'transparent' }}
+          >
+            {language === 'pl' ? 'Zarezerwuj' : 'Book Now'}
+          </motion.a>
+
+          {/* More Button for Secondary Actions */}
+          <button
+            className="ml-2 flex items-center justify-center w-12 h-12 rounded-full bg-primary text-white shadow-lg hover:bg-blue-900 transition-all"
+            onClick={() => { setShowMenu(true); setMenuType('quick'); }}
+            aria-label="More actions"
+            style={{ WebkitTapHighlightColor: 'transparent' }}
+          >
+            <EllipsisHorizontalIcon className="w-7 h-7" />
+          </button>
+        </motion.div>
       </div>
 
-      {/* Full screen menu overlay */}
+      {/* Overlay Menu for Navigation or Quick Actions */}
       <AnimatePresence>
-        {isMenuOpen && (
-          <>
-            {/* Dark overlay */}
+        {showMenu && menuType === 'nav' && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[100001] flex items-end justify-center bg-black/40 md:hidden"
+            onClick={() => setShowMenu(false)}
+          >
             <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              className="fixed inset-0 bg-primary/90 z-[99999]"
-              onClick={() => setIsMenuOpen(false)}
-            />
-
-            {/* Menu content */}
-            <motion.div
-              initial={{ x: '100%' }}
-              animate={{ x: 0 }}
-              exit={{ x: '100%' }}
-              transition={{ type: 'spring', damping: 25 }}
-              className="fixed inset-y-0 right-0 w-full sm:max-w-sm bg-cream z-[100000] p-6 overflow-y-auto"
+              initial={{ y: 100 }}
+              animate={{ y: 0 }}
+              exit={{ y: 100 }}
+              transition={{ type: 'spring', stiffness: 300, damping: 30 }}
+              className="w-full max-w-sm mx-auto bg-white rounded-t-2xl p-6 flex flex-col gap-4 shadow-2xl relative overflow-hidden"
+              onClick={e => e.stopPropagation()}
             >
-              {/* Close button */}
+              {/* Logo background */}
+              <div className="absolute inset-0 flex items-center justify-center pointer-events-none select-none opacity-10 z-0">
+                <Image src="/images/logo.svg" alt="NowRent Logo" width={180} height={180} className="w-40 h-40" />
+              </div>
               <button
-                onClick={() => setIsMenuOpen(false)}
-                className="absolute top-4 right-4 p-2"
+                className="absolute top-3 right-4 text-gray-400 hover:text-gray-700 z-10"
+                onClick={() => setShowMenu(false)}
                 aria-label="Close menu"
               >
-                <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                </svg>
+                <XMarkIcon className="w-7 h-7" />
               </button>
-
-              {/* Navigation links */}
-              <nav className="mt-8 flex flex-col gap-4">
-                {navigation.map((item) => (
+              {/* Navigation Links */}
+              <nav className="flex flex-col gap-4 mt-6 z-10">
+                {navigation.map((item, idx) => (
                   <a
-                    key={item.name}
+                    key={item.href}
                     href={item.href}
-                    className="text-lg font-bold px-4 py-2 text-primary hover:bg-accent hover:text-white rounded-lg transition-colors"
-                    onClick={() => setIsMenuOpen(false)}
+                    className="text-lg font-bold text-primary px-4 py-3 rounded-xl hover:bg-primary/10 transition-all text-center"
+                    onClick={() => setShowMenu(false)}
                   >
-                    {item.name}
+                    {item.name[language]}
                   </a>
                 ))}
               </nav>
-
-              {/* Language switcher */}
-              <div className="mt-8 flex items-center justify-center gap-2">
-                <button className="px-4 py-2 font-bold text-accent">PL</button>
-                <span className="text-primary-light">|</span>
-                <button className="px-4 py-2 font-bold text-primary">EN</button>
-              </div>
-
-              {/* Social icons */}
-              <div className="mt-8 flex justify-center gap-6">
-                {socialLinks.map((item) => (
+              {/* Social Links */}
+              <div className="flex justify-center gap-4 mt-6 z-10">
+                {socialLinks.map((item, idx) => (
                   <a
                     key={item.name}
                     href={item.href}
-                    className="text-primary-light hover:text-accent transition-colors text-2xl"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-2xl text-primary hover:text-[#FFD700] transition-colors"
                     aria-label={item.name}
                   >
                     <i className={`fab ${item.icon}`} />
@@ -130,7 +157,51 @@ export default function MobileNavigation() {
                 ))}
               </div>
             </motion.div>
-          </>
+          </motion.div>
+        )}
+        {showMenu && menuType === 'quick' && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[100001] flex items-end justify-center bg-black/40 md:hidden"
+            onClick={() => setShowMenu(false)}
+          >
+            <motion.div
+              initial={{ y: 100 }}
+              animate={{ y: 0 }}
+              exit={{ y: 100 }}
+              transition={{ type: 'spring', stiffness: 300, damping: 30 }}
+              className="w-full max-w-sm mx-auto bg-white rounded-t-2xl p-6 flex flex-col gap-4 shadow-2xl"
+              onClick={e => e.stopPropagation()}
+            >
+              <button
+                className="absolute top-3 right-4 text-gray-400 hover:text-gray-700"
+                onClick={() => setShowMenu(false)}
+                aria-label="Close menu"
+              >
+                <XMarkIcon className="w-7 h-7" />
+              </button>
+              <a
+                href="tel:+34694229035"
+                className="w-full flex items-center gap-3 px-4 py-3 bg-primary text-white font-bold rounded-xl text-center shadow hover:bg-blue-900 transition-all justify-center"
+                style={{ WebkitTapHighlightColor: 'transparent' }}
+              >
+                <PhoneIcon className="w-5 h-5" />
+                {language === 'pl' ? 'Zadzwoń' : 'Call'}
+              </a>
+              <a
+                href="https://wa.me/34694229035"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full flex items-center gap-3 px-4 py-3 bg-[#25D366] text-white font-bold rounded-xl text-center shadow hover:bg-[#128C7E] transition-all justify-center"
+                style={{ WebkitTapHighlightColor: 'transparent' }}
+              >
+                <i className="fab fa-whatsapp text-xl" />
+                WhatsApp
+              </a>
+            </motion.div>
+          </motion.div>
         )}
       </AnimatePresence>
     </>

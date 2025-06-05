@@ -1,0 +1,6 @@
+# Security Policy
+Contact: mailto:nowrentes@gmail.com
+Expires: 2025-01-01T00:00:00.000Z
+Preferred-Languages: en, pl
+Policy: https://nowrent.com/security-policy
+Hiring: https://nowrent.com/careers 

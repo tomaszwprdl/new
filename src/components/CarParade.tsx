@@ -3,27 +3,32 @@
 import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useLanguage } from '@/context/LanguageContext';
+import Image from 'next/image';
 
 const cars = [
   {
-    src: "/images/cars/suv.png",
-    category: { pl: "SUV", en: "SUV" }
+    src: '/images/graphics/Beep Beep - Medium Vehicle (3).svg',
+    category: { en: 'Economy', pl: 'Ekonomiczne' },
+    width: 286,
+    height: 117
   },
   {
-    src: "/images/cars/kompaktowy.png",
-    category: { pl: "Kompaktowe", en: "Compact" }
+    src: '/images/graphics/Beep Beep - Medium Vehicle (4).svg',
+    category: { en: 'Standard', pl: 'Standardowe' },
+    width: 286,
+    height: 117
   },
   {
-    src: "/images/cars/luksusowy.png",
-    category: { pl: "Premium", en: "Premium" }
+    src: '/images/graphics/Beep Beep - Medium Vehicle (5).svg',
+    category: { en: 'Premium', pl: 'Premium' },
+    width: 286,
+    height: 117
   },
   {
-    src: "/images/cars/eco.png",
-    category: { pl: "Ekonomiczny", en: "Economy" }
-  },
-  {
-    src: "/images/cars/van.png",
-    category: { pl: "Van", en: "Van" }
+    src: '/images/graphics/Beep Beep - Medium Vehicle.webp',
+    category: { en: 'Luxury', pl: 'Luksusowe' },
+    width: 286,
+    height: 117
   }
 ];
 
@@ -80,11 +85,7 @@ export default function CarParade() {
                 }}
               >
                 <div className="w-[200px] h-[140px] flex items-center justify-center bg-transparent">
-                  <motion.img
-                    src={car.src}
-                    alt={car.category[language]}
-                    className="max-w-full max-h-full object-contain select-none"
-                    draggable={false}
+                  <motion.div
                     animate={{ 
                       rotate: [-1, 1],
                       y: [-2, 2]
@@ -94,7 +95,17 @@ export default function CarParade() {
                       repeat: Infinity,
                       repeatType: "reverse"
                     }}
-                  />
+                  >
+                    <Image
+                      src={car.src}
+                      alt={car.category[language]}
+                      width={car.width}
+                      height={car.height}
+                      className="max-w-full max-h-full object-contain select-none"
+                      draggable={false}
+                      priority={idx < 4} // Only prioritize first set of cars
+                    />
+                  </motion.div>
                 </div>
                 
                 <motion.div

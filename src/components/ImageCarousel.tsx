@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { useLanguage } from '@/context/LanguageContext';
+import Image from 'next/image';
 
 interface CarouselImage {
   src: string;
@@ -38,27 +39,27 @@ const Modal: React.FC<{ image: CarouselImage; onClose: () => void }> = ({ image,
 // Default images for demonstration
 const defaultImages: CarouselImage[] = [
   {
-    src: "/images/cars/car1.png",
+    src: "/images/cars/car1.webp",
     title: "Sierra de Grazalema",
     desc: "Stunning mountain views and hiking trails."
   },
   {
-    src: "/images/cars/car2.png",
+    src: "/images/cars/car2.webp",
     title: "Las Salinas de Torrevieja",
     desc: "Famous pink salt lake, perfect for photos."
   },
   {
-    src: "/images/cars/car3.png",
+    src: "/images/cars/car3.webp",
     title: "Costa del Sol",
     desc: "Sunny beaches and vibrant nightlife."
   },
   {
-    src: "/images/cars/car4.png",
+    src: "/images/cars/car4.webp",
     title: "Barcelona",
     desc: "Iconic architecture and city life."
   },
   {
-    src: "/images/cars/car5.png",
+    src: "/images/cars/car5.webp",
     title: "Madrid",
     desc: "The heart of Spain, full of culture."
   }
@@ -153,7 +154,10 @@ export const ImageCarousel: React.FC<ImageCarouselProps> = ({ images = defaultIm
               <img
                 src={images[indices[0]].src}
                 alt={images[indices[0]].title}
+                width={280}
+                height={200}
                 className="rounded-lg shadow-lg object-contain w-[280px] h-[200px] bg-white"
+                loading="lazy"
               />
             </div>
             <div
@@ -168,7 +172,10 @@ export const ImageCarousel: React.FC<ImageCarouselProps> = ({ images = defaultIm
               <img
                 src={images[indices[1]].src}
                 alt={images[indices[1]].title}
+                width={440}
+                height={300}
                 className="rounded-xl shadow-2xl object-contain w-[440px] h-[300px] border-4 border-blue-300 bg-white"
+                loading="eager"
               />
               <div className="text-center mt-4">
                 <h3 className="text-xl font-semibold">{images[indices[1]].title}</h3>
@@ -189,7 +196,10 @@ export const ImageCarousel: React.FC<ImageCarouselProps> = ({ images = defaultIm
               <img
                 src={images[indices[2]].src}
                 alt={images[indices[2]].title}
+                width={280}
+                height={200}
                 className="rounded-lg shadow-lg object-contain w-[280px] h-[200px] bg-white"
+                loading="lazy"
               />
             </div>
             <button
@@ -204,23 +214,37 @@ export const ImageCarousel: React.FC<ImageCarouselProps> = ({ images = defaultIm
         {/* Mobile: show only the center image, enlarged and accessible */}
         <div className="flex md:hidden flex-1 items-center justify-center relative z-20 w-full">
           <div className="relative flex flex-col items-center justify-center mx-auto w-full">
-            <img
-              src={images[centerIdx].src}
-              alt={images[centerIdx].title}
-              className="rounded-xl shadow-2xl object-contain w-full h-[60vw] max-h-[400px] border-4 border-blue-300 bg-white"
-              style={{ minHeight: '220px' }}
-            />
+            <div className="relative w-full h-[60vw] max-h-[400px] min-h-[220px]">
+              <Image
+                src={images[centerIdx].src}
+                alt={images[centerIdx].title}
+                fill
+                sizes="(max-width: 768px) 100vw, 400px"
+                className="rounded-xl shadow-2xl object-contain border-4 border-blue-300 bg-white"
+                priority={centerIdx === 0}
+                loading={centerIdx === 0 ? "eager" : "lazy"}
+              />
+            </div>
             <div className="text-center mt-4 px-2">
               <h3 className="text-lg font-semibold">{images[centerIdx].title}</h3>
               <p className="text-base text-blue-800 mt-2">{images[centerIdx].desc}</p>
             </div>
-            <div className="flex mt-4 space-x-2 justify-center">
+            <div className="flex mt-4 space-x-4 justify-center">
               {images.map((img, idx) => (
                 <button
                   key={idx}
-                  className={`w-3 h-3 rounded-full ${idx === centerIdx ? "bg-blue-600" : "bg-blue-200"}`}
+                  className={`w-4 h-4 rounded-full transition-colors duration-200 ${
+                    idx === centerIdx ? "bg-blue-600" : "bg-blue-200"
+                  }`}
                   onClick={() => setCenterIdx(idx)}
-                  aria-label={`Go to ${img.title}`}
+                  aria-label={`${language === 'pl' ? 'Przejdź do' : 'Go to'} ${img.title}`}
+                  aria-current={idx === centerIdx ? 'true' : 'false'}
+                  style={{ 
+                    WebkitTapHighlightColor: 'transparent',
+                    minWidth: '24px',
+                    minHeight: '24px',
+                    padding: '8px'
+                  }}
                 />
               ))}
             </div>

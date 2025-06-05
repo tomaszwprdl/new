@@ -1,127 +1,251 @@
-import React from 'react';
-import Link from 'next/link';
-import Image from 'next/image';
-import { useLanguage } from '@/context/LanguageContext';
+'use client';
 
-const navigation = {
-  main: [
-    { name: { en: 'Home', pl: 'Strona główna' }, href: '#home' },
-    { name: { en: 'How it Works', pl: 'Jak to działa' }, href: '#how' },
-    { name: { en: 'Testimonials', pl: 'Opinie' }, href: '#testimonials' },
-    { name: { en: 'Contact', pl: 'Kontakt' }, href: '#contact' },
-  ],
-  social: [
-    { 
-      name: 'Facebook', 
-      href: '#', 
-      icon: 'facebook',
-      ariaLabel: 'Visit our Facebook page'
-    },
-    { 
-      name: 'WhatsApp', 
-      href: 'https://wa.me/34694229035', 
-      icon: 'whatsapp',
-      ariaLabel: 'Contact us on WhatsApp'
-    },
-    { 
-      name: 'Instagram', 
-      href: '#', 
-      icon: 'instagram',
-      ariaLabel: 'Follow us on Instagram'
-    },
-    { 
-      name: 'TikTok', 
-      href: '#', 
-      icon: 'tiktok',
-      ariaLabel: 'Follow us on TikTok'
-    },
-  ],
-};
+import React from 'react';
+import { useLanguage } from '@/context/LanguageContext';
+import Image from 'next/image';
+import { motion } from 'framer-motion';
+import { 
+  PhoneIcon, 
+  EnvelopeIcon,
+  MapPinIcon,
+  ChatBubbleLeftIcon
+} from '@heroicons/react/24/outline';
+import Link from 'next/link';
 
 export default function Footer() {
-  const { language } = useLanguage();
-  const currentYear = new Date().getFullYear();
+  const { language, setLanguage } = useLanguage();
+
+  const contactInfo = {
+    phone: '+34 123 456 789',
+    email: 'contact@nowrent.com',
+    address: {
+      en: 'Torrevieja, Spain',
+      pl: 'Torrevieja, Hiszpania'
+    },
+    whatsapp: 'WhatsApp'
+  };
+
+  const quickLinks = [
+    { 
+      title: { en: 'About Us', pl: 'O Nas' },
+      href: '#about'
+    },
+    {
+      title: { en: 'Our Cars', pl: 'Nasze Samochody' },
+      href: '#cars'
+    },
+    {
+      title: { en: 'Book Now', pl: 'Zarezerwuj' },
+      href: '#booking'
+    },
+    {
+      title: { en: 'Contact', pl: 'Kontakt' },
+      href: '#contact'
+    }
+  ];
+
+  const legalLinks = [
+    {
+      title: { en: 'Privacy Policy', pl: 'Polityka Prywatności' },
+      href: '/[lang]/privacy-policy'
+    },
+    {
+      title: { en: 'Terms & Conditions', pl: 'Regulamin' },
+      href: '/[lang]/terms'
+    },
+    {
+      title: { en: 'Cookie Policy', pl: 'Polityka Cookies' },
+      href: '/[lang]/cookies'
+    }
+  ];
+
+  const content = {
+    en: {
+      privacyPolicy: 'Privacy Policy',
+      terms: 'Terms of Service',
+      cookies: 'Cookie Policy',
+      rights: 'All rights reserved',
+      contact: {
+        title: 'Contact',
+        email: 'Email:',
+        phone: 'Phone:',
+        address: 'Address:'
+      }
+    },
+    pl: {
+      privacyPolicy: 'Polityka Prywatności',
+      terms: 'Regulamin',
+      cookies: 'Polityka Cookies',
+      rights: 'Wszelkie prawa zastrzeżone',
+      contact: {
+        title: 'Kontakt',
+        email: 'Email:',
+        phone: 'Telefon:',
+        address: 'Adres:'
+      }
+    }
+  };
 
   return (
-    <footer className="bg-primary pt-10 pb-4 mt-12 relative overflow-hidden">
-      {/* Background accent - subtle palm tree silhouette */}
-      <div className="absolute right-0 bottom-0 text-white opacity-10 text-[200px] pointer-events-none">
-        🌴
-      </div>
-      
-      <div className="max-w-5xl mx-auto px-4 flex flex-col md:flex-row items-center md:items-start justify-between gap-8 relative z-10">
-        {/* Logo and tagline */}
-        <div className="flex flex-col items-center md:items-start">
-          <div className="mb-2 relative w-[60px] h-[60px]">
-            <Image 
-              src="/images/logo.png" 
-              alt="NowRent logo" 
-              fill
-              className="object-contain"
-            />
-          </div>
-          <p className="text-white font-semibold text-lg">NowRent</p>
-          <p className="text-white text-sm mt-1">
-            {language === 'pl' ? 'Wypożyczalnia aut Costa Blanca' : 'Car Rental Costa Blanca'}
-          </p>
-        </div>
-
-        {/* Navigation */}
-        <nav className="flex flex-col items-center md:items-start gap-3">
-          {navigation.main.map((item) => (
-            <Link
-              key={item.name[language]}
-              href={item.href}
-              className="text-white hover:text-accent font-medium transition-colors"
-            >
-              {item.name[language]}
-            </Link>
-          ))}
-        </nav>
-
-        {/* Contact and Social */}
-        <div className="flex flex-col items-center md:items-end gap-4">
-          {/* Contact info */}
-          <div className="flex flex-col items-center md:items-end gap-2">
-            <a 
-              href="tel:+34694229035" 
-              className="text-white hover:text-accent font-medium transition-colors flex items-center gap-2"
-            >
-              <span>📞</span> +34 694 22 90 35
-            </a>
-            <a 
-              href="mailto:nowrentes@gmail.com"
-              className="text-white hover:text-accent font-medium transition-colors flex items-center gap-2"
-            >
-              <span>✉️</span> nowrentes@gmail.com
-            </a>
-          </div>
-
-          {/* Social links */}
-          <div className="flex gap-4 mt-2">
-            {navigation.social.map((item) => (
-              <a
-                key={item.name}
-                href={item.href}
-                aria-label={item.ariaLabel}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-white hover:text-accent transition-colors"
+    <footer className="bg-[#0D1B33] text-white">
+      <div className="container mx-auto px-4 py-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
+          {/* Company Info */}
+          <div className="space-y-4">
+            <div className="mb-4 flex items-center gap-2">
+              <Image
+                src="/images/logo.webp"
+                alt="NowRent Logo"
+                width={32}
+                height={32}
+                className="h-8 w-auto"
+                priority
+              />
+              <span className="text-white text-xl font-semibold">NowRent</span>
+            </div>
+            <p className="text-white/80 text-sm leading-relaxed">
+              {language === 'pl'
+                ? 'Twój zaufany partner w wynajmie samochodów w Hiszpanii. Oferujemy szeroki wybór pojazdów i profesjonalną obsługę.'
+                : 'Your trusted car rental partner in Spain. We offer a wide selection of vehicles and professional service.'}
+            </p>
+            <div className="flex items-center gap-2 pt-2">
+              <button
+                onClick={() => setLanguage('pl')}
+                className={`relative overflow-hidden rounded-lg flex items-center justify-center p-1 bg-[#0D1B33] ${
+                  language === 'pl' ? 'ring-2 ring-[#FFD700]' : 'border border-white/20'
+                }`}
               >
-                <i className={`fab fa-${item.icon} text-2xl`} />
-              </a>
-            ))}
+                <div className="relative w-8 h-6 overflow-hidden">
+                  <Image
+                    src="/images/flags/poli.webp"
+                    alt="Polish"
+                    fill
+                    className="object-cover"
+                  />
+                </div>
+                <span className="text-white text-sm ml-1">Poli</span>
+              </button>
+              <button
+                onClick={() => setLanguage('en')}
+                className={`relative overflow-hidden rounded-lg flex items-center justify-center p-1 bg-[#0D1B33] ${
+                  language === 'en' ? 'ring-2 ring-[#FFD700]' : 'border border-white/20'
+                }`}
+              >
+                <div className="relative w-8 h-6 overflow-hidden">
+                  <Image
+                    src="/images/flags/eng.webp"
+                    alt="English"
+                    fill
+                    className="object-cover"
+                  />
+                </div>
+                <span className="text-white text-sm ml-1">Eng</span>
+              </button>
+            </div>
+          </div>
+
+          {/* Quick Links */}
+          <div>
+            <h3 className="text-lg font-semibold mb-4 text-white/90">
+              {language === 'pl' ? 'Szybkie Linki' : 'Quick Links'}
+            </h3>
+            <ul className="space-y-2">
+              {quickLinks.map((link, index) => (
+                <motion.li
+                  key={index}
+                  whileHover={{ x: 5 }}
+                  className="transition-colors"
+                >
+                  <a
+                    href={link.href}
+                    className="text-white/70 hover:text-[#FFD700] text-sm"
+                  >
+                    {link.title[language]}
+                  </a>
+                </motion.li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Contact Info */}
+          <div>
+            <h3 className="text-lg font-semibold mb-4 text-white/90">
+              {language === 'pl' ? 'Kontakt' : 'Contact'}
+            </h3>
+            <ul className="space-y-2">
+              <li>
+                <a
+                  href={`tel:${contactInfo.phone}`}
+                  className="flex items-center gap-2 text-white/70 hover:text-[#FFD700] text-sm"
+                >
+                  <PhoneIcon className="w-4 h-4" />
+                  <span>{contactInfo.phone}</span>
+                </a>
+              </li>
+              <li>
+                <a
+                  href={`mailto:${contactInfo.email}`}
+                  className="flex items-center gap-2 text-white/70 hover:text-[#FFD700] text-sm"
+                >
+                  <EnvelopeIcon className="w-4 h-4" />
+                  <span>{contactInfo.email}</span>
+                </a>
+              </li>
+              <li>
+                <div className="flex items-start gap-2 text-white/70 text-sm">
+                  <MapPinIcon className="w-4 h-4 mt-1 flex-shrink-0" />
+                  <span>{contactInfo.address[language]}</span>
+                </div>
+              </li>
+              <li>
+                <a
+                  href={`https://wa.me/${contactInfo.phone.replace(/\D/g, '')}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 text-white/70 hover:text-[#FFD700] text-sm"
+                >
+                  <ChatBubbleLeftIcon className="w-4 h-4" />
+                  <span>{contactInfo.whatsapp}</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          {/* Legal */}
+          <div>
+            <h3 className="text-lg font-semibold mb-4 text-white/90">
+              {language === 'pl' ? 'Informacje Prawne' : 'Legal'}
+            </h3>
+            <ul className="space-y-2">
+              {legalLinks.map((link, index) => (
+                <motion.li
+                  key={index}
+                  whileHover={{ x: 5 }}
+                  className="transition-colors"
+                >
+                  <Link
+                    href={link.href.replace('[lang]', language)}
+                    className="text-white/70 hover:text-[#FFD700] text-sm"
+                  >
+                    {link.title[language]}
+                  </Link>
+                </motion.li>
+              ))}
+            </ul>
           </div>
         </div>
-      </div>
 
-      {/* Copyright */}
-      <div className="mt-8 text-center text-xs text-accent">
-        <p>© {currentYear} NowRent. {language === 'pl' ? 'Wszelkie prawa zastrzeżone.' : 'All rights reserved.'}</p>
-      </div>
-      {/* Designer credit */}
-      <div className="mt-2 text-center text-xs text-accent">
-        <p>Designed with ❤ by Weston</p>
+        {/* Bottom Bar */}
+        <div className="border-t border-white/10 mt-8 pt-6 text-center text-white/60 text-sm">
+          <div className="space-y-2">
+            <p>
+              © {new Date().getFullYear()} NowRent. {language === 'pl' ? 'Wszelkie prawa zastrzeżone.' : 'All rights reserved.'}
+            </p>
+            <p className="text-white/40">
+              Designed with <span className="text-red-500">❤</span> by Weston
+            </p>
+          </div>
+        </div>
       </div>
     </footer>
   );

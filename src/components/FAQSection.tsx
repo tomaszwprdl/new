@@ -1,3 +1,5 @@
+'use client';
+
 import React, { useState } from 'react';
 import { useLanguage } from '@/context/LanguageContext';
 
@@ -130,11 +132,11 @@ const FAQS = [
     key: "payment",
     en: {
       q: "How do I pay for my rental?",
-      a: "We prefer payment in cash or by bank transfer."
+      a: "We accept payment by cash, payment card, or bank transfer."
     },
     pl: {
       q: "Jak mogę zapłacić za wynajem?",
-      a: "Preferujemy płatność gotówką lub przelewem bankowym"
+      a: "Akceptujemy płatność gotówką, kartą płatniczą lub przelewem bankowym."
     }
   }
 ];

@@ -39,7 +39,7 @@ export default function EntryAnimation({ onComplete }: { onComplete: () => void 
             className="flex items-center justify-center"
           >
             <Image
-              src="/images/logo tezzz.svg"
+              src="/images/logo.svg"
               alt="NowRent Logo"
               width={346}
               height={346}
@@ -86,9 +86,8 @@ export default function EntryAnimation({ onComplete }: { onComplete: () => void 
                 alt="Car 7" 
                 width={286} 
                 height={117}
-                className="object-contain"
-                style={{ width: 'auto', height: '100%' }}
                 priority
+                className="object-contain"
               />
             </div>
           </motion.div>

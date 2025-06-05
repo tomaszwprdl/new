@@ -1,0 +1,110 @@
+﻿  { rel: 'preload', href: '/images/graphics/Beep Beep - Medium Vehicle.webp', as: 'image', type: 'image/webp' },
+  { rel: 'preload', href: '/images/graphics/swimming.svg', as: 'image', type: 'image/svg+xml' },
+  { rel: 'preload', href: '/images/logo.svg', as: 'image', type: 'image/svg+xml' },
+          href="/images/logo.svg"
+              logo: 'https://nowrent.com/images/logo.svg',
+                src="/images/optimized/about-image-2-large.webp"
+    image: '/images/cars/van.png',
+    image: '/images/cars/suv.png',
+    image: '/images/cars/luksusowy.png',
+    image: '/images/cars/kompaktowy.png',
+    image: '/images/cars/eco.png',
+          <div className="absolute inset-0" style={{ backgroundImage: 'url("/images/pattern.svg")', backgroundSize: '40px' }} />
+    src: '/images/graphics/Beep Beep - Medium Vehicle (3).svg',
+    src: '/images/graphics/Beep Beep - Medium Vehicle (4).svg',
+    src: '/images/graphics/Beep Beep - Medium Vehicle (5).svg',
+    src: '/images/graphics/Beep Beep - Medium Vehicle.webp',
+    { src: '/images/graphics/Allura - Sitting.svg', alt: 'Woman sitting illustration' },
+    { src: '/images/graphics/Città - Standing.svg', alt: 'Person standing illustration' }
+            src="/images/graphics/Città - Standing.svg"
+            src="/images/graphics/Allura - Sitting.svg"
+            {/* <div className="absolute inset-0 bg-[url('/images/pattern.svg')] opacity-5" /> */}
+                    src="/images/ceo.jpg"
+      <div className="absolute inset-0 bg-[url('/images/pattern.svg')] opacity-5" />
+              src="/images/ceo.jpg"
+                      src="/images/graphics/Allura - Sitting.svg" 
+                      src="/images/graphics/Città - Standing.svg" 
+                    <Image src="/images/graphics/pin.svg" alt="Local Service" width={56} height={56} className="w-14 h-14" />
+                    <Image src="/images/graphics/card.svg" alt="No Hidden Fees" width={56} height={56} className="w-14 h-14" />
+                    <Image src="/images/graphics/carrr.svg" alt="Free Delivery" width={56} height={56} className="w-14 h-14" />
+                    <Image src="/images/graphics/customer service.svg" alt="24/7 Support" width={56} height={56} className="w-14 h-14" />
+              src="/images/graphics/red shirt .svg" 
+                src: "/images/places/optimized/isla de Tabarca-large.webp",
+                src: "/images/places/optimized/Sierra Espuńa Mrcia-large.webp",
+                src: "/images/places/optimized/Castillo-de-Santa-Barbara-large.webp",
+                src: "/images/places/optimized/Sierra Espuńa -large.webp",
+                src: "/images/places/optimized/Santa_Pola_Parqu-large.webp",
+                src: "/images/places/optimized/Santa_Pola-large.webp",
+                src: "/images/places/optimized/Sierra Espuńa debera ampillar-large.webp",
+                src: "/images/places/optimized/Castillo de la Atalaya-large.webp",
+                src: "/images/places/optimized/playas-torrevieja-la-mata-large.webp",
+                src: "/images/places/optimized/Calle del Mar Santa pola-large.webp",
+                src: "/images/places/optimized/lake pink-large.webp",
+                src: "/images/places/optimized/torrevieja flamingos-large.webp",
+                src: "/images/places/optimized/Lagunas de La Mata y Torrevieja-large.webp",
+                src: "/images/places/optimized/Castillo de Monteagudo-large.webp",
+                src: "/images/places/optimized/torrevieja-large.webp",
+                src: "/images/places/optimized/Playa Albir-large.webp",
+                src: "/images/places/optimized/Sierra Espuńa Mrcia-large.webp",
+                src: "/images/places/optimized/Laguna de La Mata-large.webp",
+                src: "/images/places/optimized/Alicante-large.webp",
+  { src: "/images/contact/contact1.jpg", alt: "Contact 1" },
+  { src: "/images/contact/contact2.jpg", alt: "Contact 2" },
+  { src: "/images/contact/contact3.jpg", alt: "Contact 3" },
+    image: '/images/places/optimized/Alicante-large.webp',
+    image: '/images/places/optimized/benidorm-large.webp',
+    image: '/images/places/optimized/torrevieja-large.webp',
+    image: '/images/places/optimized/Elche-large.webp',
+    image: '/images/places/optimized/guadalest-large.webp',
+    image: '/images/places/optimized/isla de Tabarca-large.webp',
+    image: '/images/places/optimized/Laguna de La Mata-large.webp',
+    image: '/images/places/optimized/valencia-large.webp',
+    image: '/images/places/optimized/Alicante-large.webp',
+    image: '/images/places/optimized/torrevieja-large.webp',
+    image: '/images/places/optimized/Elche-large.webp',
+    image: '/images/places/optimized/Castillo de Monteagudo murcia-large.webp',
+    image: '/images/places/optimized/cartagena-large.webp',
+    image: '/images/places/optimized/guadalest-large.webp',
+    image: '/images/places/optimized/benidorm-large.webp',
+    image: '/images/places/optimized/valencia-large.webp',
+    image: '/images/places/optimized/Mar Menor-large.webp',
+    image: '/images/places/optimized/isla de Tabarca-large.webp',
+              src="/images/logo tezzz.svg"
+              <Image src="/images/graphics/Beep Beep - Medium Vehicle (1).svg" alt="Car 1" width={286} height={117} style={{ width: 'auto', height: '100%' }} />
+              <Image src="/images/graphics/Beep Beep - Medium Vehicle (2).svg" alt="Car 2" width={286} height={117} style={{ width: 'auto', height: '100%' }} />
+              <Image src="/images/graphics/Beep Beep - Medium Vehicle (3).svg" alt="Car 3" width={286} height={117} style={{ width: 'auto', height: '100%' }} />
+              <Image src="/images/graphics/Beep Beep - Medium Vehicle (4).svg" alt="Car 4" width={286} height={117} style={{ width: 'auto', height: '100%' }} />
+              <Image src="/images/graphics/Beep Beep - Medium Vehicle (5).svg" alt="Car 5" width={286} height={117} style={{ width: 'auto', height: '100%' }} />
+              <Image src="/images/graphics/Beep Beep - Medium Vehicle (1).svg" alt="Car 6" width={286} height={117} style={{ width: 'auto', height: '100%' }} />
+                src="/images/graphics/Beep Beep - Medium Vehicle .svg" 
+  { src: "/images/faq/faq1.jpg", question: "FAQ 1" },
+  { src: "/images/faq/faq2.jpg", question: "FAQ 2" },
+  { src: "/images/faq/faq3.jpg", question: "FAQ 3" },
+        src="/images/graphics/yellow shirt.svg" 
+    image: "/images/cars/optimized/eco-large.webp",
+    image: "/images/cars/optimized/kompaktowy-large.webp",
+    image: "/images/cars/optimized/suv-large.webp",
+    image: "/images/cars/optimized/van-large.webp",
+    image: "/images/cars/optimized/luksusowy-large.webp",
+                src="/images/logo.svg"
+                    src="/images/flags/poli.png"
+                    src="/images/flags/eng.png"
+                  src="/images/logo.svg"
+          src="/images/optimized/hero-image-large.webp"
+        background: `linear-gradient(to bottom, rgba(227, 242, 253, 0.4), rgba(255, 255, 255, 0.4)), url('/images/graphics/beach.jpeg')`,
+    src: "/images/cars/optimized/car1-large.webp",
+    src: "/images/cars/optimized/car2-large.webp",
+    src: "/images/cars/optimized/car3-large.webp",
+    src: "/images/cars/optimized/car4-large.webp",
+    src: "/images/cars/optimized/car5-large.webp",
+    { src: '/images/graphics/Beep Beep - Medium Vehicle (3).svg', width: 286, height: 117 },
+    { src: '/images/graphics/Beep Beep - Medium Vehicle (4).svg', width: 286, height: 117 },
+    { src: '/images/graphics/Beep Beep - Medium Vehicle (5).svg', width: 286, height: 117 },
+    { src: '/images/graphics/Beep Beep - Medium Vehicle.webp', width: 286, height: 117 }
+                  src="/images/logo.svg"
+          src="/images/graphics/swimming.svg"
+          src="/images/graphics/swimming.svg"
+  { src: "/images/testimonials/testimonial1.jpg", name: "Testimonial 1" },
+  { src: "/images/testimonials/testimonial2.jpg", name: "Testimonial 2" },
+  { src: "/images/testimonials/testimonial3.jpg", name: "Testimonial 3" },
+            backgroundImage: 'url("/images/pattern.svg")', 
