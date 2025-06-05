@@ -489,11 +489,7 @@ export default function ClientFeatures() {
         {/* Additional gradient to blend the illustration */}
         {/* Removing the white gradient overlay */}
 
-        <style jsx>{`
-          .hide-scrollbar::-webkit-scrollbar {
-            display: none;
-          }
-        `}</style>
+        {/* Removed <style jsx> for .hide-scrollbar, migrated to globals.css */}
       </div>
     </section>
   );

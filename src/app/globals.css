@@ -313,4 +313,13 @@ body {
 
 .animate-drive-across {
   animation: drive-across 1.2s ease-in-out forwards;
+}
+
+/* Migrated from <style jsx global> and <style jsx> blocks */
+.hide-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
 } 
