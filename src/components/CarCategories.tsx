@@ -6,70 +6,85 @@ import 'keen-slider/keen-slider.min.css';
 import { useLanguage } from '@/context/LanguageContext';
 import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ShieldCheckIcon, CurrencyEuroIcon, UserGroupIcon, SparklesIcon, XMarkIcon } from '@heroicons/react/24/outline';
+import { ShieldCheckIcon, CurrencyEuroIcon, UserGroupIcon, SparklesIcon, XMarkIcon, MapIcon } from '@heroicons/react/24/outline';
 
 // Add exchange rate constant
 const PLN_RATE = 4.32; // Example rate EUR to PLN
 
 const carTypes = [
   {
-    type: { en: 'Van', pl: 'Van' },
+    bookingValue: 'van',
+    type: { en: '7-seat / Van class', pl: 'Klasa 7-osobowa / van' },
+    alt: { en: 'Seven-seat van rental class for Alicante Airport pickup', pl: 'Klasa 7-osobowa / van do wynajęcia z odbiorem na lotnisku w Alicante' },
     image: '/images/cars/van.png',
     price: 55,
     details: { en: 'Van, 7 seats', pl: 'Van, 7 miejsc' },
     badge: { type: 'group', text: { en: 'Perfect for groups', pl: 'Idealne dla grup' } },
     features: [
       { icon: UserGroupIcon, text: { en: '7 seats', pl: '7 miejsc' } },
-      { icon: ShieldCheckIcon, text: { en: 'Full insurance', pl: 'Pełne ubezpieczenie' } },
+      { icon: ShieldCheckIcon, text: { en: 'Full insurance included', pl: 'Pełne ubezpieczenie w cenie' } },
+      { icon: MapIcon, text: { en: 'Unlimited mileage in Spain', pl: 'Bez limitu km w Hiszpanii' } },
       { icon: CurrencyEuroIcon, text: { en: 'No deposit', pl: 'Bez depozytu' } }
     ]
   },
   {
-    type: { en: 'SUV', pl: 'SUV' },
+    bookingValue: 'suv',
+    type: { en: 'SUV class', pl: 'Klasa SUV' },
+    alt: { en: 'SUV car rental class in Torrevieja and Orihuela Costa', pl: 'Klasa SUV do wynajęcia w Torrevieja i Orihuela Costa' },
     image: '/images/cars/suv.png',
     price: 45,
     details: { en: 'SUV, 5 seats', pl: 'SUV, 5 miejsc' },
     badge: { type: 'family', text: { en: 'Family friendly', pl: 'Przyjazny rodzinie' } },
     features: [
       { icon: UserGroupIcon, text: { en: '5 seats', pl: '5 miejsc' } },
-      { icon: ShieldCheckIcon, text: { en: 'Full insurance', pl: 'Pełne ubezpieczenie' } },
+      { icon: ShieldCheckIcon, text: { en: 'Full insurance included', pl: 'Pełne ubezpieczenie w cenie' } },
+      { icon: MapIcon, text: { en: 'Unlimited mileage in Spain', pl: 'Bez limitu km w Hiszpanii' } },
       { icon: CurrencyEuroIcon, text: { en: 'No deposit', pl: 'Bez depozytu' } }
     ]
   },
   {
-    type: { en: 'Luxury', pl: 'Luksusowy' },
+    bookingValue: 'luxury',
+    type: { en: 'Comfort class', pl: 'Klasa komfortowa' },
+    alt: { en: 'Comfort class car rental in Costa Blanca South', pl: 'Klasa komfort do wynajęcia na Costa Blanca South' },
     image: '/images/cars/luksusowy.png',
     price: 75,
-    details: { en: 'Luxury, 5 seats', pl: 'Luksusowy, 5 miejsc' },
-    badge: { type: 'luxury', text: { en: 'Unique in Spain', pl: 'Unikalny w Hiszpanii' } },
+    details: { en: 'Comfort, 5 seats', pl: 'Komfort, 5 miejsc' },
+    badge: { type: 'luxury', text: { en: 'Higher class when available', pl: 'Wyższa klasa, gdy dostępna' } },
     features: [
       { icon: UserGroupIcon, text: { en: '5 seats', pl: '5 miejsc' } },
-      { icon: SparklesIcon, text: { en: 'Premium', pl: 'Premium' } },
-      { icon: ShieldCheckIcon, text: { en: 'Full insurance', pl: 'Pełne ubezpieczenie' } },
+      { icon: SparklesIcon, text: { en: 'Higher comfort', pl: 'Wyższy komfort' } },
+      { icon: ShieldCheckIcon, text: { en: 'Full insurance included', pl: 'Pełne ubezpieczenie w cenie' } },
+      { icon: MapIcon, text: { en: 'Unlimited mileage in Spain', pl: 'Bez limitu km w Hiszpanii' } },
       { icon: CurrencyEuroIcon, text: { en: 'No deposit', pl: 'Bez depozytu' } }
     ]
   },
   {
-    type: { en: 'Compact', pl: 'Kompaktowy' },
+    bookingValue: 'compact',
+    type: { en: 'Compact class', pl: 'Klasa kompaktowa' },
+    alt: { en: 'Compact car rental class around Alicante Airport and Costa Blanca South', pl: 'Klasa kompaktowa do wynajęcia w okolicach Alicante Airport i Costa Blanca South' },
     image: '/images/cars/kompaktowy.png',
     price: 35,
     details: { en: 'Compact, 5 seats', pl: 'Kompaktowy, 5 miejsc' },
     badge: { type: 'economy', text: { en: 'Best value', pl: 'Najlepsza wartość' } },
     features: [
       { icon: UserGroupIcon, text: { en: '5 seats', pl: '5 miejsc' } },
-      { icon: ShieldCheckIcon, text: { en: 'Full insurance', pl: 'Pełne ubezpieczenie' } },
+      { icon: ShieldCheckIcon, text: { en: 'Full insurance included', pl: 'Pełne ubezpieczenie w cenie' } },
+      { icon: MapIcon, text: { en: 'Unlimited mileage in Spain', pl: 'Bez limitu km w Hiszpanii' } },
       { icon: CurrencyEuroIcon, text: { en: 'No deposit', pl: 'Bez depozytu' } }
     ]
   },
   {
-    type: { en: 'Economy', pl: 'Ekonomiczny' },
+    bookingValue: 'economic',
+    type: { en: 'Economy class', pl: 'Klasa ekonomiczna' },
+    alt: { en: 'Economy class car rental around Alicante Airport and Costa Blanca South', pl: 'Klasa ekonomiczna do wynajęcia w okolicach Alicante Airport i Costa Blanca South' },
     image: '/images/cars/eco.png',
     price: 29,
     details: { en: 'Economy, 4 seats', pl: 'Ekonomiczny, 4 miejsca' },
     badge: { type: 'economy', text: { en: 'Budget friendly', pl: 'Ekonomiczny wybór' } },
     features: [
       { icon: UserGroupIcon, text: { en: '4 seats', pl: '4 miejsca' } },
-      { icon: ShieldCheckIcon, text: { en: 'Full insurance', pl: 'Pełne ubezpieczenie' } },
+      { icon: ShieldCheckIcon, text: { en: 'Full insurance included', pl: 'Pełne ubezpieczenie w cenie' } },
+      { icon: MapIcon, text: { en: 'Unlimited mileage in Spain', pl: 'Bez limitu km w Hiszpanii' } },
       { icon: CurrencyEuroIcon, text: { en: 'No deposit', pl: 'Bez depozytu' } }
     ]
   }
@@ -147,12 +162,17 @@ export default function CarCategories() {
             className="text-center mb-16"
           >
             <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
-              {language === 'pl' ? 'Nasza Flota' : 'Our Fleet'}
+              {language === 'pl' ? 'Dostępne klasy aut' : 'Available car classes'}
             </h2>
-            <p className="text-lg md:text-xl text-white/80 max-w-2xl mx-auto">
+            <p className="text-base md:text-lg text-white/80 max-w-3xl mx-auto">
               {language === 'pl'
-                ? 'Wybierz auto idealne dla Twoich potrzeb'
-                : 'Choose the perfect car for your needs'}
+                ? 'Nasza flota zmienia się w zależności od dostępności. Zdjęcia pokazują przykładowe klasy aut, nie gwarantowane konkretne modele. Przed rezerwacją potwierdzimy z Tobą dokładne dostępne auto.'
+                : 'Our fleet changes depending on availability. Photos show example car classes, not guaranteed exact models. We confirm the exact available car with you before booking.'}
+            </p>
+            <p className="mt-4 text-sm md:text-base font-semibold text-[#FFD700] max-w-3xl mx-auto">
+              {language === 'pl'
+                ? 'Bez kaucji · Pełne ubezpieczenie w cenie · Bez limitu kilometrów w Hiszpanii'
+                : 'No deposit · No credit card required · Full insurance · Unlimited mileage inside Spain'}
             </p>
             
             {/* Currency Switcher */}
@@ -191,13 +211,13 @@ export default function CarCategories() {
                 <div>
                   <h3 className="text-2xl font-bold text-[#FFD700] mb-2">
                     {language === 'pl' 
-                      ? 'Indywidualna wycena = Najlepsza oferta'
-                      : 'Individual pricing for best deals'}
+                      ? 'Wycena dopasowana do Twojego terminu'
+                      : 'Personal quote based on your dates'}
                   </h3>
                   <p className="text-white/90 text-base leading-relaxed">
                     {language === 'pl'
-                      ? 'Aby zapewnić naszym klientom najkorzystniejsze ceny, kalkulujemy je indywidualnie w oparciu o typ samochodu, długość wynajmu, sezon i inne czynniki. Skontaktuj się z nami, aby otrzymać dokładną wycenę dopasowaną do Twoich potrzeb.'
-                      : 'To provide our customers with the best possible rates, we calculate prices individually based on the type of car, rental duration, season, and other factors. Contact us to get an exact quote tailored to your needs.'}
+                      ? 'Cena zależy od dat, sezonu, miejsca odbioru, długości wynajmu i klasy auta. Wyślij szczegóły wyjazdu, a potwierdzimy końcową cenę przed rezerwacją.'
+                      : 'Prices depend on dates, season, pickup location, rental length and car class. Send us your trip details and we’ll confirm the final price before booking.'}
                   </p>
                 </div>
               </div>
@@ -262,7 +282,7 @@ export default function CarCategories() {
                     >
                       <Image
                         src={car.image}
-                        alt={car.type[language]}
+                        alt={car.alt[language]}
                         width={240}
                         height={160}
                         className="object-contain w-auto h-auto max-h-full transform group-hover:scale-105 transition-transform duration-500"
@@ -286,28 +306,9 @@ export default function CarCategories() {
                       whileTap={{ scale: 0.95 }}
                       className="w-full mt-6 bg-gradient-to-r from-[#FFD700] to-[#FFB300] text-primary font-bold py-3 rounded-full shadow-lg hover:shadow-xl transition-all"
                       onClick={() => {
-                        // Get the car type value matching the select options in BookingForm
-                        let carTypeValue;
-                        switch(car.type.en.toLowerCase()) {
-                          case 'van':
-                            carTypeValue = 'van';
-                            break;
-                          case 'suv':
-                            carTypeValue = 'suv';
-                            break;
-                          case 'luxury':
-                            carTypeValue = 'luxury';
-                            break;
-                          case 'compact':
-                            carTypeValue = 'compact';
-                            break;
-                          case 'economy':
-                            carTypeValue = 'economy';
-                            break;
-                          default:
-                            carTypeValue = '';
-                        }
-                        
+                        // Preselect the matching car class in the request form
+                        const carTypeValue = car.bookingValue || '';
+
                         // Set the URL parameter
                         const url = new URL(window.location.href);
                         url.hash = `booking?carType=${carTypeValue}`;
@@ -320,7 +321,7 @@ export default function CarCategories() {
                         }
                       }}
                     >
-                      {language === 'pl' ? 'Zarezerwuj teraz' : 'Book now'}
+                      {language === 'pl' ? 'Sprawdź dostępność' : 'Check availability'}
                     </motion.button>
                   </div>
                 </motion.div>
@@ -474,10 +475,10 @@ export default function CarCategories() {
                   className="bg-gradient-to-r from-[#FFD700] to-[#FFB300] text-primary font-bold py-3 px-8 rounded-full shadow-lg hover:shadow-xl transition-all"
                   onClick={() => {
                     setIsCompareModalOpen(false);
-                    window.location.href = '#contact';
+                    window.location.href = '#booking';
                   }}
                 >
-                  {language === 'pl' ? 'Zarezerwuj teraz' : 'Book now'}
+                  {language === 'pl' ? 'Sprawdź dostępność' : 'Check availability'}
                 </motion.button>
               </div>
             </motion.div>

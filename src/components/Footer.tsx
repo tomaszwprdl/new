@@ -16,11 +16,11 @@ export default function Footer() {
   const { language, setLanguage } = useLanguage();
 
   const contactInfo = {
-    phone: '+34 123 456 789',
-    email: 'contact@nowrent.com',
+    phone: '+34 694 229 035',
+    email: 'nowrentes@gmail.com',
     address: {
-      en: 'Torrevieja, Spain',
-      pl: 'Torrevieja, Hiszpania'
+      en: 'Costa Blanca South, Spain',
+      pl: 'Costa Blanca, Hiszpania'
     },
     whatsapp: 'WhatsApp'
   };
@@ -28,7 +28,7 @@ export default function Footer() {
   const quickLinks = [
     { 
       title: { en: 'About Us', pl: 'O Nas' },
-      href: '#about'
+      href: '#features'
     },
     {
       title: { en: 'Our Cars', pl: 'Nasze Samochody' },
@@ -40,7 +40,7 @@ export default function Footer() {
     },
     {
       title: { en: 'Contact', pl: 'Kontakt' },
-      href: '#contact'
+      href: '#booking'
     }
   ];
 
@@ -105,8 +105,8 @@ export default function Footer() {
             </div>
             <p className="text-white/80 text-sm leading-relaxed">
               {language === 'pl'
-                ? 'Twój zaufany partner w wynajmie samochodów w Hiszpanii. Oferujemy szeroki wybór pojazdów i profesjonalną obsługę.'
-                : 'Your trusted car rental partner in Spain. We offer a wide selection of vehicles and professional service.'}
+                ? 'NowRent — lokalny wynajem aut w okolicach Lotniska Alicante i Costa Blanca. Bez kaucji, z pełnym ubezpieczeniem i obsługą po polsku.'
+                : 'NowRent — local car rental around Alicante Airport and Costa Blanca South. No deposit, full insurance and direct, friendly support.'}
             </p>
             <div className="flex items-center gap-2 pt-2">
               <button

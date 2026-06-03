@@ -30,7 +30,7 @@ const values = [
   },
   {
     icon: CurrencyEuroIcon,
-    title: { en: 'Best Rates', pl: 'Najlepsze Ceny' },
+    title: { en: 'Clear pricing', pl: 'Jasne ceny' },
     description: {
       en: 'Competitive pricing with no hidden fees',
       pl: 'Konkurencyjne ceny bez ukrytych opłat'
@@ -64,18 +64,18 @@ export default function AboutSection() {
               >
                 <h2 className="text-4xl md:text-5xl font-bold text-[#1A2B49]">
                   {language === 'pl' 
-                    ? 'Twój Zaufany Partner w Wynajmie Samochodów'
-                    : 'Your Trusted Car Rental Partner'}
+                    ? 'Lokalny wynajem aut — Lotnisko Alicante i Costa Blanca'
+                    : 'Your local car rental around Alicante Airport & Costa Blanca South'}
                 </h2>
                 <p className="text-lg text-gray-600">
                   {language === 'pl'
-                    ? 'Od 2020 roku dostarczamy naszym klientom najwyższej jakości usługi wynajmu samochodów w Alicante i okolicach. Nasza flota obejmuje szeroki wybór pojazdów, od ekonomicznych po luksusowe, aby spełnić wszystkie Twoje potrzeby transportowe.'
-                    : 'Since 2020, we\'ve been providing our customers with top-quality car rental services in Alicante and surrounding areas. Our fleet includes a wide selection of vehicles, from economy to luxury, to meet all your transportation needs.'}
+                    ? 'Od 2020 pomagamy wynajmować auta w okolicach Lotniska Alicante, Torrevieja i Costa Blanca. Jasne zasady, brak kaucji i bezpośredni kontakt po polsku sprawiają, że wynajem jest prostszy i spokojniejszy.'
+                    : 'Since 2020, we’ve helped customers rent cars around Alicante Airport and Costa Blanca South with clear rules, no deposit and direct support.'}
                 </p>
                 <p className="text-lg text-gray-600">
                   {language === 'pl'
-                    ? 'Nasz zespół doświadczonych profesjonalistów jest zawsze gotowy, aby zapewnić Ci bezpieczną, wygodną i niezapomnianą podróż.'
-                    : 'Our team of experienced professionals is always ready to ensure you have a safe, comfortable, and memorable journey.'}
+                    ? 'Większość naszych klientów trafia do nas z polecenia, Facebooka i polskiej społeczności. Odpowiadamy bezpośrednio na WhatsApp lub telefonicznie i wyjaśniamy proste zasady przed rezerwacją.'
+                    : 'Most of our customers come from referrals, Facebook and the Polish community. We reply directly on WhatsApp or by phone and explain the simple rules before you book.'}
                 </p>
               </motion.div>
 
@@ -131,7 +131,7 @@ export default function AboutSection() {
                     </div>
                     <div>
                       <h4 className="text-xl font-bold text-white">
-                        {language === 'pl' ? '1000+ Zadowolonych Klientów' : '1000+ Happy Customers'}
+                        {language === 'pl' ? '1000+ zrealizowanych wynajmów' : '1000+ completed rentals'}
                       </h4>
                       <p className="text-white/80">
                         {language === 'pl' ? 'Dołącz do naszej rodziny zadowolonych klientów' : 'Join our family of satisfied customers'}

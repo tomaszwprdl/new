@@ -41,48 +41,48 @@ const CARS = [
   { emoji: '🚗', name: 'Economy', color: '#FFD600' },
   { emoji: '🚙', name: 'Compact', color: '#4FC3F7' },
   { emoji: '🚐', name: 'Van', color: '#FF9800' },
-  { emoji: '🏎️', name: 'Premium', color: '#F44336' },
+  { emoji: '🏎️', name: 'Comfort', color: '#F44336' },
 ];
 
 const STEPS = [
   {
     number: '01',
-    pl: 'Napisz do nas lub zadzwoń – doradzimy i pomożemy wybrać idealny samochód',
-    en: 'Contact us - we\'ll help you choose the perfect car',
+    pl: 'Wyślij daty',
+    en: 'Send your dates',
     icon: '📞',
     subtitle: {
-      pl: 'Jesteśmy dostępni 24/7, aby pomóc Ci w wyborze',
-      en: 'We\'re available 24/7 to help you choose'
+      pl: 'Podaj miejsce odbioru, datę zwrotu i preferowaną klasę auta.',
+      en: 'Tell us pickup location, return date and preferred car class.'
     }
   },
   {
     number: '02',
-    pl: 'Wybierz termin i miejsce odbioru – resztą zajmiemy się my',
-    en: 'Pick your dates and pickup location - we\'ll handle the rest',
+    pl: 'Potwierdzamy dostępność',
+    en: 'We confirm availability',
     icon: '🚗',
     subtitle: {
-      pl: 'Elastyczne terminy i wygodne miejsca odbioru',
-      en: 'Flexible dates and convenient pickup locations'
+      pl: 'Wysyłamy dostępne opcje, końcową cenę i jasne zasady.',
+      en: 'We send available options, final price and clear rental terms.'
     }
   },
   {
     number: '03',
-    pl: 'Odbierz gotowy samochód – szybka, jasna umowa, bez ukrytych kosztów',
-    en: 'Pick up your ready car - quick, clear contract, no hidden fees',
+    pl: 'Odbierz auto',
+    en: 'Pick up your car',
     icon: '📝',
     subtitle: {
-      pl: 'Przejrzyste zasady i uczciwe ceny',
-      en: 'Transparent terms and fair prices'
+      pl: 'Szybkie przekazanie, czytelna umowa, bez ukrytych opłat.',
+      en: 'Quick handover, clear contract, no hidden fees.'
     }
   },
   {
     number: '04',
-    pl: 'Ciesz się podróżą – zwrot auta to czysta formalność',
-    en: 'Enjoy your journey - returning the car is easy and hassle-free',
+    pl: 'Prosty zwrot',
+    en: 'Return made simple',
     icon: '🏖️',
     subtitle: {
-      pl: 'Bezstresowy zwrot - dowolne miejsce w regionie',
-      en: 'Stress-free return anywhere in the region'
+      pl: 'Zwróć auto w ustalonym miejscu — lotnisko, apartament lub inna ustalona lokalizacja.',
+      en: 'Return the car at the agreed place — airport, apartment or arranged location.'
     }
   },
 ];
@@ -307,18 +307,20 @@ export default function HowItWorks() {
         >
           <div className="max-w-3xl mx-auto bg-white/80 backdrop-blur-sm rounded-2xl p-8 shadow-lg border border-white/20">
         <h2 className="text-4xl font-bold text-[#1A2B49] mb-4">
-          {language === 'pl' ? 'Jak to działa?' : 'How it works?'}
+          {language === 'pl' ? 'Jak to działa' : 'How it works'}
           </h2>
             <p className="text-lg text-[#1A2B49] max-w-2xl mx-auto font-medium">
             {language === 'pl' 
-            ? 'Prosty proces w 4 krokach do wynajęcia samochodu'
-            : 'A simple 4-step process to rent your car'}
+            ? 'Prosty proces sprawdzenia dostępności i wynajmu auta'
+            : 'A simple process to check availability and rent your car'}
           </p>
           </div>
         </motion.div>
 
       {/* Main content container */}
       <div className="max-w-6xl mx-auto px-4 relative" style={{ zIndex: 30 }}>
+        {/* Animation layer: clipped so the road/cars never render under the final CTA or bleed into the next section */}
+        <div className="relative overflow-hidden">
         {/* Road Container */}
         <div 
           className="absolute left-1/2 -translate-x-1/2 h-full"
@@ -550,6 +552,8 @@ export default function HowItWorks() {
             );
           })}
         </div>
+        </div>
+        {/* End animation layer */}
 
         {/* Call to Action */}
         <motion.div 

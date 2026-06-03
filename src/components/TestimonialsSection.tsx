@@ -16,95 +16,67 @@ import { StarIcon as StarOutlineIcon } from '@heroicons/react/24/outline';
 const testimonials = [
   {
     id: 1,
-    name: { en: 'Michael Brown', pl: 'Michael Brown' },
-    photo: `https://ui-avatars.com/api/?name=Michael+Brown&background=1A2B49&color=FFD700&size=128&bold=true`,
+    name: { en: 'Anna W.', pl: 'Anna W.' },
+    photo: `https://ui-avatars.com/api/?name=Anna+W&background=1A2B49&color=FFD700&size=128&bold=true`,
     rating: 5,
     headline: {
-      en: 'Exceptional service and beautiful cars',
-      pl: 'Wyjątkowa obsługa i piękne samochody'
+      en: 'Clear contract, no hidden costs',
+      pl: 'Czytelna umowa, bez ukrytych kosztów'
     },
     review: {
-      en: 'The entire experience with NowRent was fantastic. The SUV we rented was in perfect condition, and the staff went above and beyond to make our trip special.',
-      pl: 'Całe doświadczenie z NowRent było fantastyczne. SUV, który wynajęliśmy był w idealnym stanie, a personel zrobił wszystko, aby nasza podróż była wyjątkowa.'
+      en: 'Professional service, clear contract, clean car and no hidden costs. No deposit, no credit card and full insurance.',
+      pl: 'Profesjonalna obsługa, jasna i czytelna umowa, czyste auto i brak ukrytych kosztów. Bez depozytu, bez karty kredytowej i z pełnym ubezpieczeniem.'
     },
-    source: 'Google'
+    source: 'Facebook'
   },
   {
     id: 2,
-    name: { en: 'Anna Kowalska', pl: 'Anna Kowalska' },
-    photo: `https://ui-avatars.com/api/?name=Anna+Kowalska&background=1A2B49&color=FFD700&size=128&bold=true`,
+    name: { en: 'Mirka J.', pl: 'Mirka J.' },
+    photo: `https://ui-avatars.com/api/?name=Mirka+J&background=1A2B49&color=FFD700&size=128&bold=true`,
     rating: 5,
     headline: {
-      en: 'Best car rental in Spain',
-      pl: 'Najlepszy wynajem samochodów w Hiszpanii'
+      en: 'Car ready at Alicante airport',
+      pl: 'Auto gotowe na lotnisku w Alicante'
     },
     review: {
-      en: 'Professional service from start to finish. The luxury car was immaculate and made our vacation truly memorable.',
-      pl: 'Profesjonalna obsługa od początku do końca. Luksusowy samochód był nieskazitelny i sprawił, że nasze wakacje były naprawdę niezapomniane.'
+      en: 'Everything was arranged in Polish before the trip. The car was waiting at Alicante airport on time — no queues, no stress and no hidden fees.',
+      pl: 'Wszystko ustalone po polsku przed wyjazdem. Auto czekało na lotnisku w Alicante dokładnie na czas, bez kolejek, bez stresu i bez ukrytych opłat.'
     },
     source: 'Facebook'
   },
   {
     id: 3,
-    name: { en: 'Thomas Wagner', pl: 'Thomas Wagner' },
-    photo: `https://ui-avatars.com/api/?name=Thomas+Wagner&background=1A2B49&color=FFD700&size=128&bold=true`,
+    name: { en: 'Aleksandra D.', pl: 'Aleksandra D.' },
+    photo: `https://ui-avatars.com/api/?name=Aleksandra+D&background=1A2B49&color=FFD700&size=128&bold=true`,
     rating: 5,
     headline: {
-      en: 'Smooth and hassle-free rental',
-      pl: 'Bezproblemowy i łatwy wynajem'
+      en: 'In good hands from the start',
+      pl: 'W dobrych rękach od początku'
     },
     review: {
-      en: 'Quick pickup, no hidden fees, and a great van that fit our whole family. Will definitely use NowRent again!',
-      pl: 'Szybki odbiór, brak ukrytych opłat i świetny van, który pomieścił całą naszą rodzinę. Na pewno skorzystamy z NowRent ponownie!'
-    },
-    source: 'Google'
-  },
-  {
-    id: 4,
-    name: { en: 'Maria Rodriguez', pl: 'Maria Rodriguez' },
-    photo: `https://ui-avatars.com/api/?name=Maria+Rodriguez&background=1A2B49&color=FFD700&size=128&bold=true`,
-    rating: 5,
-    headline: {
-      en: 'Perfect family vacation car',
-      pl: 'Idealny samochód na rodzinne wakacje'
-    },
-    review: {
-      en: 'We rented a spacious SUV for our family trip. The car was clean, comfortable, and the service was outstanding. Highly recommend!',
-      pl: 'Wynajęliśmy przestronnego SUV-a na naszą rodzinną podróż. Samochód był czysty, wygodny, a obsługa była doskonała. Gorąco polecam!'
-    },
-    source: 'Google'
-  },
-  {
-    id: 5,
-    name: { en: 'Jan Nowicki', pl: 'Jan Nowicki' },
-    photo: `https://ui-avatars.com/api/?name=Jan+Nowicki&background=1A2B49&color=FFD700&size=128&bold=true`,
-    rating: 5,
-    headline: {
-      en: 'Great experience with luxury car',
-      pl: 'Świetne doświadczenie z luksusowym autem'
-    },
-    review: {
-      en: 'Rented a Mercedes for our anniversary. The car was pristine and the service was top-notch. Will definitely be back!',
-      pl: 'Wynajęliśmy Mercedesa na naszą rocznicę. Auto było w idealnym stanie, a obsługa na najwyższym poziomie. Na pewno wrócimy!'
+      en: 'From the beginning I felt in good hands. Everything was explained clearly, the car was clean and comfortable, and there were no surprise costs.',
+      pl: 'Od początku czułam, że jestem w dobrych rękach. Wszystko wyjaśnione jasno, samochód czysty i wygodny, żadnych niespodziewanych kosztów.'
     },
     source: 'Facebook'
   },
   {
-    id: 6,
-    name: { en: 'Sophie Martin', pl: 'Sophie Martin' },
-    photo: `https://ui-avatars.com/api/?name=Sophie+Martin&background=1A2B49&color=FFD700&size=128&bold=true`,
+    id: 4,
+    name: { en: 'Maciej L.', pl: 'Maciej L.' },
+    photo: `https://ui-avatars.com/api/?name=Maciej+L&background=1A2B49&color=FFD700&size=128&bold=true`,
     rating: 5,
     headline: {
-      en: 'Excellent customer service',
-      pl: 'Doskonała obsługa klienta'
+      en: 'Safe and well looked after',
+      pl: 'Bezpiecznie i z realną opieką'
     },
     review: {
-      en: 'The team was incredibly helpful and responsive. They delivered the car right to our hotel and made the whole process so easy.',
-      pl: 'Zespół był niesamowicie pomocny i reagował na wszystkie prośby. Dostarczyli samochód prosto do naszego hotelu i sprawili, że cały proces był bardzo łatwy.'
+      en: 'I felt safe and genuinely looked after as a customer. Other reviews describe the service well. Thank you — see you again.',
+      pl: 'Czułem bezpieczeństwo i realną opiekę nad klientem. Opinie trafnie opisują usługę. Dziękuję i do zobaczenia.'
     },
-    source: 'Google'
+    source: 'Facebook'
   }
 ];
+
+const FACEBOOK_REVIEWS_URL = 'https://www.facebook.com/people/NowRent/61574868050559/?sk=reviews';
 
 export default function TestimonialsSection() {
   const { language } = useLanguage();
@@ -199,7 +171,7 @@ export default function TestimonialsSection() {
             </h2>
             <p className="text-lg md:text-xl text-white/80 max-w-2xl mx-auto">
               {language === 'pl'
-                ? 'Poznaj opinie osób, które już nam zaufały'
+                ? 'Prawdziwe opinie klientów z Facebooka'
                 : 'Read reviews from people who trusted us'}
             </p>
           </div>
@@ -284,6 +256,22 @@ export default function TestimonialsSection() {
                 </div>
               </div>
             )}
+          </div>
+
+          {/* Facebook reviews link */}
+          <div className="flex flex-col items-center gap-3 mt-12">
+            <span className="text-white/80 text-sm md:text-base">
+              {language === 'pl' ? 'Polecane przez klientów' : 'Recommended by customers'}
+            </span>
+            <a
+              href={FACEBOOK_REVIEWS_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-3 px-6 py-3 rounded-full bg-[#1877F2] text-white font-semibold shadow-lg hover:bg-[#0f5ed7] transition-all hover:scale-105"
+            >
+              <i className="fab fa-facebook text-xl" />
+              {language === 'pl' ? 'Zobacz więcej opinii na Facebooku' : 'Read more on Facebook'}
+            </a>
           </div>
         </motion.div>
       </div>

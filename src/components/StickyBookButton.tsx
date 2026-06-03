@@ -19,7 +19,7 @@ export default function StickyBookButton() {
         hover:shadow-[0_16px_48px_rgba(255,215,0,0.4)] transition-all duration-300
         border border-white/20 hover:border-white/40"
       >
-        {language === 'pl' ? 'Zarezerwuj' : 'Book Now'}
+        {language === 'pl' ? 'Sprawdź dostępność' : 'Check availability'}
       </motion.a>
     </div>
   );

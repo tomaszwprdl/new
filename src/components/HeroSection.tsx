@@ -43,8 +43,8 @@ const trustBadges = [
   {
     id: 'rating',
     Icon: StarIcon,
-    pl: '4.9/5 Ocena klientów',
-    en: '4.9/5 Customer rating',
+    pl: 'Polecane przez klientów',
+    en: 'Recommended by customers',
     iconClasses: 'rotate-12',
     bgColor: 'from-purple-400/30 to-[#1A2B49]/40',
     iconColor: '#9F7AEA',
@@ -96,8 +96,8 @@ export default function HeroSection() {
             >
               <span className="text-gradient">
                 {language === 'pl' 
-                  ? 'Najlepszy wynajem aut na Costa Blanca'
-                  : 'Best Car Rental in Costa Blanca'}
+                  ? 'Wynajem auta bez kaucji — Lotnisko Alicante i Costa Blanca'
+                  : 'Local car rental around Alicante Airport & Costa Blanca South'}
               </span>
             </motion.h1>
 
@@ -109,7 +109,7 @@ export default function HeroSection() {
               className="text-xl md:text-2xl mb-4 font-bold text-center text-[#FFD700] drop-shadow-lg"
             >
               {language === 'pl'
-                ? 'Twoja przygoda zaczyna się tutaj! 🌞'
+                ? 'Auto na Twój pobyt w Hiszpanii — prosto i bez stresu'
                 : 'Your adventure starts here! 🌞'}
             </motion.p>
 
@@ -121,8 +121,8 @@ export default function HeroSection() {
               className="text-lg md:text-xl mb-10 font-medium text-white text-center drop-shadow-lg max-w-[95%] xl:max-w-[85%] mx-auto leading-relaxed"
             >
               {language === 'pl'
-                ? 'Odkrywaj region Alicante i Costa Blanca na własnych zasadach – komfort, swoboda i niezapomniane chwile za kierownicą idealnego auta od NowRent.'
-                : 'Explore Alicante and Costa Blanca on your own terms – comfort, freedom, and unforgettable moments behind the wheel of your perfect car from NowRent.'}
+                ? 'Pełne ubezpieczenie w cenie, bez karty kredytowej i z elastycznym odbiorem. Podaj daty i lokalizację — potwierdzimy dostępne auto bezpośrednio z Tobą.'
+                : 'No deposit, no credit card required, full insurance and flexible pickup. Tell us your dates and location — we confirm the available car class directly with you.'}
             </motion.p>
 
             {/* CTA Buttons */}
@@ -130,35 +130,37 @@ export default function HeroSection() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.4 }}
-              className="mb-4 md:mb-8 lg:mb-12 hidden md:flex flex-col md:flex-row items-center justify-center gap-4"
+              className="mb-4 md:mb-8 lg:mb-12 flex flex-col sm:flex-row items-center justify-center gap-4"
             >
-              {/* Call Now Button */}
-              <a
-                href="tel:+34694229035"
-                className="btn-primary inline-flex items-center gap-3 group md:w-auto w-full"
-              >
-                <i className="fas fa-phone-alt text-2xl text-primary group-hover:rotate-12 transition-transform" />
-                <span className="text-lg md:text-xl">
-                  {language === 'pl' ? 'Zadzwoń teraz' : 'Call now'}
-                </span>
-              </a>
-
-              {/* WhatsApp Button */}
+              {/* Primary CTA - Check availability (WhatsApp first) */}
               <a
                 href="https://wa.me/34694229035"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="btn-primary bg-[#25D366] hover:bg-[#128C7E] inline-flex items-center gap-3 group md:w-auto w-full border-none"
+                className="btn-primary bg-[#25D366] hover:bg-[#128C7E] inline-flex items-center gap-3 group w-full sm:w-auto border-none"
               >
                 <i className="fab fa-whatsapp text-2xl text-white group-hover:rotate-12 transition-transform" />
                 <span className="text-lg md:text-xl text-white">
-                  {language === 'pl' ? 'WhatsApp' : 'WhatsApp'}
+                  {language === 'pl' ? 'Sprawdź dostępność' : 'Check availability'}
+                </span>
+              </a>
+
+              {/* Secondary CTA - Call us */}
+              <a
+                href="tel:+34694229035"
+                className="btn-primary inline-flex items-center gap-3 group w-full sm:w-auto"
+              >
+                <i className="fas fa-phone-alt text-2xl text-primary group-hover:rotate-12 transition-transform" />
+                <span className="text-lg md:text-xl">
+                  {language === 'pl' ? 'Zadzwoń' : 'Call us'}
                 </span>
               </a>
             </motion.div>
 
-            <span className="text-sm md:text-base text-white/90 text-center block italic font-medium tracking-wide mb-8 hidden md:block">
-              {language === 'pl' ? 'Zarezerwuj auto na swój urlop w kilka minut!' : 'Book your holiday car in minutes!'}
+            <span className="text-sm md:text-base text-white/90 text-center block font-medium tracking-wide mb-8">
+              {language === 'pl'
+                ? 'Lotnisko Alicante · Torrevieja · Orihuela Costa · San Pedro del Pinatar · okolice'
+                : 'Alicante Airport · Torrevieja · Orihuela Costa · San Pedro del Pinatar · nearby areas'}
             </span>
 
             {/* Trust Badges */}

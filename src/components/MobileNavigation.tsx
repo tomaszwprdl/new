@@ -16,10 +16,8 @@ const navigation = [
 ];
 
 const socialLinks = [
-  { name: 'Facebook', href: 'https://www.facebook.com/share/1EGhm46q8X/', icon: 'fa-facebook' },
+  { name: 'Facebook', href: 'https://www.facebook.com/people/NowRent/61574868050559/', icon: 'fa-facebook' },
   { name: 'WhatsApp', href: 'https://wa.me/34694229035', icon: 'fa-whatsapp' },
-  { name: 'Instagram', href: 'https://www.instagram.com/nowrente/', icon: 'fa-instagram' },
-  { name: 'TikTok', href: 'https://tiktok.com/@nowrentes', icon: 'fa-tiktok' },
 ];
 
 export default function MobileNavigation() {
@@ -84,7 +82,7 @@ export default function MobileNavigation() {
             whileTap={{ scale: 0.95 }}
             style={{ WebkitTapHighlightColor: 'transparent' }}
           >
-            {language === 'pl' ? 'Zarezerwuj' : 'Book Now'}
+            {language === 'pl' ? 'Sprawdź dostępność' : 'Check availability'}
           </motion.a>
 
           {/* More Button for Secondary Actions */}
@@ -199,6 +197,16 @@ export default function MobileNavigation() {
               >
                 <i className="fab fa-whatsapp text-xl" />
                 WhatsApp
+              </a>
+              <a
+                href="https://www.facebook.com/people/NowRent/61574868050559/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full flex items-center gap-3 px-4 py-3 bg-[#1877F2] text-white font-bold rounded-xl text-center shadow hover:bg-[#0f5ed7] transition-all justify-center"
+                style={{ WebkitTapHighlightColor: 'transparent' }}
+              >
+                <i className="fab fa-facebook text-xl" />
+                Facebook
               </a>
             </motion.div>
           </motion.div>

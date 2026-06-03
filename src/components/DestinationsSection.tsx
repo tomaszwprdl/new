@@ -249,11 +249,11 @@ export default function DestinationsSection() {
             </span>
           </motion.div>
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-4 bg-clip-text text-transparent bg-gradient-to-r from-white via-white to-[#FFD700]">
-            {language === 'pl' ? 'Dokąd chcesz jechać?' : 'Where Do You Want to Go?'}
+            {language === 'pl' ? 'Popularne trasy z Alicante' : 'Where Do You Want to Go?'}
           </h2>
           <p className="text-lg md:text-xl text-white/80 max-w-2xl mx-auto">
             {language === 'pl'
-              ? 'Odkryj najpiękniejsze miejsca w okolicy Alicante'
+              ? 'Miejsca, do których często jadą nasi klienci'
               : 'Discover the most beautiful places around Alicante'}
           </p>
         </div>

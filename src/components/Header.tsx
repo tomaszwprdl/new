@@ -24,24 +24,10 @@ const socialLinks = [
   },
   { 
     name: 'Facebook', 
-    href: 'https://www.facebook.com/share/1EGhm46q8X/', 
+    href: 'https://www.facebook.com/people/NowRent/61574868050559/', 
     icon: 'facebook',
     ariaLabel: 'Visit our Facebook page',
     color: '#1877F2'
-  },
-  { 
-    name: 'Instagram', 
-    href: 'https://www.instagram.com/nowrente/', 
-    icon: 'instagram',
-    ariaLabel: 'Follow us on Instagram',
-    color: '#E4405F'
-  },
-  { 
-    name: 'TikTok', 
-    href: 'https://tiktok.com/@nowrentes', 
-    icon: 'tiktok',
-    ariaLabel: 'Follow us on TikTok',
-    color: '#000000'
   },
 ];
 

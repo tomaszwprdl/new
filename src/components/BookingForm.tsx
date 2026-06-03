@@ -136,12 +136,17 @@ export default function BookingForm() {
             className="text-center mb-12"
           >
             <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
-              {language === 'pl' ? 'Zarezerwuj Samochód' : 'Book a Car'}
+              {language === 'pl' ? 'Zapytaj o dostępność' : 'Request availability'}
             </h2>
-            <p className="text-lg text-white/80">
+            <p className="text-lg text-white/80 max-w-2xl mx-auto">
               {language === 'pl'
-                ? 'Wypełnij poniższy formularz, aby zarezerwować swój wymarzony samochód'
-                : 'Fill out the form below to book your dream car'}
+                ? 'Wyślij daty i miejsce odbioru. To nie jest automatyczna rezerwacja — potwierdzimy dostępne auto, końcową cenę i zasady przed rezerwacją.'
+                : 'Send your dates and pickup location. This is not an automatic booking — we confirm the available car, final price and terms with you before reservation.'}
+            </p>
+            <p className="mt-4 text-sm md:text-base text-[#FFD700] font-semibold max-w-2xl mx-auto">
+              {language === 'pl'
+                ? 'Dla najlepszej dostępności skontaktuj się z nami 3–4 dni przed wynajmem. Wynajmy tego samego dnia, na jutro i jednodniowe są ograniczone i mogą być niedostępne.'
+                : 'For best availability, contact us 3–4 days before your rental. Same-day, next-day and one-day rentals are limited and may not be available.'}
             </p>
           </motion.div>
 
@@ -272,21 +277,22 @@ export default function BookingForm() {
               {/* Car Type */}
               <div className="space-y-2">
                 <label htmlFor="carType" className="text-white/80 block">
-                  {language === 'pl' ? 'Typ samochodu' : 'Car Type'}
+                  {language === 'pl' ? 'Preferowana klasa auta' : 'Preferred car class'}
                 </label>
                 <select
                   id="carType"
                   name="carType"
                   value={formData.carType}
                   onChange={handleChange}
-                  className="w-full bg-white/5 border border-white/10 rounded-xl py-3 px-4 text-white focus:outline-none focus:ring-2 focus:ring-[#FFD700] focus:border-transparent"
-                  aria-label={language === 'pl' ? 'Wybierz typ samochodu' : 'Select car type'}
+                  className="w-full bg-white/5 border border-white/10 rounded-xl py-3 px-4 text-white focus:outline-none focus:ring-2 focus:ring-[#FFD700] focus:border-transparent [&>option]:bg-white [&>option]:text-slate-900"
+                  aria-label={language === 'pl' ? 'Wybierz klasę auta' : 'Select car class'}
                 >
-                  <option value="">{language === 'pl' ? 'Wybierz typ samochodu' : 'Select car type'}</option>
-                  <option value="economic">{language === 'pl' ? 'Ekonomiczny' : 'Economic'}</option>
-                  <option value="compact">{language === 'pl' ? 'Kompaktowy' : 'Compact'}</option>
-                  <option value="suv">{language === 'pl' ? 'SUV' : 'SUV'}</option>
-                  <option value="luxury">{language === 'pl' ? 'Luksusowy' : 'Luxury'}</option>
+                  <option value="" className="bg-white text-slate-900">{language === 'pl' ? 'Wybierz klasę auta' : 'Select car class'}</option>
+                  <option value="economic" className="bg-white text-slate-900">{language === 'pl' ? 'Klasa ekonomiczna' : 'Economy class'}</option>
+                  <option value="compact" className="bg-white text-slate-900">{language === 'pl' ? 'Klasa kompaktowa' : 'Compact class'}</option>
+                  <option value="suv" className="bg-white text-slate-900">{language === 'pl' ? 'Klasa SUV' : 'SUV class'}</option>
+                  <option value="van" className="bg-white text-slate-900">{language === 'pl' ? 'Klasa 7-osobowa / van' : '7-seat / Van class'}</option>
+                  <option value="luxury" className="bg-white text-slate-900">{language === 'pl' ? 'Klasa komfortowa' : 'Comfort class'}</option>
                 </select>
               </div>
 
@@ -335,7 +341,7 @@ export default function BookingForm() {
               {/* Phone */}
               <div className="space-y-2">
                 <label htmlFor="phone" className="text-white/80 block">
-                  {language === 'pl' ? 'Telefon' : 'Phone'}
+                  {language === 'pl' ? 'Telefon / WhatsApp' : 'Phone / WhatsApp'}
                 </label>
                 <div className="relative">
                   <PhoneIcon className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-white/60" aria-hidden="true" />
@@ -356,7 +362,7 @@ export default function BookingForm() {
               {/* Message */}
               <div className="space-y-2 md:col-span-2">
                 <label htmlFor="message" className="text-white/80 block">
-                  {language === 'pl' ? 'Wiadomość' : 'Message'}
+                  {language === 'pl' ? 'Dodatkowe informacje' : 'Additional information'}
                 </label>
                 <div className="relative">
                   <ChatBubbleBottomCenterTextIcon className="absolute left-3 top-3 w-5 h-5 text-white/60" aria-hidden="true" />
@@ -399,7 +405,7 @@ export default function BookingForm() {
               >
                 {isSubmitting 
                   ? (language === 'pl' ? 'Wysyłanie...' : 'Sending...') 
-                  : (language === 'pl' ? 'Zarezerwuj Teraz' : 'Book Now')}
+                  : (language === 'pl' ? 'Wyślij zapytanie' : 'Send request')}
               </motion.button>
             </div>
           </motion.form>
@@ -417,11 +423,14 @@ export default function BookingForm() {
               +34 694 22 90 35
             </a>
             <a
-              href="#contact"
-              className="inline-block bg-gradient-to-r from-[#FFD700] to-[#FFB300] text-[#1A2B49] font-bold py-3 px-8 rounded-full shadow-lg hover:shadow-xl transition-all text-lg md:text-xl border-2 border-[#FFD700] hover:bg-[#FFD700] hover:text-[#1A2B49]"
+              href="https://wa.me/34694229035"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-3 bg-[#25D366] hover:bg-[#128C7E] text-white font-bold py-3 px-8 rounded-full shadow-lg hover:shadow-xl transition-all text-lg md:text-xl border-2 border-[#25D366]"
               style={{ letterSpacing: '1px' }}
             >
-              {language === 'pl' ? 'Kontakt' : 'Contact'}
+              <i className="fab fa-whatsapp text-2xl" />
+              {language === 'pl' ? 'Napisz na WhatsApp' : 'Message on WhatsApp'}
             </a>
           </div>
         </div>

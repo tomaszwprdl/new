@@ -3,7 +3,7 @@ User-agent: *
 Allow: /
 
 # Sitemap location
-Sitemap: https://nowrent.com/sitemap.xml
+Sitemap: https://nowrent.eu/sitemap.xml
 
 # Disallow admin and API routes
 Disallow: /api/*

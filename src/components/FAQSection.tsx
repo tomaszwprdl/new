@@ -4,12 +4,21 @@ import React, { useState } from 'react';
 import { useLanguage } from '@/context/LanguageContext';
 
 const ICONS: Record<string, JSX.Element> = {
+  cars: <span className="text-blue-400 mr-3">🚗</span>,
   docs: <span className="text-blue-400 mr-3">📄</span>,
   deposit: <span className="text-yellow-400 mr-3">💳</span>,
+  card: <span className="text-yellow-500 mr-3">💳</span>,
+  insurance: <span className="text-blue-500 mr-3">🛡️</span>,
+  mileage: <span className="text-green-500 mr-3">🛣️</span>,
+  oneday: <span className="text-orange-400 mr-3">📅</span>,
+  airport: <span className="text-sky-400 mr-3">✈️</span>,
+  apartment: <span className="text-amber-500 mr-3">🏠</span>,
+  locations: <span className="text-orange-400 mr-3">📍</span>,
   babyseat: <span className="text-pink-400 mr-3">🧸</span>,
   hours: <span className="text-green-400 mr-3">⏰</span>,
   included: <span className="text-blue-500 mr-3">✅</span>,
   region: <span className="text-orange-400 mr-3">🗺️</span>,
+  outside: <span className="text-teal-500 mr-3">🌍</span>,
   accident: <span className="text-red-400 mr-3">🚨</span>,
   age: <span className="text-purple-400 mr-3">🎂</span>,
   extend: <span className="text-blue-400 mr-3">🔄</span>,
@@ -22,121 +31,154 @@ const FAQS = [
     key: "docs",
     en: {
       q: "What documents do I need to rent a car?",
-      a: "You need a valid driver's license and a passport or national ID."
+      a: "A valid driver's license and a passport or national ID."
     },
     pl: {
-      q: "Jakie dokumenty są potrzebne do wynajmu samochodu?",
-      a: "Potrzebujesz ważnego prawa jazdy, paszportu lub dowodu osobistego."
+      q: "Jakie dokumenty są potrzebne do wynajmu auta?",
+      a: "Ważne prawo jazdy oraz paszport lub dowód osobisty."
     }
   },
   {
     key: "deposit",
     en: {
-      q: "Is there a deposit required?",
-      a: "No deposit is required unless you order a baby or child seat. In that case, a small refundable deposit applies."
+      q: "Can I rent without a deposit or a credit card?",
+      a: "Yes. We take no deposit and don't require a credit card — you pay only for the rental."
     },
     pl: {
-      q: "Czy wymagany jest depozyt?",
-      a: "Nie pobieramy depozytu, chyba że zamówisz fotelik dziecięcy – wtedy obowiązuje niewielki, zwrotny depozyt."
+      q: "Czy mogę wynająć auto bez kaucji i karty kredytowej?",
+      a: "Tak. Nie pobieramy kaucji i nie wymagamy karty kredytowej — płacisz tylko za wynajem."
+    }
+  },
+  {
+    key: "insurance",
+    en: {
+      q: "Is full insurance included?",
+      a: "Yes, full insurance is included — no add-ons to the basic cover. We explain the simple rules before booking."
+    },
+    pl: {
+      q: "Czy pełne ubezpieczenie jest w cenie?",
+      a: "Tak, pełne ubezpieczenie jest w cenie — bez dopłat do podstawowej ochrony. Proste zasady wyjaśniamy przed rezerwacją."
+    }
+  },
+  {
+    key: "mileage",
+    en: {
+      q: "Is mileage unlimited?",
+      a: "Yes, mileage is unlimited inside Spain."
+    },
+    pl: {
+      q: "Czy kilometry są bez limitu?",
+      a: "Tak, na terenie Hiszpanii jeździsz bez limitu kilometrów."
+    }
+  },
+  {
+    key: "cars",
+    en: {
+      q: "Are the cars shown the exact vehicles I will get?",
+      a: "Photos show example car classes, not guaranteed exact models. We confirm the exact available car with you before booking."
+    },
+    pl: {
+      q: "Czy auta ze zdjęć to dokładnie te, które otrzymam?",
+      a: "Auta ze zdjęć są przykładami klas, nie gwarantowanymi konkretnymi modelami. Dokładne dostępne auto potwierdzamy z Tobą przed rezerwacją."
+    }
+  },
+  {
+    key: "airport",
+    en: {
+      q: "Can I pick up the car at Alicante Airport?",
+      a: "Yes, pickup and delivery at Alicante Airport is common. We arrange the details with you in advance."
+    },
+    pl: {
+      q: "Czy mogę odebrać auto na lotnisku w Alicante?",
+      a: "Tak, odbiór i podstawienie auta na Lotnisku Alicante to u nas standard. Szczegóły ustalamy wcześniej."
+    }
+  },
+  {
+    key: "apartment",
+    en: {
+      q: "Can the car be delivered to my apartment?",
+      a: "Yes, we can deliver the car to your apartment or another arranged location on the Costa Blanca."
+    },
+    pl: {
+      q: "Czy możliwe jest podstawienie auta pod apartament?",
+      a: "Tak, możemy podstawić auto pod apartament lub w inne ustalone miejsce na Costa Blanca."
+    }
+  },
+  {
+    key: "oneday",
+    en: {
+      q: "Can I rent for one day?",
+      a: "One-day rentals are limited and depend on availability. We prefer rentals of about 3 days to 2 weeks — message us to check."
+    },
+    pl: {
+      q: "Czy mogę wynająć auto na jeden dzień?",
+      a: "Wynajem jednodniowy jest ograniczony i zależy od dostępności. Preferujemy wynajem od około 3 dni do 2 tygodni — napisz, sprawdzimy."
+    }
+  },
+  {
+    key: "region",
+    en: {
+      q: "Can I travel outside the Alicante region?",
+      a: "Yes, you can travel throughout Spain with unlimited mileage."
+    },
+    pl: {
+      q: "Czy mogę podróżować poza region Alicante?",
+      a: "Tak, możesz podróżować po całej Hiszpanii bez limitu kilometrów."
+    }
+  },
+  {
+    key: "outside",
+    en: {
+      q: "Can I travel outside Spain?",
+      a: "Travel outside Spain is not currently available unless explicitly agreed in advance."
+    },
+    pl: {
+      q: "Czy mogę wyjechać poza Hiszpanię?",
+      a: "Wyjazd poza Hiszpanię nie jest obecnie dostępny, chyba że zostanie wcześniej wyraźnie uzgodniony."
+    }
+  },
+  {
+    key: "accident",
+    en: {
+      q: "What happens in case of a breakdown or accident?",
+      a: "Contact us right away. We're available 24/7 and will help with the next steps, including roadside assistance or a replacement car."
+    },
+    pl: {
+      q: "Co zrobić w przypadku awarii lub wypadku?",
+      a: "Skontaktuj się z nami od razu. Działamy 24/7 i pomożemy w kolejnych krokach, w tym w pomocy drogowej lub aucie zastępczym."
+    }
+  },
+  {
+    key: "driver",
+    en: {
+      q: "Can I add a second driver?",
+      a: "Yes, an additional driver is free. Anyone aged 21+ with a license held for at least a year can drive."
+    },
+    pl: {
+      q: "Czy mogę dodać drugiego kierowcę?",
+      a: "Tak, dodatkowy kierowca jest bez opłat. Może prowadzić każdy, kto ma ukończone 21 lat i prawo jazdy od co najmniej roku."
     }
   },
   {
     key: "babyseat",
     en: {
       q: "Can I request a baby or child seat?",
-      a: "Yes, we offer baby and child seats on request. Please let us know in advance if you need one. A small refundable deposit may apply."
+      a: "Yes, we offer baby and child seats on request. Let us know in advance if you need one."
     },
     pl: {
       q: "Czy mogę zamówić fotelik dziecięcy?",
-      a: "Tak, oferujemy foteliki dziecięce na życzenie. Prosimy o wcześniejszą informację, jeśli potrzebujesz fotelika. Może obowiązywać niewielki, zwrotny depozyt."
-    }
-  },
-  {
-    key: "hours",
-    en: {
-      q: "Can I pick up or return the car outside business hours?",
-      a: "Yes, we offer flexible pick-up and return times, including outside regular business hours. Please contact us in advance to arrange."
-    },
-    pl: {
-      q: "Czy mogę odebrać lub zwrócić samochód poza godzinami pracy?",
-      a: "Tak, oferujemy elastyczne godziny odbioru i zwrotu, także poza standardowymi godzinami pracy. Prosimy o wcześniejszy kontakt w celu ustalenia szczegółów."
-    }
-  },
-  {
-    key: "included",
-    en: {
-      q: "What is included in the rental price?",
-      a: "The price includes full insurance, local taxes, and 24/7 roadside assistance. There are no hidden fees."
-    },
-    pl: {
-      q: "Co jest wliczone w cenę wynajmu?",
-      a: "Cena obejmuje pełne ubezpieczenie, lokalne podatki oraz całodobową pomoc drogową. Brak ukrytych opłat."
-    }
-  },
-  {
-    key: "region",
-    en: {
-      q: "Can I travel outside the Alicante region with the car?",
-      a: "Yes, you can travel throughout Spain, but trips outside the country are currently not possible."
-    },
-    pl: {
-      q: "Czy mogę podróżować poza region Alicante?",
-      a: "Tak, możesz podróżować po terenie całej Hiszpanii, niestety wyjazdy poza granicę kraju są obecnie niemożliwe."
-    }
-  },
-  {
-    key: "accident",
-    en: {
-      q: "What happens in case of an accident or breakdown?",
-      a: "Contact us immediately. We provide 24/7 support and will assist you with the next steps, including roadside assistance or a replacement vehicle."
-    },
-    pl: {
-      q: "Co zrobić w przypadku wypadku lub awarii?",
-      a: "Skontaktuj się z nami niezwłocznie. Zapewniamy wsparcie 24/7 i pomożemy w dalszych krokach, w tym w organizacji pomocy drogowej lub pojazdu zastępczego."
-    }
-  },
-  {
-    key: "age",
-    en: {
-      q: "Is there an age limit for renting a car?",
-      a: "The minimum age is 21 years and you must have held a valid driver's license for at least one year."
-    },
-    pl: {
-      q: "Czy obowiązuje limit wiekowy przy wynajmie samochodu?",
-      a: "Minimalny wiek to 21 lat i musisz posiadać ważne prawo jazdy od co najmniej roku."
-    }
-  },
-  {
-    key: "extend",
-    en: {
-      q: "How do I extend my rental?",
-      a: "Contact us as soon as possible. We will check availability and help you extend your rental period."
-    },
-    pl: {
-      q: "Jak mogę przedłużyć wynajem?",
-      a: "Skontaktuj się z nami jak najszybciej. Sprawdzimy dostępność i pomożemy przedłużyć okres wynajmu."
-    }
-  },
-  {
-    key: "driver",
-    en: {
-      q: "Can I add an additional driver?",
-      a: "With us, additional drivers are free of charge. Anyone who is at least 21 years old and has held a driver's license for at least 1 year can drive the car."
-    },
-    pl: {
-      q: "Czy mogę dodać dodatkowego kierowcę?",
-      a: "U nas dodatkowi kierowcy są bez dodatkowych opłat. Samochodem może prowadzić każdy kto ma ukończone 21 lat i prawo jazdy min. 1 rok."
+      a: "Tak, oferujemy foteliki dziecięce na życzenie. Daj znać wcześniej, jeśli go potrzebujesz."
     }
   },
   {
     key: "payment",
     en: {
       q: "How do I pay for my rental?",
-      a: "We accept payment by cash, payment card, or bank transfer."
+      a: "By cash, card or bank transfer. A credit card is not required."
     },
     pl: {
       q: "Jak mogę zapłacić za wynajem?",
-      a: "Akceptujemy płatność gotówką, kartą płatniczą lub przelewem bankowym."
+      a: "Gotówką, kartą lub przelewem. Karta kredytowa nie jest wymagana."
     }
   }
 ];
