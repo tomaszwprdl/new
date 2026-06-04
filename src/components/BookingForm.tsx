@@ -143,10 +143,10 @@ export default function BookingForm() {
                 ? 'Wyślij daty, lokalizację i preferowaną klasę auta. Sprawdzimy dostępność, końcową cenę i zasady przed potwierdzeniem rezerwacji.'
                 : 'Send your dates, location and preferred car class. We’ll check availability, the final price and the terms before confirming your booking.'}
             </p>
-            <p className="mt-4 text-sm md:text-base text-[#FFD700] font-semibold max-w-2xl mx-auto">
+            <p className="mt-4 text-base md:text-lg text-[#FFD700] font-semibold max-w-2xl mx-auto">
               {language === 'pl'
-                ? 'Najlepiej napisz 3–4 dni wcześniej. Wynajem na dziś, jutro lub 1 dzień może być niedostępny.'
-                : 'For best availability, contact us 3–4 days before your rental. Same-day, next-day or one-day rentals may be unavailable.'}
+                ? 'Rezerwacje przyjmujemy z 3–4-dniowym wyprzedzeniem. Preferowany okres wynajmu to minimum 3 dni.'
+                : 'We accept bookings 3–4 days in advance. The preferred rental period is a minimum of 3 days.'}
             </p>
           </motion.div>
 
