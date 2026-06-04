@@ -119,7 +119,6 @@ export default function AboutSection() {
                 fill
                 sizes="(max-width: 768px) 100vw, 50vw"
                 quality={90}
-                priority
                 className="object-cover object-center"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />

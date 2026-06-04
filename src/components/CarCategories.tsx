@@ -16,7 +16,7 @@ const carTypes = [
     bookingValue: 'van',
     type: { en: '7-seat / Van class', pl: 'Klasa 7-osobowa / van' },
     alt: { en: 'Seven-seat van rental class for Alicante Airport pickup', pl: 'Klasa 7-osobowa / van do wynajmu na Lotnisku Alicante' },
-    image: '/images/cars/van.png',
+    image: '/images/cars/van.avif',
     price: 55,
     seats: { en: '7 seats', pl: '7 miejsc' },
     bestFor: { en: 'Ideal for groups', pl: 'Idealne dla grup' },
@@ -33,7 +33,7 @@ const carTypes = [
     bookingValue: 'suv',
     type: { en: 'SUV class', pl: 'Klasa SUV' },
     alt: { en: 'SUV car rental class in Torrevieja and Orihuela Costa', pl: 'Klasa SUV do wynajmu w Alicante i Torrevieja' },
-    image: '/images/cars/suv.png',
+    image: '/images/cars/suv.avif',
     price: 45,
     seats: { en: '5 seats', pl: '5 miejsc' },
     bestFor: { en: 'Good for families', pl: 'Dobre dla rodziny' },
@@ -50,7 +50,7 @@ const carTypes = [
     bookingValue: 'luxury',
     type: { en: 'Comfort class', pl: 'Klasa komfortowa' },
     alt: { en: 'Comfort class car rental in Costa Blanca South', pl: 'Klasa komfortowa auta do wynajmu w Costa Blanca' },
-    image: '/images/cars/luksusowy.png',
+    image: '/images/cars/luksusowy.avif',
     price: 75,
     seats: { en: '5 seats', pl: '5 miejsc' },
     bestFor: { en: 'Higher comfort when available', pl: 'Wyższy komfort, gdy dostępna' },
@@ -68,7 +68,7 @@ const carTypes = [
     bookingValue: 'compact',
     type: { en: 'Compact class', pl: 'Klasa kompaktowa' },
     alt: { en: 'Compact car rental class around Alicante Airport and Costa Blanca South', pl: 'Klasa kompaktowa auta do wynajmu w Costa Blanca' },
-    image: '/images/cars/kompaktowy.png',
+    image: '/images/cars/kompaktowy.avif',
     price: 35,
     seats: { en: '5 seats', pl: '5 miejsc' },
     bestFor: { en: 'Good balance', pl: 'Dobry kompromis' },
@@ -85,7 +85,7 @@ const carTypes = [
     bookingValue: 'economic',
     type: { en: 'Economy class', pl: 'Klasa ekonomiczna' },
     alt: { en: 'Economy class car rental around Alicante Airport and Costa Blanca South', pl: 'Klasa ekonomiczna auta do wynajmu w Alicante' },
-    image: '/images/cars/eco.png',
+    image: '/images/cars/eco.avif',
     price: 29,
     seats: { en: '4 seats', pl: '4 miejsca' },
     bestFor: { en: 'Budget-friendly choice', pl: 'Ekonomiczny wybór' },
@@ -360,7 +360,6 @@ export default function CarCategories() {
                         width={240}
                         height={160}
                         className="object-contain w-auto h-auto max-h-full transform group-hover:scale-105 transition-transform duration-500"
-                        priority={index === 0}
                       />
                     </motion.div>
 

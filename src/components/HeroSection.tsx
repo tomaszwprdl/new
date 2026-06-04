@@ -1,7 +1,6 @@
 'use client';
 
 import React from 'react';
-import Image from 'next/image';
 import { useLanguage } from '@/context/LanguageContext';
 import { WalletIcon, ShieldCheckIcon, ChatBubbleLeftRightIcon, StarIcon } from '@heroicons/react/24/outline';
 
@@ -59,18 +58,26 @@ export default function HeroSection() {
     <section id="home" className="relative bg-primary text-white min-h-screen flex items-center justify-center overflow-hidden">
       {/* Background image with overlay */}
       <div className="absolute inset-0 z-0">
-        <Image
-          src="/images/hero-image.webp"
-          alt="Sunny coastal road in Costa Blanca"
-          fill
-          className="object-cover object-center"
-          priority
-          quality={90}
-          sizes="100vw"
-          style={{
-            objectPosition: 'center 20%'
-          }}
-        />
+        <picture className="absolute inset-0 block h-full w-full">
+          <source
+            media="(min-width: 768px)"
+            srcSet="/images/hero-image.avif"
+            type="image/avif"
+          />
+          <source
+            media="(min-width: 768px)"
+            srcSet="/images/hero-image.webp"
+            type="image/webp"
+          />
+          <img
+            src="/images/hero-mobile.webp"
+            alt="Sunny coastal road in Costa Blanca"
+            className="h-full w-full object-cover object-center"
+            fetchPriority="high"
+            decoding="async"
+            style={{ objectPosition: 'center 20%' }}
+          />
+        </picture>
         <div className="absolute inset-0 bg-gradient-to-b from-primary/80 via-primary/60 to-primary/40 backdrop-blur-[1px]" />
         
         {/* Sunny overlay effect */}

@@ -125,7 +125,7 @@ export default function SurferAnimation() {
           src="/images/graphics/swimming.svg"
           width={SURFER_WIDTH}
           height={SURFER_HEIGHT}
-          priority
+          loading="lazy"
           className="pointer-events-none object-contain"
           style={{ width: '100%', height: '100%' }}
         />

@@ -85,14 +85,6 @@ export const metadata: Metadata = {
   },
 }
 
-// Preload critical assets
-const preloadAssets = [
-  { rel: 'preload', href: '/images/graphics/Beep Beep - Medium Vehicle (3).svg', as: 'image' },
-  { rel: 'preload', href: '/images/graphics/Beep Beep - Medium Vehicle (4).svg', as: 'image' },
-  { rel: 'preload', href: '/images/graphics/Beep Beep - Medium Vehicle (5).svg', as: 'image' },
-  { rel: 'preload', href: '/images/graphics/Beep Beep - Medium Vehicle.png', as: 'image' },
-]
-
 export default function RootLayout({
   children,
 }: {
@@ -101,11 +93,6 @@ export default function RootLayout({
   return (
     <html lang="pl" suppressHydrationWarning>
       <head>
-        <link
-          rel="preload"
-          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
-          as="style"
-        />
         <link
           rel="icon"
           type="image/svg+xml"
@@ -147,10 +134,6 @@ export default function RootLayout({
             }),
           }}
         />
-        {/* Add preload tags for critical assets */}
-        {preloadAssets.map((asset, index) => (
-          <link key={index} {...asset} />
-        ))}
       </head>
       <body className={inter.className}>
         <LanguageProvider>
