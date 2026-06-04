@@ -188,7 +188,7 @@ const FAQSection: React.FC = () => {
   const [open, setOpen] = useState<string | null>(null);
 
   return (
-    <section className="max-w-3xl mx-auto my-20 px-4 py-12 rounded-3xl bg-blue-50/60 shadow-inner relative">
+    <section id="faq" className="max-w-3xl mx-auto my-20 px-4 py-12 rounded-3xl bg-blue-50/60 shadow-inner relative">
       <h2 className="text-3xl font-extrabold text-blue-900 mb-10 text-center tracking-tight">
         {language === 'pl' ? 'Najczęściej zadawane pytania' : 'Frequently Asked Questions'}
       </h2>

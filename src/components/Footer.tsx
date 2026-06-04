@@ -48,7 +48,7 @@ export default function Footer() {
 
   const legalLinks = [
     {
-      title: { en: 'Privacy Policy', pl: 'Polityka Prywatności' },
+      title: { en: 'Privacy Policy', pl: 'Polityka prywatności' },
       href: '/[lang]/privacy-policy'
     },
     {
@@ -56,7 +56,7 @@ export default function Footer() {
       href: '/[lang]/terms'
     },
     {
-      title: { en: 'Cookie Policy', pl: 'Polityka Cookies' },
+      title: { en: 'Cookie Policy', pl: 'Polityka cookies' },
       href: '/[lang]/cookies'
     }
   ];
@@ -75,9 +75,9 @@ export default function Footer() {
       }
     },
     pl: {
-      privacyPolicy: 'Polityka Prywatności',
+      privacyPolicy: 'Polityka prywatności',
       terms: 'Regulamin',
-      cookies: 'Polityka Cookies',
+      cookies: 'Polityka cookies',
       rights: 'Wszelkie prawa zastrzeżone',
       contact: {
         title: 'Kontakt',

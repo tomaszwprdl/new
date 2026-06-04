@@ -132,7 +132,7 @@ export default function TestimonialsSection() {
   };
 
   return (
-    <section className="relative pt-16 md:pt-24 pb-28 md:pb-24 bg-gradient-to-b from-[#0D1B33] to-[#1A2B49] overflow-hidden">
+    <section id="testimonials" className="relative pt-16 md:pt-24 pb-28 md:pb-24 bg-gradient-to-b from-[#0D1B33] to-[#1A2B49] overflow-hidden">
       {/* Background Pattern */}
       <div className="absolute inset-0 opacity-5 pointer-events-none">
         <div 
