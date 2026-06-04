@@ -6,9 +6,10 @@ import { motion } from 'framer-motion';
 
 interface BackButtonProps {
   lang: 'en' | 'pl';
+  tone?: 'dark' | 'light';
 }
 
-export default function BackButton({ lang }: BackButtonProps) {
+export default function BackButton({ lang, tone = 'dark' }: BackButtonProps) {
   const router = useRouter();
 
   const buttonText = {
@@ -16,10 +17,26 @@ export default function BackButton({ lang }: BackButtonProps) {
     pl: 'Powrót'
   };
 
+  const toneClass =
+    tone === 'light'
+      ? 'text-white/80 hover:text-white'
+      : 'text-primary hover:text-primary/80';
+
+  const handleBack = () => {
+    // Use normal back navigation when there is history to go back to
+    // (e.g. the user came from the homepage); otherwise fall back to home
+    // so a directly-opened legal page still has a working button.
+    if (typeof window !== 'undefined' && window.history.length > 1) {
+      router.back();
+    } else {
+      router.push('/');
+    }
+  };
+
   return (
     <motion.button
-      onClick={() => router.back()}
-      className="mb-8 flex items-center gap-2 text-primary hover:text-primary/80 transition-colors group"
+      onClick={handleBack}
+      className={`mb-8 flex items-center gap-2 transition-colors group ${toneClass}`}
       initial={{ opacity: 0, x: -20 }}
       animate={{ opacity: 1, x: 0 }}
       transition={{ duration: 0.3 }}

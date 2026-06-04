@@ -95,7 +95,7 @@ export default function Header() {
                 <div className="absolute inset-0 bg-gold-gradient rounded-full blur-md opacity-50 group-hover:opacity-75 transition-opacity" />
                 <Image
                   src="/images/logo.svg"
-                  alt="NowRent Logo"
+                  alt="NowRent logo"
                   width={32}
                   height={32}
                   className="h-8 w-auto"
@@ -120,7 +120,7 @@ export default function Header() {
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   transition={{ delay: 0.3 }}
-                  className={`text-xl font-bold ml-1 ${
+                  className={`text-xl font-bold ${
                     scrolled 
                       ? 'text-accent' 
                       : 'text-gradient'

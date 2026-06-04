@@ -105,7 +105,7 @@ const ClientPage: React.FC = () => {
                       <div className="flex items-center justify-center gap-4 md:gap-6 mt-8 md:mt-12">
                         <div className="hidden md:block flex-shrink-0 h-56 w-auto -ml-32">
                           <Image 
-                            src="/images/graphics/Città - Standing.svg" 
+                            src="/images/graphics/citta-standing.svg" 
                             alt="Decorative standing figure" 
                             width={224}
                             height={224}
@@ -137,7 +137,7 @@ const ClientPage: React.FC = () => {
                       <div className="flex items-center justify-center gap-4 md:gap-6 mt-8 md:mt-12">
                         <div className="hidden md:block flex-shrink-0 h-56 w-auto -ml-32">
                           <Image 
-                            src="/images/graphics/Città - Standing.svg" 
+                            src="/images/graphics/citta-standing.svg" 
                             alt="Decorative standing figure" 
                             width={224}
                             height={224}
@@ -440,7 +440,7 @@ const ClientPage: React.FC = () => {
                     <div className="flex items-center justify-center gap-4 md:gap-6 mt-8 md:mt-12">
                       <div className="hidden md:block flex-shrink-0 h-56 w-auto -ml-32">
                         <Image 
-                          src="/images/graphics/Città - Standing.svg" 
+                          src="/images/graphics/citta-standing.svg" 
                           alt="Decorative standing figure" 
                           width={224}
                           height={224}
@@ -472,7 +472,7 @@ const ClientPage: React.FC = () => {
                     <div className="flex items-center justify-center gap-4 md:gap-6 mt-8 md:mt-12">
                       <div className="hidden md:block flex-shrink-0 h-56 w-auto -ml-32">
                         <Image 
-                          src="/images/graphics/Città - Standing.svg" 
+                          src="/images/graphics/citta-standing.svg" 
                           alt="Decorative standing figure" 
                           width={224}
                           height={224}

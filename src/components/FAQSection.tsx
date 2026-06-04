@@ -31,7 +31,7 @@ const FAQS = [
     key: "docs",
     en: {
       q: "What documents do I need to rent a car?",
-      a: "A valid driver's license and a passport or national ID."
+      a: "A valid driving licence and a passport or national ID."
     },
     pl: {
       q: "Jakie dokumenty są potrzebne do wynajmu auta?",
@@ -42,33 +42,33 @@ const FAQS = [
     key: "deposit",
     en: {
       q: "Can I rent without a deposit or a credit card?",
-      a: "Yes. We take no deposit and don't require a credit card — you pay only for the rental."
+      a: "Yes. We take no deposit and do not require a credit card. You only pay for the rental."
     },
     pl: {
       q: "Czy mogę wynająć auto bez kaucji i karty kredytowej?",
-      a: "Tak. Nie pobieramy kaucji i nie wymagamy karty kredytowej — płacisz tylko za wynajem."
+      a: "Tak. Nie pobieramy kaucji i nie wymagamy karty kredytowej. Płacisz tylko za wynajem."
     }
   },
   {
     key: "insurance",
     en: {
       q: "Is full insurance included?",
-      a: "Yes, full insurance is included — no add-ons to the basic cover. We explain the simple rules before booking."
+      a: "Yes. Full insurance is included. Before booking, we explain the exact cover and the rules for using the car."
     },
     pl: {
       q: "Czy pełne ubezpieczenie jest w cenie?",
-      a: "Tak, pełne ubezpieczenie jest w cenie — bez dopłat do podstawowej ochrony. Proste zasady wyjaśniamy przed rezerwacją."
+      a: "Tak. Pełne ubezpieczenie jest w cenie. Przed rezerwacją wyjaśniamy dokładnie zakres ochrony i zasady korzystania z auta."
     }
   },
   {
     key: "mileage",
     en: {
       q: "Is mileage unlimited?",
-      a: "Yes, mileage is unlimited inside Spain."
+      a: "Yes. Mileage is unlimited inside Spain."
     },
     pl: {
       q: "Czy kilometry są bez limitu?",
-      a: "Tak, na terenie Hiszpanii jeździsz bez limitu kilometrów."
+      a: "Tak. Na terenie Hiszpanii możesz jeździć bez limitu kilometrów."
     }
   },
   {
@@ -79,95 +79,95 @@ const FAQS = [
     },
     pl: {
       q: "Czy auta ze zdjęć to dokładnie te, które otrzymam?",
-      a: "Auta ze zdjęć są przykładami klas, nie gwarantowanymi konkretnymi modelami. Dokładne dostępne auto potwierdzamy z Tobą przed rezerwacją."
+      a: "Zdjęcia pokazują przykładowe klasy aut, nie gwarantowane konkretne modele. Dokładne dostępne auto potwierdzamy z Tobą przed rezerwacją."
     }
   },
   {
     key: "airport",
     en: {
       q: "Can I pick up the car at Alicante Airport?",
-      a: "Yes, pickup and delivery at Alicante Airport is common. We arrange the details with you in advance."
+      a: "Yes. Delivery and pickup at Alicante Airport are common for us. We arrange the details in advance."
     },
     pl: {
       q: "Czy mogę odebrać auto na lotnisku w Alicante?",
-      a: "Tak, odbiór i podstawienie auta na Lotnisku Alicante to u nas standard. Szczegóły ustalamy wcześniej."
+      a: "Tak. Podstawienie i odbiór auta na Lotnisku Alicante to u nas standard. Szczegóły ustalamy wcześniej."
     }
   },
   {
     key: "apartment",
     en: {
       q: "Can the car be delivered to my apartment?",
-      a: "Yes, we can deliver the car to your apartment or another arranged location on the Costa Blanca."
+      a: "Yes. We can deliver the car to your apartment or another agreed location on Costa Blanca."
     },
     pl: {
       q: "Czy możliwe jest podstawienie auta pod apartament?",
-      a: "Tak, możemy podstawić auto pod apartament lub w inne ustalone miejsce na Costa Blanca."
+      a: "Tak. Możemy podstawić auto pod apartament lub inne ustalone miejsce na Costa Blanca."
     }
   },
   {
     key: "oneday",
     en: {
       q: "Can I rent for one day?",
-      a: "One-day rentals are limited and depend on availability. We prefer rentals of about 3 days to 2 weeks — message us to check."
+      a: "One-day rentals are very limited and often unavailable. It is best to ask at least 3–4 days in advance. We usually prefer rentals from around 3 days."
     },
     pl: {
       q: "Czy mogę wynająć auto na jeden dzień?",
-      a: "Wynajem jednodniowy jest ograniczony i zależy od dostępności. Preferujemy wynajem od około 3 dni do 2 tygodni — napisz, sprawdzimy."
+      a: "Wynajem na 1 dzień jest mocno ograniczony i często niedostępny. Najlepiej zapytać minimum 3–4 dni wcześniej. Preferujemy wynajem od około 3 dni."
     }
   },
   {
     key: "region",
     en: {
       q: "Can I travel outside the Alicante region?",
-      a: "Yes, you can travel throughout Spain with unlimited mileage."
+      a: "Yes. You can travel throughout Spain with unlimited mileage. Travel outside Spain is not allowed without prior approval."
     },
     pl: {
       q: "Czy mogę podróżować poza region Alicante?",
-      a: "Tak, możesz podróżować po całej Hiszpanii bez limitu kilometrów."
+      a: "Tak. Możesz jeździć po całej Hiszpanii bez limitu kilometrów. Wyjazd poza Hiszpanię nie jest dozwolony bez wcześniejszej zgody."
     }
   },
   {
     key: "outside",
     en: {
       q: "Can I travel outside Spain?",
-      a: "Travel outside Spain is not currently available unless explicitly agreed in advance."
+      a: "No. As standard, we do not allow the car to be taken outside Spain."
     },
     pl: {
       q: "Czy mogę wyjechać poza Hiszpanię?",
-      a: "Wyjazd poza Hiszpanię nie jest obecnie dostępny, chyba że zostanie wcześniej wyraźnie uzgodniony."
+      a: "Nie. Standardowo nie zezwalamy na wyjazd autem poza Hiszpanię."
     }
   },
   {
     key: "accident",
     en: {
       q: "What happens in case of a breakdown or accident?",
-      a: "Contact us right away. We're available 24/7 and will help with the next steps, including roadside assistance or a replacement car."
+      a: "Contact us right away. We are available 24/7 and will tell you what to do step by step. If needed, we will help with roadside assistance or a replacement solution."
     },
     pl: {
       q: "Co zrobić w przypadku awarii lub wypadku?",
-      a: "Skontaktuj się z nami od razu. Działamy 24/7 i pomożemy w kolejnych krokach, w tym w pomocy drogowej lub aucie zastępczym."
+      a: "Skontaktuj się z nami od razu. Jesteśmy dostępni 24/7 i powiemy, co zrobić krok po kroku. W razie potrzeby pomożemy z pomocą drogową lub rozwiązaniem zastępczym."
     }
   },
   {
     key: "driver",
     en: {
       q: "Can I add a second driver?",
-      a: "Yes, an additional driver is free. Anyone aged 21+ with a license held for at least a year can drive."
+      a: "Yes. An additional driver is free. The driver must be at least 21 years old and have held a driving licence for at least one year."
     },
     pl: {
       q: "Czy mogę dodać drugiego kierowcę?",
-      a: "Tak, dodatkowy kierowca jest bez opłat. Może prowadzić każdy, kto ma ukończone 21 lat i prawo jazdy od co najmniej roku."
+      a: "Tak. Dodatkowy kierowca jest bez opłat. Może prowadzić osoba, która ma ukończone 21 lat i prawo jazdy od co najmniej roku."
     }
   },
   {
     key: "babyseat",
     en: {
       q: "Can I request a baby or child seat?",
-      a: "Yes, we offer baby and child seats on request. Let us know in advance if you need one."
+      a: "Yes. Baby and child seats are available on request. Let us know in advance if you need one."
     },
     pl: {
       q: "Czy mogę zamówić fotelik dziecięcy?",
-      a: "Tak, oferujemy foteliki dziecięce na życzenie. Daj znać wcześniej, jeśli go potrzebujesz."
+      a: "Tak. Foteliki dziecięce są dostępne na życzenie. Daj znać wcześniej, jeśli go potrzebujesz."
     }
   },
   {

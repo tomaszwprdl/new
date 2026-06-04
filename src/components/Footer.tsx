@@ -16,7 +16,9 @@ export default function Footer() {
   const { language, setLanguage } = useLanguage();
 
   const contactInfo = {
-    phone: '+34 694 229 035',
+    phoneDisplay: '+34 694 22 90 35',
+    phoneHref: 'tel:+34694229035',
+    whatsappHref: 'https://wa.me/34694229035',
     email: 'nowrentes@gmail.com',
     address: {
       en: 'Costa Blanca South, Spain',
@@ -31,7 +33,7 @@ export default function Footer() {
       href: '#features'
     },
     {
-      title: { en: 'Our Cars', pl: 'Nasze Samochody' },
+      title: { en: 'Cars', pl: 'Samochody' },
       href: '#cars'
     },
     {
@@ -95,7 +97,7 @@ export default function Footer() {
             <div className="mb-4 flex items-center gap-2">
               <Image
                 src="/images/logo.webp"
-                alt="NowRent Logo"
+                alt="NowRent logo"
                 width={32}
                 height={32}
                 className="h-8 w-auto"
@@ -105,8 +107,8 @@ export default function Footer() {
             </div>
             <p className="text-white/80 text-sm leading-relaxed">
               {language === 'pl'
-                ? 'NowRent — lokalny wynajem aut w okolicach Lotniska Alicante i Costa Blanca. Bez kaucji, z pełnym ubezpieczeniem i obsługą po polsku.'
-                : 'NowRent — local car rental around Alicante Airport and Costa Blanca South. No deposit, full insurance and direct, friendly support.'}
+                ? 'NowRent, lokalny wynajem aut bez kaucji w okolicach Lotniska Alicante i Costa Blanca. Pełne ubezpieczenie i obsługa po polsku.'
+                : 'NowRent, local no-deposit car rental around Alicante Airport and Costa Blanca. Full insurance included and support in English.'}
             </p>
             <div className="flex items-center gap-2 pt-2">
               <button
@@ -123,7 +125,7 @@ export default function Footer() {
                     className="object-cover"
                   />
                 </div>
-                <span className="text-white text-sm ml-1">Poli</span>
+                <span className="text-white text-sm ml-1">PL</span>
               </button>
               <button
                 onClick={() => setLanguage('en')}
@@ -139,7 +141,7 @@ export default function Footer() {
                     className="object-cover"
                   />
                 </div>
-                <span className="text-white text-sm ml-1">Eng</span>
+                <span className="text-white text-sm ml-1">EN</span>
               </button>
             </div>
           </div>
@@ -147,7 +149,7 @@ export default function Footer() {
           {/* Quick Links */}
           <div>
             <h3 className="text-lg font-semibold mb-4 text-white/90">
-              {language === 'pl' ? 'Szybkie Linki' : 'Quick Links'}
+              {language === 'pl' ? 'Szybkie linki' : 'Quick links'}
             </h3>
             <ul className="space-y-2">
               {quickLinks.map((link, index) => (
@@ -175,11 +177,11 @@ export default function Footer() {
             <ul className="space-y-2">
               <li>
                 <a
-                  href={`tel:${contactInfo.phone}`}
+                  href={contactInfo.phoneHref}
                   className="flex items-center gap-2 text-white/70 hover:text-[#FFD700] text-sm"
                 >
                   <PhoneIcon className="w-4 h-4" />
-                  <span>{contactInfo.phone}</span>
+                  <span>{contactInfo.phoneDisplay}</span>
                 </a>
               </li>
               <li>
@@ -199,7 +201,7 @@ export default function Footer() {
               </li>
               <li>
                 <a
-                  href={`https://wa.me/${contactInfo.phone.replace(/\D/g, '')}`}
+                  href={contactInfo.whatsappHref}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center gap-2 text-white/70 hover:text-[#FFD700] text-sm"
@@ -214,7 +216,7 @@ export default function Footer() {
           {/* Legal */}
           <div>
             <h3 className="text-lg font-semibold mb-4 text-white/90">
-              {language === 'pl' ? 'Informacje Prawne' : 'Legal'}
+              {language === 'pl' ? 'Informacje prawne' : 'Legal information'}
             </h3>
             <ul className="space-y-2">
               {legalLinks.map((link, index) => (

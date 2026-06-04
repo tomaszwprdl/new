@@ -25,7 +25,7 @@ const testimonials = [
     },
     review: {
       en: 'Professional service, clear contract, clean car and no hidden costs. No deposit, no credit card and full insurance.',
-      pl: 'Profesjonalna obsługa, jasna i czytelna umowa, czyste auto i brak ukrytych kosztów. Bez depozytu, bez karty kredytowej i z pełnym ubezpieczeniem.'
+      pl: 'Profesjonalna obsługa, jasna i czytelna umowa, czyste auto i brak ukrytych kosztów. Bez kaucji, bez karty kredytowej i z pełnym ubezpieczeniem.'
     },
     source: 'Facebook'
   },
@@ -132,7 +132,7 @@ export default function TestimonialsSection() {
   };
 
   return (
-    <section className="relative py-24 bg-gradient-to-b from-[#0D1B33] to-[#1A2B49] overflow-hidden">
+    <section className="relative pt-16 md:pt-24 pb-28 md:pb-24 bg-gradient-to-b from-[#0D1B33] to-[#1A2B49] overflow-hidden">
       {/* Background Pattern */}
       <div className="absolute inset-0 opacity-5 pointer-events-none">
         <div 
@@ -187,10 +187,10 @@ export default function TestimonialsSection() {
                   viewport={{ once: true }}
                   transition={{ delay: index * 0.1 }}
                 >
-                  <div className="bg-white/10 backdrop-blur-sm rounded-xl p-6 h-full border border-white/20 hover:bg-white/20 transition-all duration-500 group mx-2">
-                    <div className="flex items-start gap-4 mb-4">
+                  <div className="bg-white/10 backdrop-blur-sm rounded-xl px-6 py-5 md:p-5 h-full border border-white/20 hover:bg-white/20 transition-all duration-500 group mx-2">
+                    <div className="flex items-start gap-4 mb-3">
                       <div className="relative">
-                        <div className="relative w-16 h-16 rounded-full overflow-hidden ring-2 ring-[#FFD700] ring-offset-2 ring-offset-[#1A2B49]">
+                        <div className="relative w-16 h-16 md:w-14 md:h-14 rounded-full overflow-hidden ring-2 ring-[#FFD700] ring-offset-2 ring-offset-[#1A2B49]">
                           <Image
                             src={testimonial.photo}
                             alt={`${testimonial.name[language]} - ${language === 'pl' ? 'Zweryfikowany klient' : 'Verified customer'}`}
@@ -207,7 +207,7 @@ export default function TestimonialsSection() {
                         </div>
                       </div>
                       <div>
-                        <h3 className="text-xl font-semibold text-white group-hover:text-[#FFD700] transition-colors">
+                        <h3 className="text-lg font-semibold text-white group-hover:text-[#FFD700] transition-colors">
                           {testimonial.name[language]}
                         </h3>
                         <div className="flex items-center gap-2">
@@ -220,14 +220,14 @@ export default function TestimonialsSection() {
                       </div>
                     </div>
                     <div className="relative">
-                      <h4 className="text-xl font-bold text-white mb-2">
+                      <h4 className="text-lg font-bold text-white mb-2">
                         {testimonial.headline[language]}
                       </h4>
-                      <p className="text-white/90 italic">
+                      <p className="text-base md:text-[0.95rem] leading-relaxed text-white/90 italic">
                         &ldquo;{testimonial.review[language]}&rdquo;
                       </p>
-                      <div className="absolute -left-2 -top-2 text-[#FFD700]/20 transform -rotate-12">
-                        <svg className="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
+                      <div className="absolute -left-1 -top-1 text-[#FFD700]/10 transform -rotate-12">
+                        <svg className="w-7 h-7 md:w-6 md:h-6" fill="currentColor" viewBox="0 0 24 24">
                           <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
                         </svg>
                       </div>
@@ -239,21 +239,24 @@ export default function TestimonialsSection() {
 
             {/* Navigation Dots */}
             {loadedTestimonials && testimonialSliderInstance.current && (
-              <div className="flex flex-col items-center gap-4 mt-8">
+              <div className="flex flex-col items-center gap-3 mt-8">
                 <div className="flex justify-center gap-2">
-                  {[...Array(Math.ceil(testimonials.length / 3))].map((_, idx) => (
+                  {testimonials.map((_, idx) => (
                     <button
                       key={idx}
-                      onClick={() => testimonialSliderInstance.current?.moveToIdx(idx * 3)}
-                      className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                        Math.floor(currentTestimonial / 3) === idx
+                      onClick={() => testimonialSliderInstance.current?.moveToIdx(idx)}
+                      className={`h-2 rounded-full transition-all duration-300 ${
+                        currentTestimonial === idx
                           ? 'w-8 bg-[#FFD700]'
-                          : 'bg-white/20'
+                          : 'w-2 bg-white/20'
                       }`}
-                      aria-label={`Go to testimonial group ${idx + 1}`}
+                      aria-label={`${language === 'pl' ? 'Przejdź do opinii' : 'Go to review'} ${idx + 1}`}
                     />
                   ))}
                 </div>
+                <p className="md:hidden text-sm text-white/50" aria-hidden="true">
+                  {currentTestimonial + 1} / {testimonials.length}
+                </p>
               </div>
             )}
           </div>

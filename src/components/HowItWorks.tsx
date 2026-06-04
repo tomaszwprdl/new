@@ -245,7 +245,7 @@ export default function HowItWorks() {
     <section
       ref={containerRef}
       id="how-it-works"
-      className="relative min-h-[250vh] py-24 overflow-hidden"
+      className="relative min-h-[200vh] md:min-h-[180vh] pt-24 pb-12 overflow-hidden"
       style={{
         background: `linear-gradient(to bottom, rgba(227, 242, 253, 0.4), rgba(255, 255, 255, 0.4)), url('/images/graphics/beach.webp')`,
         backgroundSize: 'cover',
@@ -460,7 +460,7 @@ export default function HowItWorks() {
               <motion.div
                 key={index}
                 className={`
-                  flex mb-48 relative
+                  flex mb-28 md:mb-48 relative
                   ${isLeft ? 'md:justify-end md:pr-[60%]' : 'md:justify-start md:pl-[60%]'}
                   justify-center pr-0 pl-0
                 `}
@@ -513,7 +513,7 @@ export default function HowItWorks() {
                       {step.icon}
                     </motion.span>
                     <span 
-                      className="text-[8vw] font-black text-[#1A2B49]/5 absolute -top-8 -right-4 pointer-events-none select-none"
+                      className="text-[14vw] sm:text-[8vw] font-black text-[#1A2B49]/5 absolute -top-2 right-0 md:-top-8 md:-right-4 pointer-events-none select-none"
                       style={{
                         textShadow: '2px 2px 4px rgba(0,0,0,0.1)'
                       }}
@@ -560,7 +560,7 @@ export default function HowItWorks() {
           initial={{ opacity: 0, y: '2vh' }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mt-24 relative z-50"
+          className="text-center mt-6 md:-mt-16 relative z-50"
         >
           <button
             onClick={() => {
@@ -569,9 +569,14 @@ export default function HowItWorks() {
                 element.scrollIntoView({ behavior: 'smooth' });
               }
             }}
-            className="inline-block bg-[#FFD600] text-[#1A2B49] px-[4.4rem] py-[2.2rem] rounded-full font-bold text-[2.2em] shadow-lg hover:transform hover:scale-105 transition-transform duration-300"
+            className="inline-block bg-[#FFD600] text-[#1A2B49] px-8 py-3 text-lg whitespace-nowrap md:px-[4.4rem] md:py-[2.2rem] md:text-[2.2em] rounded-full font-bold shadow-lg hover:transform hover:scale-105 transition-transform duration-300"
           >
-            {language === 'pl' ? 'Rozpocznij swoją podróż!' : 'Start your journey!'}
+            <span className="md:hidden">
+              {language === 'pl' ? 'Sprawdź dostępność' : 'Check availability'}
+            </span>
+            <span className="hidden md:inline">
+              {language === 'pl' ? 'Rozpocznij swoją podróż!' : 'Start your journey!'}
+            </span>
           </button>
         </motion.div>
       </div>

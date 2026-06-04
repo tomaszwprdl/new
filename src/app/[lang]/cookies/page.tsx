@@ -1,114 +1,113 @@
 import { Metadata } from 'next';
+import { notFound } from 'next/navigation';
 import { MotionDiv } from '@/components/MotionDiv';
 import BackButton from '@/components/BackButton';
+import LegalContent, { LegalSection } from '@/components/LegalContent';
 
 export const metadata: Metadata = {
-  title: 'Cookie Policy - NowRent',
-  description: 'Cookie Policy for NowRent car rental service'
+  title: 'Cookies Policy - NowRent',
+  description: 'Cookies Policy for NowRent car rental service'
+};
+
+export function generateStaticParams() {
+  return [{ lang: 'pl' }, { lang: 'en' }];
+}
+
+type LegalCopy = {
+  title: string;
+  lastUpdated: string;
+  sections: LegalSection[];
 };
 
 export default function CookiePolicy({ params: { lang } }: { params: { lang: 'en' | 'pl' } }) {
-  const content = {
+  if (lang !== 'pl' && lang !== 'en') {
+    notFound();
+  }
+
+  const content: Record<'en' | 'pl', LegalCopy> = {
     en: {
-      title: 'Cookie Policy',
-      lastUpdated: 'Last updated: February 20, 2024',
+      title: 'Cookies Policy',
+      lastUpdated: 'Last updated: June 2026',
       sections: [
         {
-          title: '1. What Are Cookies',
-          content: 'Cookies are small text files that are stored on your computer or mobile device when you visit our website. They help us provide you with a better experience by remembering your preferences and analyzing how you use our site.'
+          title: '1. What cookies are',
+          content:
+            'Cookies are small files stored on your device by a website. They may help the website work correctly or remember simple settings, such as language preference.'
         },
         {
-          title: '2. Types of Cookies We Use',
-          content: 'We use the following types of cookies:\n- Essential cookies: Required for basic site functionality\n- Analytics cookies: Help us understand how visitors use our site\n- Preference cookies: Remember your settings and choices\n- Marketing cookies: Used to deliver relevant advertisements'
+          title: '2. What cookies we use',
+          content:
+            'The website may use cookies or similar technologies needed for the website to work and to remember basic user settings, such as your selected language. We do not use analytics, marketing or payment cookies on this website.'
         },
         {
-          title: '3. How We Use Cookies',
-          content: 'We use cookies to:\n- Keep you signed in\n- Remember your language preferences\n- Understand how you use our website\n- Improve our services\n- Provide personalized content'
+          title: '3. External services',
+          content:
+            'The website may include links to external services such as Facebook or WhatsApp. When you click those links, the privacy and cookie rules of that service apply.'
         },
         {
-          title: '4. Managing Cookies',
-          content: 'You can control cookies through your browser settings. You can:\n- Block all cookies\n- Delete existing cookies\n- Allow only certain types of cookies\n- Set preferences for different websites'
+          title: '4. Managing cookies',
+          content:
+            'You can control or delete cookies in your browser settings. Limiting cookies may affect some website features, such as remembering the selected language.'
         },
         {
-          title: '5. Third-Party Cookies',
-          content: 'Some cookies are placed by third-party services that appear on our pages. We use these for:\n- Social media integration\n- Analytics services\n- Payment processing\n- Marketing purposes'
-        },
-        {
-          title: '6. Updates to This Policy',
-          content: 'We may update this Cookie Policy periodically. Please check back regularly to stay informed about our use of cookies.'
+          title: '5. Changes to this policy',
+          content:
+            'This cookies policy may be updated. The current version is available on nowrent.eu.'
         }
       ]
     },
     pl: {
-      title: 'Polityka Cookies',
-      lastUpdated: 'Ostatnia aktualizacja: 20 lutego 2024',
+      title: 'Polityka cookies',
+      lastUpdated: 'Ostatnia aktualizacja: czerwiec 2026',
       sections: [
         {
-          title: '1. Czym są Pliki Cookie',
-          content: 'Pliki cookie to małe pliki tekstowe przechowywane na Twoim komputerze lub urządzeniu mobilnym podczas odwiedzania naszej strony. Pomagają nam zapewnić lepsze doświadczenia, zapamiętując Twoje preferencje i analizując sposób korzystania z naszej strony.'
+          title: '1. Czym są pliki cookies',
+          content:
+            'Cookies to małe pliki zapisywane na Twoim urządzeniu przez stronę internetową. Mogą pomagać w prawidłowym działaniu strony lub zapamiętywaniu prostych ustawień, takich jak preferencje języka.'
         },
         {
-          title: '2. Rodzaje Używanych Plików Cookie',
-          content: 'Używamy następujących rodzajów plików cookie:\n- Niezbędne: Wymagane do podstawowego funkcjonowania strony\n- Analityczne: Pomagają zrozumieć, jak odwiedzający korzystają z naszej strony\n- Preferencyjne: Zapamiętują Twoje ustawienia i wybory\n- Marketingowe: Służą do wyświetlania odpowiednich reklam'
+          title: '2. Jakich cookies używamy',
+          content:
+            'Strona może używać cookies lub podobnych technologii potrzebnych do działania strony oraz zapamiętania podstawowych ustawień użytkownika, takich jak wybrany język. Nie używamy na tej stronie cookies analitycznych, marketingowych ani płatniczych.'
         },
         {
-          title: '3. Jak Wykorzystujemy Pliki Cookie',
-          content: 'Używamy plików cookie do:\n- Utrzymywania Twojego zalogowania\n- Zapamiętywania preferencji językowych\n- Zrozumienia, jak korzystasz z naszej strony\n- Ulepszania naszych usług\n- Dostarczania spersonalizowanych treści'
+          title: '3. Cookies zewnętrzne',
+          content:
+            'Na stronie mogą znajdować się linki do zewnętrznych serwisów, takich jak Facebook lub WhatsApp. Po kliknięciu takiego linku obowiązują zasady prywatności i cookies danego serwisu.'
         },
         {
-          title: '4. Zarządzanie Plikami Cookie',
-          content: 'Możesz kontrolować pliki cookie poprzez ustawienia przeglądarki. Możesz:\n- Blokować wszystkie pliki cookie\n- Usuwać istniejące pliki cookie\n- Zezwalać tylko na określone typy plików cookie\n- Ustawiać preferencje dla różnych stron'
+          title: '4. Zarządzanie cookies',
+          content:
+            'Możesz kontrolować lub usuwać cookies w ustawieniach swojej przeglądarki. Ograniczenie cookies może wpłynąć na niektóre funkcje strony, na przykład zapamiętanie wybranego języka.'
         },
         {
-          title: '5. Pliki Cookie Stron Trzecich',
-          content: 'Niektóre pliki cookie są umieszczane przez usługi stron trzecich. Używamy ich do:\n- Integracji z mediami społecznościowymi\n- Usług analitycznych\n- Przetwarzania płatności\n- Celów marketingowych'
-        },
-        {
-          title: '6. Aktualizacje Polityki',
-          content: 'Możemy okresowo aktualizować tę Politykę Cookie. Prosimy o regularne sprawdzanie, aby być na bieżąco z naszym wykorzystaniem plików cookie.'
+          title: '5. Zmiany polityki',
+          content:
+            'Polityka cookies może być aktualizowana. Aktualna wersja jest dostępna na stronie nowrent.eu.'
         }
       ]
     }
   };
 
+  const copy = content[lang];
+
   return (
-    <div className="min-h-screen bg-gray-50 py-16 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-4xl mx-auto">
-        <BackButton lang={lang} />
+    <div className="min-h-screen bg-gradient-to-b from-[#0D1B33] to-[#1A2B49] py-16 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-3xl mx-auto">
+        <BackButton lang={lang} tone="light" />
         <MotionDiv
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
+          className="bg-[#FBFAF7] rounded-2xl shadow-xl p-6 sm:p-10"
         >
-          <h1 className="text-4xl font-bold text-primary mb-2">
-            {content[lang].title}
+          <h1 className="text-3xl sm:text-4xl font-bold text-[#1A2B49] mb-2">
+            {copy.title}
           </h1>
-          <p className="text-gray-600 mb-8">
-            {content[lang].lastUpdated}
-          </p>
-
-          {content[lang].sections.map((section, index) => (
-            <MotionDiv
-              key={section.title}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="mb-8"
-            >
-              <h2 className="text-2xl font-semibold text-primary mb-4">
-                {section.title}
-              </h2>
-              <div className="prose prose-blue max-w-none">
-                {section.content.split('\\n').map((paragraph, i) => (
-                  <p key={i} className="text-gray-700 mb-2">
-                    {paragraph}
-                  </p>
-                ))}
-              </div>
-            </MotionDiv>
-          ))}
+          <p className="text-slate-500 text-sm mb-8">{copy.lastUpdated}</p>
+          <LegalContent sections={copy.sections} />
         </MotionDiv>
       </div>
     </div>
   );
-} 
+}

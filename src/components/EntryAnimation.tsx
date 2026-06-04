@@ -40,7 +40,7 @@ export default function EntryAnimation({ onComplete }: { onComplete: () => void 
           >
             <Image
               src="/images/logo.svg"
-              alt="NowRent Logo"
+              alt="NowRent logo"
               width={346}
               height={346}
               style={{ width: 'auto', height: 'auto', maxWidth: '70vw', maxHeight: '70vh' }}
@@ -63,27 +63,27 @@ export default function EntryAnimation({ onComplete }: { onComplete: () => void 
             style={{ pointerEvents: 'none', minWidth: 'max-content' }}
           >
             <div className="w-[286px] h-[117px] flex items-end">
-              <Image src="/images/graphics/Beep Beep - Medium Vehicle (1).svg" alt="Car 1" width={286} height={117} style={{ width: 'auto', height: '100%' }} />
+              <Image src="/images/graphics/Beep Beep - Medium Vehicle (1).svg" alt="NowRent — auto do wynajmu" width={286} height={117} style={{ width: 'auto', height: '100%' }} />
             </div>
             <div className="w-[286px] h-[117px] flex items-end">
-              <Image src="/images/graphics/Beep Beep - Medium Vehicle (2).svg" alt="Car 2" width={286} height={117} style={{ width: 'auto', height: '100%' }} />
+              <Image src="/images/graphics/Beep Beep - Medium Vehicle (2).svg" alt="NowRent — auto do wynajmu" width={286} height={117} style={{ width: 'auto', height: '100%' }} />
             </div>
             <div className="w-[286px] h-[117px] flex items-end">
-              <Image src="/images/graphics/Beep Beep - Medium Vehicle (3).svg" alt="Car 3" width={286} height={117} style={{ width: 'auto', height: '100%' }} />
+              <Image src="/images/graphics/Beep Beep - Medium Vehicle (3).svg" alt="NowRent — auto do wynajmu" width={286} height={117} style={{ width: 'auto', height: '100%' }} />
             </div>
             <div className="w-[286px] h-[117px] flex items-end">
-              <Image src="/images/graphics/Beep Beep - Medium Vehicle (4).svg" alt="Car 4" width={286} height={117} style={{ width: 'auto', height: '100%' }} />
+              <Image src="/images/graphics/Beep Beep - Medium Vehicle (4).svg" alt="NowRent — auto do wynajmu" width={286} height={117} style={{ width: 'auto', height: '100%' }} />
             </div>
             <div className="w-[286px] h-[117px] flex items-end">
-              <Image src="/images/graphics/Beep Beep - Medium Vehicle (5).svg" alt="Car 5" width={286} height={117} style={{ width: 'auto', height: '100%' }} />
+              <Image src="/images/graphics/Beep Beep - Medium Vehicle (5).svg" alt="NowRent — auto do wynajmu" width={286} height={117} style={{ width: 'auto', height: '100%' }} />
             </div>
             <div className="w-[286px] h-[117px] flex items-end">
-              <Image src="/images/graphics/Beep Beep - Medium Vehicle (1).svg" alt="Car 6" width={286} height={117} style={{ width: 'auto', height: '100%' }} />
+              <Image src="/images/graphics/Beep Beep - Medium Vehicle (1).svg" alt="NowRent — auto do wynajmu" width={286} height={117} style={{ width: 'auto', height: '100%' }} />
             </div>
             <div className="w-[286px] h-[117px] flex items-end">
               <Image 
                 src="/images/graphics/Beep Beep - Medium Vehicle .svg" 
-                alt="Car 7" 
+                alt="NowRent — auto do wynajmu" 
                 width={286} 
                 height={117}
                 priority

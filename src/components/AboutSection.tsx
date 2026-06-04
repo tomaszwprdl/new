@@ -14,34 +14,34 @@ import {
 const values = [
   {
     icon: ShieldCheckIcon,
-    title: { en: 'Safety First', pl: 'Bezpieczeństwo' },
+    title: { en: 'Safety first', pl: 'Bezpieczeństwo' },
     description: {
-      en: 'All our vehicles undergo regular maintenance and safety checks',
-      pl: 'Wszystkie nasze pojazdy przechodzą regularne przeglądy i kontrole bezpieczeństwa'
+      en: 'Cars are checked and inspected before handover.',
+      pl: 'Auta przechodzą przeglądy i kontrolę przed wydaniem.'
     }
   },
   {
     icon: ClockIcon,
-    title: { en: '24/7 Support', pl: 'Wsparcie 24/7' },
+    title: { en: 'Support 24/7', pl: 'Wsparcie 24/7' },
     description: {
-      en: 'Our team is available around the clock to assist you',
-      pl: 'Nasz zespół jest dostępny przez całą dobę, aby Ci pomóc'
+      en: 'Help during your rental when you need it.',
+      pl: 'Pomoc podczas wynajmu, gdy jej potrzebujesz.'
     }
   },
   {
     icon: CurrencyEuroIcon,
-    title: { en: 'Clear pricing', pl: 'Jasne ceny' },
+    title: { en: 'Clear prices', pl: 'Jasne ceny' },
     description: {
-      en: 'Competitive pricing with no hidden fees',
-      pl: 'Konkurencyjne ceny bez ukrytych opłat'
+      en: 'We confirm the final price before booking.',
+      pl: 'Końcową cenę potwierdzamy przed rezerwacją.'
     }
   },
   {
     icon: UserGroupIcon,
-    title: { en: 'Personal Service', pl: 'Osobista Obsługa' },
+    title: { en: 'Personal service', pl: 'Osobista obsługa' },
     description: {
-      en: 'Dedicated support throughout your rental experience',
-      pl: 'Dedykowane wsparcie przez cały okres wynajmu'
+      en: 'Direct contact throughout the rental period.',
+      pl: 'Bezpośredni kontakt przez cały okres wynajmu.'
     }
   }
 ];
@@ -64,18 +64,18 @@ export default function AboutSection() {
               >
                 <h2 className="text-4xl md:text-5xl font-bold text-[#1A2B49]">
                   {language === 'pl' 
-                    ? 'Lokalny wynajem aut — Lotnisko Alicante i Costa Blanca'
-                    : 'Your local car rental around Alicante Airport & Costa Blanca South'}
+                    ? 'Lokalny wynajem aut bez kaucji w Alicante i na Costa Blanca'
+                    : 'Local no-deposit car rental in Alicante and Costa Blanca'}
                 </h2>
                 <p className="text-lg text-gray-600">
                   {language === 'pl'
-                    ? 'Od 2020 pomagamy wynajmować auta w okolicach Lotniska Alicante, Torrevieja i Costa Blanca. Jasne zasady, brak kaucji i bezpośredni kontakt po polsku sprawiają, że wynajem jest prostszy i spokojniejszy.'
-                    : 'Since 2020, we’ve helped customers rent cars around Alicante Airport and Costa Blanca South with clear rules, no deposit and direct support.'}
+                    ? 'Od 2020 pomagamy klientom wynajmować auta w okolicach Lotniska Alicante, Torrevieja i Costa Blanca. Jasne zasady, brak kaucji i kontakt po polsku sprawiają, że wynajem jest prostszy i spokojniejszy.'
+                    : 'Since 2020, we have helped customers rent cars around Alicante Airport, Torrevieja and Costa Blanca. Clear rules, no deposit and direct contact make the rental process simpler and calmer.'}
                 </p>
                 <p className="text-lg text-gray-600">
                   {language === 'pl'
-                    ? 'Większość naszych klientów trafia do nas z polecenia, Facebooka i polskiej społeczności. Odpowiadamy bezpośrednio na WhatsApp lub telefonicznie i wyjaśniamy proste zasady przed rezerwacją.'
-                    : 'Most of our customers come from referrals, Facebook and the Polish community. We reply directly on WhatsApp or by phone and explain the simple rules before you book.'}
+                    ? 'Większość klientów trafia do nas z polecenia, Facebooka i polskiej społeczności w Hiszpanii. Odpowiadamy bezpośrednio na WhatsApp lub telefonicznie i wyjaśniamy warunki przed rezerwacją.'
+                    : 'Most of our customers come from recommendations, Facebook and the local Polish community in Spain. We reply directly by WhatsApp or phone and explain the rental terms before booking.'}
                 </p>
               </motion.div>
 
@@ -134,7 +134,7 @@ export default function AboutSection() {
                         {language === 'pl' ? '1000+ zrealizowanych wynajmów' : '1000+ completed rentals'}
                       </h4>
                       <p className="text-white/80">
-                        {language === 'pl' ? 'Dołącz do naszej rodziny zadowolonych klientów' : 'Join our family of satisfied customers'}
+                        {language === 'pl' ? 'Dziękujemy naszym klientom za zaufanie.' : 'Thank you to our customers for trusting us.'}
                       </p>
                     </div>
                   </div>

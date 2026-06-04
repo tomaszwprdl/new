@@ -85,8 +85,8 @@ export default function BookingForm() {
         setSubmitStatus({
           type: 'success',
           message: language === 'pl'
-            ? 'Dziękujemy! Twoja rezerwacja została wysłana. Skontaktujemy się z Tobą wkrótce.'
-            : 'Thank you! Your booking request has been sent. We will contact you soon.'
+            ? 'Dziękujemy! Twoje zapytanie zostało wysłane. Skontaktujemy się z Tobą wkrótce, aby potwierdzić dostępność i cenę.'
+            : 'Thank you! Your request has been sent. We will contact you soon to confirm availability and price.'
         });
         // Reset form
         setFormData({
@@ -109,8 +109,8 @@ export default function BookingForm() {
       setSubmitStatus({
         type: 'error',
         message: language === 'pl'
-          ? 'Przepraszamy, wystąpił błąd. Spróbuj ponownie później lub skontaktuj się z nami bezpośrednio.'
-          : 'Sorry, something went wrong. Please try again later or contact us directly.'
+          ? 'Przepraszamy, coś poszło nie tak. Spróbuj ponownie lub napisz do nas na WhatsApp: +34 694 22 90 35.'
+          : 'Sorry, something went wrong. Please try again or message us on WhatsApp: +34 694 22 90 35.'
       });
     } finally {
       setIsSubmitting(false);
@@ -140,13 +140,13 @@ export default function BookingForm() {
             </h2>
             <p className="text-lg text-white/80 max-w-2xl mx-auto">
               {language === 'pl'
-                ? 'Wyślij daty i miejsce odbioru. To nie jest automatyczna rezerwacja — potwierdzimy dostępne auto, końcową cenę i zasady przed rezerwacją.'
-                : 'Send your dates and pickup location. This is not an automatic booking — we confirm the available car, final price and terms with you before reservation.'}
+                ? 'Wyślij daty, lokalizację i preferowaną klasę auta. Sprawdzimy dostępność, końcową cenę i zasady przed potwierdzeniem rezerwacji.'
+                : 'Send your dates, location and preferred car class. We’ll check availability, the final price and the terms before confirming your booking.'}
             </p>
             <p className="mt-4 text-sm md:text-base text-[#FFD700] font-semibold max-w-2xl mx-auto">
               {language === 'pl'
-                ? 'Dla najlepszej dostępności skontaktuj się z nami 3–4 dni przed wynajmem. Wynajmy tego samego dnia, na jutro i jednodniowe są ograniczone i mogą być niedostępne.'
-                : 'For best availability, contact us 3–4 days before your rental. Same-day, next-day and one-day rentals are limited and may not be available.'}
+                ? 'Najlepiej napisz 3–4 dni wcześniej. Wynajem na dziś, jutro lub 1 dzień może być niedostępny.'
+                : 'For best availability, contact us 3–4 days before your rental. Same-day, next-day or one-day rentals may be unavailable.'}
             </p>
           </motion.div>
 
@@ -161,7 +161,7 @@ export default function BookingForm() {
               {/* Pickup Location */}
               <div className="space-y-2">
                 <label htmlFor="pickupLocation" className="text-white/80 block">
-                  {language === 'pl' ? 'Miejsce odbioru' : 'Pickup Location'}
+                  {language === 'pl' ? 'Miejsce odbioru' : 'Pickup location'}
                 </label>
                 <div className="relative">
                   <MapPinIcon className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-white/60" aria-hidden="true" />
@@ -181,7 +181,7 @@ export default function BookingForm() {
               {/* Dropoff Location */}
               <div className="space-y-2">
                 <label htmlFor="dropoffLocation" className="text-white/80 block">
-                  {language === 'pl' ? 'Miejsce zwrotu' : 'Dropoff Location'}
+                  {language === 'pl' ? 'Miejsce zwrotu' : 'Return location'}
                 </label>
                 <div className="relative">
                   <MapPinIcon className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-white/60" aria-hidden="true" />
@@ -201,7 +201,7 @@ export default function BookingForm() {
               {/* Pickup Date */}
               <div className="space-y-2">
                 <label htmlFor="pickupDate" className="text-white/80 block">
-                  {language === 'pl' ? 'Data odbioru' : 'Pickup Date'}
+                  {language === 'pl' ? 'Data odbioru' : 'Pickup date'}
                 </label>
                 <div className="relative">
                   <CalendarDaysIcon className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-white/60" aria-hidden="true" />
@@ -220,7 +220,7 @@ export default function BookingForm() {
               {/* Pickup Time */}
               <div className="space-y-2">
                 <label htmlFor="pickupTime" className="text-white/80 block">
-                  {language === 'pl' ? 'Godzina odbioru' : 'Pickup Time'}
+                  {language === 'pl' ? 'Godzina odbioru' : 'Pickup time'}
                 </label>
                 <div className="relative">
                   <ClockIcon className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-white/60" aria-hidden="true" />
@@ -239,7 +239,7 @@ export default function BookingForm() {
               {/* Dropoff Date */}
               <div className="space-y-2">
                 <label htmlFor="dropoffDate" className="text-white/80 block">
-                  {language === 'pl' ? 'Data zwrotu' : 'Dropoff Date'}
+                  {language === 'pl' ? 'Data zwrotu' : 'Return date'}
                 </label>
                 <div className="relative">
                   <CalendarDaysIcon className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-white/60" aria-hidden="true" />
@@ -258,7 +258,7 @@ export default function BookingForm() {
               {/* Dropoff Time */}
               <div className="space-y-2">
                 <label htmlFor="dropoffTime" className="text-white/80 block">
-                  {language === 'pl' ? 'Godzina zwrotu' : 'Dropoff Time'}
+                  {language === 'pl' ? 'Godzina zwrotu' : 'Return time'}
                 </label>
                 <div className="relative">
                   <ClockIcon className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-white/60" aria-hidden="true" />
@@ -299,7 +299,7 @@ export default function BookingForm() {
               {/* Name */}
               <div className="space-y-2">
                 <label htmlFor="name" className="text-white/80 block">
-                  {language === 'pl' ? 'Imię i nazwisko' : 'Full Name'}
+                  {language === 'pl' ? 'Imię i nazwisko' : 'Full name'}
                 </label>
                 <div className="relative">
                   <UserIcon className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-white/60" aria-hidden="true" />
@@ -320,7 +320,7 @@ export default function BookingForm() {
               {/* Email */}
               <div className="space-y-2">
                 <label htmlFor="email" className="text-white/80 block">
-                  {language === 'pl' ? 'Email' : 'Email'}
+                  {language === 'pl' ? 'Email (opcjonalnie)' : 'Email (optional)'}
                 </label>
                 <div className="relative">
                   <EnvelopeIcon className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-white/60" aria-hidden="true" />
@@ -333,7 +333,6 @@ export default function BookingForm() {
                     className="w-full bg-white/5 border border-white/10 rounded-xl py-3 px-10 text-white placeholder-white/40"
                     placeholder={language === 'pl' ? 'Twój adres email' : 'Your email address'}
                     aria-label={language === 'pl' ? 'Adres email' : 'Email address'}
-                    required
                   />
                 </div>
               </div>
@@ -405,7 +404,7 @@ export default function BookingForm() {
               >
                 {isSubmitting 
                   ? (language === 'pl' ? 'Wysyłanie...' : 'Sending...') 
-                  : (language === 'pl' ? 'Wyślij zapytanie' : 'Send request')}
+                  : (language === 'pl' ? 'Wyślij zapytanie o dostępność' : 'Send availability request')}
               </motion.button>
             </div>
           </motion.form>
@@ -413,7 +412,7 @@ export default function BookingForm() {
           {/* Prominent phone call section */}
           <div className="mt-10 flex flex-col items-center justify-center">
             <span className="text-white text-lg font-semibold mb-2">
-              {language === 'pl' ? 'Lub zadzwoń:' : 'Or call:'}
+              {language === 'pl' ? 'Wolisz szybki kontakt?' : 'Prefer faster contact?'}
             </span>
             <a
               href="tel:+34694229035"
@@ -423,14 +422,18 @@ export default function BookingForm() {
               +34 694 22 90 35
             </a>
             <a
-              href="https://wa.me/34694229035"
+              href={`https://wa.me/34694229035?text=${encodeURIComponent(
+                language === 'pl'
+                  ? 'Dzień dobry, chciałbym zapytać o dostępność auta.'
+                  : 'Hello, I’d like to ask about car availability.'
+              )}`}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-3 bg-[#25D366] hover:bg-[#128C7E] text-white font-bold py-3 px-8 rounded-full shadow-lg hover:shadow-xl transition-all text-lg md:text-xl border-2 border-[#25D366]"
               style={{ letterSpacing: '1px' }}
             >
               <i className="fab fa-whatsapp text-2xl" />
-              {language === 'pl' ? 'Napisz na WhatsApp' : 'Message on WhatsApp'}
+              {language === 'pl' ? 'Napisz na WhatsApp' : 'Message us on WhatsApp'}
             </a>
           </div>
         </div>

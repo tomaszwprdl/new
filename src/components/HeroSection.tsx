@@ -10,7 +10,7 @@ const trustBadges = [
   {
     id: 'no-deposit',
     Icon: WalletIcon,
-    pl: 'Brak depozytu',
+    pl: 'Bez kaucji',
     en: 'No deposit',
     iconClasses: 'rotate-0',
     bgColor: 'from-amber-400/30 to-[#1A2B49]/40',
@@ -33,7 +33,7 @@ const trustBadges = [
     id: 'support',
     Icon: ChatBubbleLeftRightIcon,
     pl: 'Polska obsługa',
-    en: 'English support',
+    en: 'Support in English',
     iconClasses: '-rotate-6',
     bgColor: 'from-green-400/30 to-[#1A2B49]/40',
     iconColor: '#48BB78',
@@ -96,8 +96,8 @@ export default function HeroSection() {
             >
               <span className="text-gradient">
                 {language === 'pl' 
-                  ? 'Wynajem auta bez kaucji — Lotnisko Alicante i Costa Blanca'
-                  : 'Local car rental around Alicante Airport & Costa Blanca South'}
+                  ? 'Wynajem samochodu bez kaucji w Alicante i na Costa Blanca'
+                  : 'No-deposit car rental in Alicante & Costa Blanca'}
               </span>
             </motion.h1>
 
@@ -109,8 +109,8 @@ export default function HeroSection() {
               className="text-xl md:text-2xl mb-4 font-bold text-center text-[#FFD700] drop-shadow-lg"
             >
               {language === 'pl'
-                ? 'Auto na Twój pobyt w Hiszpanii — prosto i bez stresu'
-                : 'Your adventure starts here! 🌞'}
+                ? 'Auto na Twój pobyt w Hiszpanii — prosto i na własnych zasadach'
+                : 'A car for your stay in Spain — simple, flexible, on your terms'}
             </motion.p>
 
             {/* Subheading */}
@@ -121,8 +121,8 @@ export default function HeroSection() {
               className="text-lg md:text-xl mb-10 font-medium text-white text-center drop-shadow-lg max-w-[95%] xl:max-w-[85%] mx-auto leading-relaxed"
             >
               {language === 'pl'
-                ? 'Pełne ubezpieczenie w cenie, bez karty kredytowej i z elastycznym odbiorem. Podaj daty i lokalizację — potwierdzimy dostępne auto bezpośrednio z Tobą.'
-                : 'No deposit, no credit card required, full insurance and flexible pickup. Tell us your dates and location — we confirm the available car class directly with you.'}
+                ? 'Bez kaucji, bez ukrytych kosztów i bez dopłat do ubezpieczenia. Napisz do nas, a sprawdzimy dostępne auta dla Twojego terminu.'
+                : 'No deposit, no hidden fees and no insurance upsells. Message us with your dates and we’ll check what’s available for your trip.'}
             </motion.p>
 
             {/* CTA Buttons */}

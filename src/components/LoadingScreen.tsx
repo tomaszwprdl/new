@@ -37,7 +37,7 @@ export default function LoadingScreen({ onLoadingComplete }: { onLoadingComplete
       >
         <Image
           src="/images/logo tezzz.svg"
-          alt="NowRent Logo"
+          alt="NowRent logo"
           fill
           sizes={isMobile ? "200px" : "300px"}
           className="object-contain"

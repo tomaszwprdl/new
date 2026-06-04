@@ -1,7 +1,7 @@
 'use client';
 
-import React, { useRef, useEffect, useState } from 'react';
-import { motion, useInView, AnimatePresence } from 'framer-motion';
+import React, { useRef, useState } from 'react';
+import { motion, useInView } from 'framer-motion';
 import { useLanguage } from '@/context/LanguageContext';
 import Image from 'next/image';
 import {
@@ -56,10 +56,21 @@ const features: Feature[] = [
     titlePL: 'Bez kaucji',
     titleEN: 'No deposit',
     descPL: 'Płacisz tylko za wynajem, bez blokady środków.',
-    descEN: 'Pay only for the rental, no deposit.',
+    descEN: 'Pay only for the rental, with no blocked funds.',
     isPrimary: true,
     accentColor: '#FFD700',
     iconBg: 'from-amber-100 to-amber-50'
+  },
+  {
+    id: 'insurance',
+    icon: ShieldCheckIcon,
+    titlePL: 'Pełne ubezpieczenie w cenie',
+    titleEN: 'Full insurance included',
+    descPL: 'Bez dopłat i bez dodatkowych pakietów przy odbiorze.',
+    descEN: 'No insurance upsells or extra packages at pickup.',
+    isPrimary: true,
+    accentColor: '#48BB78',
+    iconBg: 'from-green-100 to-green-50'
   },
   {
     id: 'no-card',
@@ -67,29 +78,18 @@ const features: Feature[] = [
     titlePL: 'Bez karty kredytowej',
     titleEN: 'No credit card required',
     descPL: 'Do wynajmu nie potrzebujesz karty kredytowej.',
-    descEN: 'No credit card needed to rent with us.',
+    descEN: 'You do not need a credit card to rent.',
     isPrimary: true,
     accentColor: '#4FC3F7',
     iconBg: 'from-blue-100 to-blue-50'
   },
   {
-    id: 'insurance',
-    icon: ShieldCheckIcon,
-    titlePL: 'Pełne ubezpieczenie w cenie',
-    titleEN: 'Full insurance included',
-    descPL: 'Bez dopłat do podstawowej ochrony.',
-    descEN: 'Full insurance included — no surprise upsells.',
-    isPrimary: true,
-    accentColor: '#48BB78',
-    iconBg: 'from-green-100 to-green-50'
-  },
-  {
     id: 'delivery',
     icon: TruckIcon,
     titlePL: 'Podstawienie i odbiór auta',
-    titleEN: 'Pickup & delivery options',
+    titleEN: 'Pickup & return options',
     descPL: 'Lotnisko, apartament lub ustalone miejsce.',
-    descEN: 'Airport, apartment or arranged location.',
+    descEN: 'Airport, apartment or agreed location.',
     accentColor: '#9F7AEA',
     iconBg: 'from-purple-100 to-purple-50'
   },
@@ -99,7 +99,7 @@ const features: Feature[] = [
     titlePL: 'Bez limitu kilometrów w Hiszpanii',
     titleEN: 'Unlimited mileage in Spain',
     descPL: 'Jeździsz po Hiszpanii bez limitu kilometrów.',
-    descEN: 'Drive anywhere in Spain, no mileage limit.',
+    descEN: 'Drive across Spain with no mileage limit.',
     accentColor: '#F56565',
     iconBg: 'from-red-100 to-red-50'
   },
@@ -109,7 +109,7 @@ const features: Feature[] = [
     titlePL: 'Polska obsługa 24/7',
     titleEN: 'Support 24/7',
     descPL: 'Pomoc w Twoim języku, kiedy jej potrzebujesz.',
-    descEN: 'Help in your language, day or night.',
+    descEN: 'Help when you need it during your rental.',
     accentColor: '#ED8936',
     iconBg: 'from-orange-100 to-orange-50'
   },
@@ -119,7 +119,7 @@ const features: Feature[] = [
     titlePL: 'Czyste, zadbane auta',
     titleEN: 'Clean, well-maintained cars',
     descPL: 'Auto przygotowane przed każdym wynajmem.',
-    descEN: 'Clean, well-maintained cars every time.',
+    descEN: 'Prepared before every rental.',
     accentColor: '#ED8936',
     iconBg: 'from-orange-100 to-orange-50'
   },
@@ -127,9 +127,9 @@ const features: Feature[] = [
     id: 'advice',
     icon: HeartIcon,
     titlePL: 'Uczciwa pomoc w wyborze auta',
-    titleEN: 'Honest advice',
+    titleEN: 'Honest help choosing a car',
     descPL: 'Doradzimy klasę auta do Twojego wyjazdu.',
-    descEN: 'Clear rules and honest recommendations.',
+    descEN: 'We recommend the right class for your trip.',
     accentColor: '#38B2AC',
     iconBg: 'from-teal-100 to-teal-50'
   }
@@ -139,9 +139,9 @@ const promiseCard = {
   id: 'promise',
   icon: UserCircleIcon,
   titlePL: 'Nasza obietnica',
-  titleEN: 'Our Promise',
-  descPL: 'Żadnych ukrytych kosztów, szczere doradztwo, osobiste podejście.',
-  descEN: 'No hidden fees, honest advice, and a personal touch.',
+  titleEN: 'Our promise',
+  descPL: 'Żadnych ukrytych kosztów, szczere doradztwo i osobiste podejście — od pierwszej wiadomości do zwrotu auta.',
+  descEN: 'No hidden fees, honest advice and personal support — from the first message to car return.',
   signature: 'Michał Nowak, CEO NowRent'
 };
 
@@ -150,134 +150,34 @@ export default function ClientFeatures() {
   const containerRef = useRef(null);
   const carouselRef = useRef<HTMLDivElement>(null);
   const [activeIndex, setActiveIndex] = useState(0);
-  const [isDragging, setIsDragging] = useState(false);
-  const [startX, setStartX] = useState(0);
-  const [scrollLeft, setScrollLeft] = useState(0);
-  const [mounted, setMounted] = useState(false);
-  const [isPaused, setIsPaused] = useState(false);
   const isInView = useInView(containerRef, { once: true, margin: "-100px" });
 
-  // Auto-slide functionality
-  useEffect(() => {
-    if (!carouselRef.current || !isInView || isPaused) return;
-
-    const interval = setInterval(() => {
-      const nextIndex = (activeIndex + 1) % (features.length + 1);
-      scrollToItem(nextIndex);
-    }, 3000); // Change slide every 3 seconds
-
-    return () => clearInterval(interval);
-  }, [activeIndex, isInView, isPaused]);
-
-  // Touch handling for mobile
-  const handleTouchStart = (e: React.TouchEvent) => {
-    setIsDragging(true);
-    setIsPaused(true);
-    setStartX(e.touches[0].pageX - (carouselRef.current?.offsetLeft || 0));
-    setScrollLeft(carouselRef.current?.scrollLeft || 0);
+  // Width of a single slide including the flex gap (gap-4 = 16px)
+  const getItemWidth = (carousel: HTMLDivElement) => {
+    const firstItem = carousel.firstElementChild as HTMLElement | null;
+    return firstItem ? firstItem.offsetWidth + 16 : carousel.offsetWidth;
   };
 
-  const handleTouchMove = (e: React.TouchEvent) => {
-    if (!isDragging) return;
-    const x = e.touches[0].pageX - (carouselRef.current?.offsetLeft || 0);
-    const walk = (x - startX) * 2;
-    if (carouselRef.current) {
-      carouselRef.current.scrollLeft = scrollLeft - walk;
-    }
-  };
-
-  const handleTouchEnd = () => {
-    setIsDragging(false);
-    if (!carouselRef.current) return;
-    
-    const itemWidth = carouselRef.current.offsetWidth * 0.8 + 16;
-    const scrollPosition = carouselRef.current.scrollLeft;
-    const newIndex = Math.round(scrollPosition / itemWidth);
-    scrollToItem(newIndex);
-    
-    // Resume auto-sliding after a delay
-    setTimeout(() => setIsPaused(false), 5000);
-  };
-
-  // Add useEffect to handle touch events with proper options
-  useEffect(() => {
+  // Native scroll-snap: derive the active card from the scroll position
+  const handleScroll = () => {
     const carousel = carouselRef.current;
     if (!carousel) return;
+    const index = Math.round(carousel.scrollLeft / getItemWidth(carousel));
+    setActiveIndex(Math.max(0, Math.min(features.length - 1, index)));
+  };
 
-    const options = { passive: false };
-    
-    const touchStartHandler = (e: TouchEvent) => {
-      setIsDragging(true);
-      setIsPaused(true);
-      setStartX(e.touches[0].pageX - (carousel.offsetLeft || 0));
-      setScrollLeft(carousel.scrollLeft || 0);
-    };
-
-    const touchMoveHandler = (e: TouchEvent) => {
-      if (!isDragging) return;
-      const x = e.touches[0].pageX - (carousel.offsetLeft || 0);
-      const walk = (x - startX) * 2;
-      carousel.scrollLeft = scrollLeft - walk;
-    };
-
-    const touchEndHandler = () => {
-      setIsDragging(false);
-      const itemWidth = carousel.offsetWidth * 0.8 + 16;
-      const scrollPosition = carousel.scrollLeft;
-      const newIndex = Math.round(scrollPosition / itemWidth);
-      scrollToItem(newIndex);
-      
-      // Resume auto-sliding after a delay
-      setTimeout(() => setIsPaused(false), 5000);
-    };
-
-    carousel.addEventListener('touchstart', touchStartHandler, options);
-    carousel.addEventListener('touchmove', touchMoveHandler, options);
-    carousel.addEventListener('touchend', touchEndHandler);
-
-    return () => {
-      carousel.removeEventListener('touchstart', touchStartHandler);
-      carousel.removeEventListener('touchmove', touchMoveHandler);
-      carousel.removeEventListener('touchend', touchEndHandler);
-    };
-  }, [isDragging, startX, scrollLeft]);
-
-  // Scroll to item with improved accessibility
+  // Programmatic navigation (dots) — lets the browser snap cleanly
   const scrollToItem = (index: number) => {
     const carousel = carouselRef.current;
     if (!carousel) return;
-
-    const itemWidth = carousel.offsetWidth * 0.8 + 16;
-    carousel.scrollTo({
-      left: itemWidth * index,
-      behavior: 'smooth'
-    });
+    carousel.scrollTo({ left: getItemWidth(carousel) * index, behavior: 'smooth' });
     setActiveIndex(index);
-
-    // Announce slide change to screen readers
-    const announcement = document.createElement('div');
-    announcement.setAttribute('aria-live', 'polite');
-    announcement.setAttribute('class', 'sr-only');
-    announcement.textContent = `${language === 'pl' ? 'Slajd' : 'Slide'} ${index + 1} ${language === 'pl' ? 'z' : 'of'} ${features.length + 1}`;
-    document.body.appendChild(announcement);
-    setTimeout(() => document.body.removeChild(announcement), 1000);
   };
-
-  // Handle illustration rotation
-  const illustrations = [
-    { src: '/images/graphics/Allura - Sitting.svg', alt: 'Woman sitting illustration' },
-    { src: '/images/graphics/Città - Standing.svg', alt: 'Person standing illustration' }
-    // Add more illustrations here for rotation if needed
-  ];
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
 
   return (
     <section 
       id="features"
-      className="relative py-16 md:py-24 bg-white overflow-hidden"
+      className="relative pt-16 md:pt-24 pb-28 md:pb-24 bg-white overflow-hidden"
       aria-label={language === 'pl' ? 'Sekcja funkcji' : 'Features section'}
     >
       {/* Background Accents */}
@@ -301,7 +201,7 @@ export default function ClientFeatures() {
           {/* Bottom Left Decorative Illustration */}
           <div className="absolute left-0 bottom-20 opacity-[0.035] transform -translate-x-1/4">
             <Image
-              src="/images/graphics/Città - Standing.svg"
+              src="/images/graphics/citta-standing.svg"
               alt=""
               width={140}
               height={140}
@@ -311,23 +211,6 @@ export default function ClientFeatures() {
           </div>
         </div>
 
-        {/* Desktop Città Illustration */}
-        <div 
-          className="absolute left-0 bottom-24 hidden xl:block"
-          style={{ transform: 'translateX(20%)' }}
-        >
-          <img
-            src="/images/graphics/Città - Standing.svg"
-            alt="Person standing illustration"
-            width="152"
-            height="152"
-            style={{
-              display: 'block',
-              maxWidth: '100%',
-              height: 'auto'
-            }}
-          />
-        </div>
       </div>
 
       {/* Main Content Container */}
@@ -352,15 +235,30 @@ export default function ClientFeatures() {
           </h2>
           <p className="text-lg md:text-xl text-primary-text max-w-2xl mx-auto">
             {language === 'pl'
-              ? 'Wypożyczalnia samochodów, która dba o Twój komfort i bezpieczeństwo.'
-              : 'A car rental service that prioritizes your comfort and safety.'}
+              ? 'Jasne zasady, polska obsługa i auto przygotowane na Twój pobyt.'
+              : 'Clear rules, direct support and a car prepared for your stay.'}
           </p>
         </motion.div>
 
         {/* Features Grid/Carousel */}
-        <div className="relative bg-primary/30 backdrop-blur-md rounded-3xl p-4 md:p-8 border border-primary/10">
-          {/* Desktop Grid */}
-          <div className="hidden md:grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 lg:gap-10 relative">
+        <div className="relative bg-primary/30 backdrop-blur-md rounded-3xl p-4 md:p-6 border border-primary/10 lg:max-w-5xl xl:max-w-6xl lg:mx-auto">
+          {/* Desktop man illustration — stands intentionally beside the panel, in front */}
+          <div
+            className="absolute left-0 bottom-0 z-20 hidden xl:block pointer-events-none"
+            style={{ transform: 'translateX(-72%)' }}
+            aria-hidden="true"
+          >
+            <img
+              src="/images/graphics/citta-standing.svg"
+              alt=""
+              width="160"
+              height="256"
+              style={{ display: 'block', width: '160px', height: 'auto' }}
+            />
+          </div>
+
+          {/* Desktop Grid (8 feature cards) */}
+          <div className="hidden md:grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 lg:gap-7 relative">
             {/* First three features */}
             {features.slice(0, 3).map((feature, index) => (
               <FeatureCard
@@ -372,43 +270,37 @@ export default function ClientFeatures() {
               />
             ))}
 
-            {/* Darmowa dostawa card with Allura */}
+            {/* 4th card with the woman illustration poking above it */}
             <div className="relative group">
               <motion.div
                 whileHover={{ 
                   scale: 1.02,
                   transition: { type: "spring", stiffness: 300, damping: 15 }
                 }}
-                className="relative"
+                className="relative h-full"
                 style={{ zIndex: 1 }}
               >
                 <div className="absolute -right-6 -top-8 w-32 h-32 bg-purple-100/50 rounded-full blur-2xl transform rotate-45" />
                 <FeatureCard
-                  feature={features[3]} // Darmowa dostawa
+                  feature={features[3]}
                   index={3}
                   language={language}
                   isInView={isInView}
                 />
               </motion.div>
 
-              {/* Desktop Allura Illustration */}
+              {/* Desktop Allura (woman) Illustration */}
               <div 
-                className="absolute -right-8 -top-[160px] hidden xl:block"
-                style={{
-                  position: 'absolute',
-                  zIndex: 9999
-                }}
+                className="absolute -right-8 -top-[160px] hidden xl:block pointer-events-none"
+                style={{ zIndex: 30 }}
+                aria-hidden="true"
               >
                 <img
                   src="/images/graphics/Allura - Sitting.svg"
-                  alt="Woman sitting illustration"
+                  alt=""
                   width="180"
                   height="180"
-                  style={{
-                    display: 'block',
-                    maxWidth: '100%',
-                    height: 'auto'
-                  }}
+                  style={{ display: 'block', maxWidth: '100%', height: 'auto' }}
                 />
               </div>
             </div>
@@ -423,80 +315,72 @@ export default function ClientFeatures() {
                 isInView={isInView}
               />
             ))}
-            <PromiseCard promise={promiseCard} language={language} isInView={isInView} />
           </div>
 
-          {/* Mobile Carousel with enhanced accessibility */}
+          {/* Mobile Carousel — native scroll-snap (1 card per swipe, no autoplay) */}
           <div
             ref={carouselRef}
-            className={`md:hidden overflow-x-auto pb-8 -mx-4 px-4 flex snap-x snap-mandatory gap-4 hide-scrollbar
-            ${isDragging ? 'cursor-grabbing' : 'cursor-grab'}`}
+            onScroll={handleScroll}
+            className="md:hidden overflow-x-auto pb-4 -mx-4 px-4 flex snap-x snap-mandatory gap-4 hide-scrollbar scroll-pl-4"
             style={{
               scrollbarWidth: 'none',
               msOverflowStyle: 'none',
-              touchAction: 'pan-x pinch-zoom',
+              touchAction: 'pan-x',
+              WebkitOverflowScrolling: 'touch',
             }}
             role="region"
             aria-label={language === 'pl' ? 'Karuzela funkcji' : 'Features carousel'}
-            onTouchStart={handleTouchStart}
-            onTouchMove={handleTouchMove}
-            onTouchEnd={handleTouchEnd}
-            onMouseEnter={() => setIsPaused(true)}
-            onMouseLeave={() => setIsPaused(false)}
           >
             {features.map((feature, index) => (
               <div 
                 key={feature.id} 
-                className="snap-center w-[80vw] min-w-[80vw] flex-shrink-0 first:pl-4 last:pr-4"
+                className="snap-start w-[82vw] min-w-[82vw] flex-shrink-0"
                 role="group"
-                aria-label={language === 'pl' ? `Slajd ${index + 1} z ${features.length + 1}` : `Slide ${index + 1} of ${features.length + 1}`}
+                aria-label={language === 'pl' ? `Slajd ${index + 1} z ${features.length}` : `Slide ${index + 1} of ${features.length}`}
               >
-                <div className="h-full">
-                  <FeatureCard
-                    feature={feature}
-                    index={index}
-                    language={language}
-                    isInView={isInView}
-                  />
-                </div>
+                <FeatureCard
+                  feature={feature}
+                  index={index}
+                  language={language}
+                  isInView={isInView}
+                />
               </div>
             ))}
-            <div 
-              className="snap-center w-[80vw] min-w-[80vw] flex-shrink-0 last:pr-4"
-              role="group"
-              aria-label={language === 'pl' ? `Slajd ${features.length + 1} z ${features.length + 1}` : `Slide ${features.length + 1} of ${features.length + 1}`}
-            >
-              <div className="h-full">
-                <PromiseCard promise={promiseCard} language={language} isInView={isInView} />
-              </div>
-            </div>
           </div>
 
-          {/* Carousel Navigation Dots with enhanced accessibility */}
-          <div 
-            className="flex md:hidden justify-center gap-2 mt-6"
-            role="tablist"
-            aria-label={language === 'pl' ? 'Nawigacja karuzeli' : 'Carousel navigation'}
-          >
-            {[...features, promiseCard].map((_, index) => (
-              <button
-                key={index}
-                className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                  index === activeIndex 
-                    ? 'w-6 bg-[#FFD700]' 
-                    : 'bg-primary/20'
-                }`}
-                onClick={() => scrollToItem(index)}
-                role="tab"
-                aria-selected={index === activeIndex}
-                aria-label={language === 'pl' 
-                  ? `Przejdź do slajdu ${index + 1}` 
-                  : `Go to slide ${index + 1}`
-                }
-              />
-            ))}
+          {/* Carousel Navigation Dots + counter */}
+          <div className="md:hidden mt-5">
+            <div 
+              className="flex justify-center gap-2"
+              role="tablist"
+              aria-label={language === 'pl' ? 'Nawigacja karuzeli' : 'Carousel navigation'}
+            >
+              {features.map((_, index) => (
+                <button
+                  key={index}
+                  className={`h-2 rounded-full transition-all duration-300 ${
+                    index === activeIndex 
+                      ? 'w-6 bg-[#FFD700]' 
+                      : 'w-2 bg-primary/20'
+                  }`}
+                  onClick={() => scrollToItem(index)}
+                  role="tab"
+                  aria-selected={index === activeIndex}
+                  aria-label={language === 'pl' 
+                    ? `Przejdź do slajdu ${index + 1}` 
+                    : `Go to slide ${index + 1}`
+                  }
+                />
+              ))}
+            </div>
+            <p className="text-center text-sm text-primary/60 mt-2" aria-hidden="true">
+              {activeIndex + 1} / {features.length}
+            </p>
           </div>
         </div>
+
+        {/* Closing trust card — full width, below the grid/carousel */}
+        <PromiseCard promise={promiseCard} language={language} isInView={isInView} />
       </div>
     </section>
   );
@@ -526,7 +410,7 @@ function FeatureCard({ feature, index, language, isInView }: FeatureCardProps) {
           damping: 15
         }
       }}
-      className={`group p-6 md:p-8 rounded-2xl bg-white hover:bg-gradient-to-br hover:from-white hover:to-gray-50
+      className={`group p-6 md:p-6 rounded-2xl bg-white hover:bg-gradient-to-br hover:from-white hover:to-gray-50
       transition-all duration-500 relative overflow-hidden transform h-full flex flex-col
       ${feature.isPrimary 
         ? 'shadow-[0_4px_20px_-4px_rgba(255,215,0,0.15)] border-2 border-[#FFD700]/20' 
@@ -534,12 +418,12 @@ function FeatureCard({ feature, index, language, isInView }: FeatureCardProps) {
     >
       {/* Icon */}
       <div className="relative z-10">
-        <div className={`w-14 h-14 md:w-16 md:h-16 rounded-2xl bg-gradient-to-br 
+        <div className={`w-14 h-14 md:w-14 md:h-14 rounded-2xl bg-gradient-to-br 
         ${feature.iconBg}
         flex items-center justify-center group-hover:scale-110 transition-transform duration-500
         ${feature.isPrimary ? 'shadow-[0_8px_16px_-4px_rgba(255,215,0,0.2)]' : ''}`}>
           <Icon 
-            className={`w-7 h-7 md:w-8 md:h-8 transition-colors duration-300`} 
+            className={`w-7 h-7 md:w-7 md:h-7 transition-colors duration-300`} 
             style={{ color: feature.accentColor }}
           />
         </div>
@@ -547,10 +431,10 @@ function FeatureCard({ feature, index, language, isInView }: FeatureCardProps) {
 
       {/* Content */}
       <div className="flex-grow flex flex-col justify-between">
-        <h3 className="text-xl md:text-2xl font-bold text-gray-900 mt-6 mb-3">
+        <h3 className="text-xl md:text-xl font-bold text-gray-900 mt-6 md:mt-5 mb-3 md:mb-2">
           {language === 'pl' ? feature.titlePL : feature.titleEN}
         </h3>
-        <p className="text-base md:text-lg text-gray-700 leading-relaxed">
+        <p className="text-base md:text-base text-gray-700 leading-relaxed">
           {language === 'pl' ? feature.descPL : feature.descEN}
         </p>
       </div>
@@ -569,43 +453,40 @@ function PromiseCard({ promise, language, isInView }: PromiseCardProps) {
           type: "spring",
           bounce: 0.3,
           duration: 0.8,
-          delay: 0.8
+          delay: 0.6
         }
       } : {}}
-      whileHover={{ 
-        y: -5,
-        transition: { 
-          type: "spring", 
-          stiffness: 300,
-          damping: 15
-        }
-      }}
-      className="p-6 md:p-8 rounded-2xl bg-gradient-to-br from-primary to-primary-dark text-white 
-      shadow-xl hover:shadow-2xl relative overflow-hidden transform transition-all duration-500 h-full flex flex-col"
+      className="mt-8 md:mt-10 p-6 md:p-10 rounded-3xl bg-gradient-to-br from-primary to-primary-dark text-white 
+      shadow-xl relative overflow-hidden transition-all duration-500"
     >
       {/* Background Accent */}
       <div className="absolute inset-0 bg-[url('/images/pattern.svg')] opacity-5" />
-      <div className="absolute top-0 right-0 w-32 h-32 bg-[#FFD700]/10 rounded-full blur-3xl transform translate-x-1/2 -translate-y-1/2" />
-      
-      {/* Content */}
-      <div className="relative z-10 flex-grow flex flex-col">
-        <div className="mb-6 flex items-center gap-4">
-          <div className="w-16 h-16 md:w-20 md:h-20 rounded-full bg-gradient-to-br from-white/20 to-white/5 p-1 shadow-inner">
+      <div className="absolute top-0 right-0 w-40 h-40 bg-[#FFD700]/10 rounded-full blur-3xl transform translate-x-1/2 -translate-y-1/2" />
+
+      {/* Content — horizontal on desktop, stacked on mobile */}
+      <div className="relative z-10 flex flex-col md:flex-row md:items-center gap-5 md:gap-8">
+        <div className="flex items-center gap-4 md:flex-shrink-0">
+          <div className="w-16 h-16 md:w-20 md:h-20 rounded-full bg-gradient-to-br from-white/20 to-white/5 p-1 shadow-inner flex-shrink-0">
             <Image
               src="/images/ceo.webp"
               alt="CEO Michał Nowak"
               width={80}
               height={80}
-              className="rounded-full object-cover"
+              className="rounded-full object-cover w-full h-full"
             />
           </div>
-          <h3 className="text-xl md:text-2xl font-bold text-white">
+          <h3 className="text-2xl md:text-3xl font-bold text-white md:hidden">
             {language === 'pl' ? promise.titlePL : promise.titleEN}
           </h3>
         </div>
-        <p className="text-base md:text-lg text-white/95 leading-relaxed flex-grow">
-          {language === 'pl' ? promise.descPL : promise.descEN}
-        </p>
+        <div className="md:flex-1">
+          <h3 className="hidden md:block text-3xl font-bold text-white mb-2">
+            {language === 'pl' ? promise.titlePL : promise.titleEN}
+          </h3>
+          <p className="text-base md:text-lg text-white/95 leading-relaxed">
+            {language === 'pl' ? promise.descPL : promise.descEN}
+          </p>
+        </div>
       </div>
     </motion.div>
   );

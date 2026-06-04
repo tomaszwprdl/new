@@ -18,22 +18,26 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   title: {
     template: '%s | NowRent',
-    default: 'No Deposit Car Rental Alicante Airport & Costa Blanca South | NowRent',
+    default: 'Wynajem auta bez kaucji Alicante i Costa Blanca | NowRent',
   },
-  description: 'Local car rental around Alicante Airport, Torrevieja, Orihuela Costa and nearby areas. No deposit, no credit card required, full insurance, unlimited mileage in Spain and flexible pickup.',
+  description: 'Wynajem auta na Lotnisku Alicante, w Torrevieja i Costa Blanca. Bez kaucji, pełne ubezpieczenie w cenie, bez limitu kilometrów w Hiszpanii i elastyczny odbiór.',
   metadataBase: new URL('https://nowrent.eu'),
   alternates: {
     canonical: 'https://nowrent.eu',
   },
   keywords: [
+    'wynajem auta Alicante',
+    'wynajem samochodu bez kaucji',
+    'wynajem auta Lotnisko Alicante',
+    'wynajem auta Costa Blanca',
+    'wypożyczalnia samochodów Alicante',
+    'wynajem auta Torrevieja',
     'car rental Alicante Airport',
     'no deposit car rental',
     'car rental Costa Blanca South',
     'car rental Torrevieja',
     'car rental Orihuela Costa',
     'car rental San Pedro del Pinatar',
-    'rent a car Alicante',
-    'wynajem samochodów Alicante',
     'full insurance car rental',
     'unlimited mileage car rental Spain',
   ],
@@ -46,25 +50,26 @@ export const metadata: Metadata = {
     address: true,
   },
   openGraph: {
-    title: 'No Deposit Car Rental Alicante Airport & Costa Blanca South | NowRent',
-    description: 'Local car rental around Alicante Airport, Torrevieja, Orihuela Costa and nearby areas. No deposit, no credit card required, full insurance and unlimited mileage in Spain.',
+    title: 'Wynajem auta bez kaucji Alicante i Costa Blanca | NowRent',
+    description: 'Wynajem auta na Lotnisku Alicante, w Torrevieja i Costa Blanca. Bez kaucji, pełne ubezpieczenie w cenie, bez limitu kilometrów w Hiszpanii i elastyczny odbiór.',
     url: 'https://nowrent.eu',
     siteName: 'NowRent',
-    locale: 'en_US',
+    locale: 'pl_PL',
+    alternateLocale: ['en_US'],
     type: 'website',
     images: [
       {
         url: 'https://nowrent.eu/og-image.jpg',
         width: 1200,
         height: 630,
-        alt: 'NowRent - Local Car Rental around Alicante Airport and Costa Blanca South',
+        alt: 'NowRent — wynajem auta bez kaucji w okolicach Lotniska Alicante i Costa Blanca',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'No Deposit Car Rental Alicante Airport & Costa Blanca South | NowRent',
-    description: 'Local car rental around Alicante Airport and Costa Blanca South. No deposit, no credit card required, full insurance and unlimited mileage in Spain.',
+    title: 'Wynajem auta bez kaucji Alicante i Costa Blanca | NowRent',
+    description: 'Wynajem auta na Lotnisku Alicante, w Torrevieja i Costa Blanca. Bez kaucji, pełne ubezpieczenie w cenie, bez limitu kilometrów w Hiszpanii i elastyczny odbiór.',
     images: ['https://nowrent.eu/twitter-image.jpg'],
   },
   robots: {
@@ -78,14 +83,10 @@ export const metadata: Metadata = {
       'max-snippet': -1,
     },
   },
-  verification: {
-    google: 'your-google-verification-code',
-  },
 }
 
 // Preload critical assets
 const preloadAssets = [
-  { rel: 'preload', href: '/Untitled design.png', as: 'image' },
   { rel: 'preload', href: '/images/graphics/Beep Beep - Medium Vehicle (3).svg', as: 'image' },
   { rel: 'preload', href: '/images/graphics/Beep Beep - Medium Vehicle (4).svg', as: 'image' },
   { rel: 'preload', href: '/images/graphics/Beep Beep - Medium Vehicle (5).svg', as: 'image' },
@@ -98,13 +99,8 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="pl" suppressHydrationWarning>
       <head>
-        <link
-          rel="preload"
-          href="/app/layout.css"
-          as="style"
-        />
         <link
           rel="preload"
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"

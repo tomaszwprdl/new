@@ -1,400 +1,483 @@
 'use client';
 
 import React, { useState } from 'react';
-import { useKeenSlider } from 'keen-slider/react';
-import 'keen-slider/keen-slider.min.css';
 import { useLanguage } from '@/context/LanguageContext';
 import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
-import { 
-  MapPinIcon, 
-  ArrowTopRightOnSquareIcon,
-  ChevronRightIcon,
-  HeartIcon,
+import {
+  MapPinIcon,
   ClockIcon,
-  ChevronLeftIcon
+  ArrowTopRightOnSquareIcon,
+  SparklesIcon,
+  ChevronDownIcon,
 } from '@heroicons/react/24/solid';
 
-const destinations = [
-  {
-    id: 1,
+interface Destination {
+  id: string;
+  name: { en: string; pl: string };
+  image: string;
+  description: { en: string; pl: string };
+  distanceKm: number;
+  travelTime: string;
+  tags: { en: string[]; pl: string[] };
+  mapsUrl: string;
+  routeNote?: { en: string; pl: string };
+}
+
+const destinations: Record<string, Destination> = {
+  alicante: {
+    id: 'alicante',
     name: { en: 'Alicante Old Town', pl: 'Stare Miasto Alicante' },
     image: '/images/places/Alicante.webp',
     description: {
-      en: 'Historic center with charming streets and the iconic Santa Barbara Castle',
-      pl: 'Historyczne centrum z urokliwymi uliczkami i ikonicznym zamkiem Santa Barbara'
+      en: 'A walk, Santa Barbara Castle and old-town atmosphere — a good choice even for a short trip.',
+      pl: 'Spacer, zamek Santa Barbara i klimat starego miasta — dobry wybór nawet na krótki wypad.',
     },
-    distance: '10km',
-    attractions: ['Santa Barbara Castle', 'Explanada', 'Central Market'],
+    distanceKm: 10,
     travelTime: '15 min',
-    isTopPick: true,
-    bookings: 1240,
-    rating: 4.8,
-    mapsUrl: 'https://maps.google.com/?q=Alicante+Old+Town,Spain'
+    tags: { en: ['castle', 'old town', 'views'], pl: ['zamek', 'stare miasto', 'widoki'] },
+    mapsUrl: 'https://maps.google.com/?q=Alicante+Old+Town,Spain',
   },
-  {
-    id: 2,
-    name: { en: 'Torrevieja', pl: 'Torrevieja' },
-    image: '/images/places/torrevieja.webp',
-    description: {
-      en: 'Charming coastal city famous for its pink salt lakes and beautiful beaches',
-      pl: 'Urokliwe nadmorskie miasto słynące z różowych jezior solnych i pięknych plaż'
-    },
-    distance: '50km',
-    attractions: ['Pink Salt Lake', 'La Mata Beach', 'Marina', 'Seafront Promenade'],
-    travelTime: '35 min',
-    isTopPick: true,
-    bookings: 980,
-    rating: 4.7,
-    mapsUrl: 'https://maps.google.com/?q=Torrevieja,Spain'
-  },
-  {
-    id: 3,
+  elche: {
+    id: 'elche',
     name: { en: 'Elche', pl: 'Elche' },
     image: '/images/places/Elche.webp',
     description: {
-      en: 'UNESCO World Heritage site with the largest palm grove in Europe',
-      pl: 'Obiekt UNESCO z największym gajem palmowym w Europie'
+      en: 'Palm trees, old town and a walk through a UNESCO-listed place.',
+      pl: 'Palmy, stare miasto i spacer w miejscu wpisanym na listę UNESCO.',
     },
-    distance: '25km',
-    attractions: ['Palm Grove', 'Basilica of Santa Maria', 'Altamira Palace'],
+    distanceKm: 25,
     travelTime: '25 min',
-    isTopPick: true,
-    bookings: 850,
-    rating: 4.7,
-    mapsUrl: 'https://maps.google.com/?q=Elche,Spain'
+    tags: { en: ['palms', 'UNESCO', 'walk'], pl: ['palmy', 'UNESCO', 'spacer'] },
+    mapsUrl: 'https://maps.google.com/?q=Elche,Spain',
   },
-  {
-    id: 4,
+  torrevieja: {
+    id: 'torrevieja',
+    name: { en: 'Torrevieja', pl: 'Torrevieja' },
+    image: '/images/places/torrevieja.webp',
+    description: {
+      en: 'Pink lake, promenade and beaches — ideal for an easy day by the sea.',
+      pl: 'Różowe jezioro, promenada i plaże — idealne na spokojny dzień blisko morza.',
+    },
+    distanceKm: 50,
+    travelTime: '35 min',
+    tags: { en: ['pink lake', 'beaches', 'promenade'], pl: ['różowe jezioro', 'plaże', 'promenada'] },
+    mapsUrl: 'https://maps.google.com/?q=Torrevieja,Spain',
+  },
+  tabarca: {
+    id: 'tabarca',
+    name: { en: 'Tabarca Island', pl: 'Wyspa Tabarca' },
+    image: '/images/places/isla de Tabarca.webp',
+    description: {
+      en: 'Drive to the port, then take a short boat trip to an island with crystal-clear water.',
+      pl: 'Dojazd autem do portu, a potem krótki rejs na wyspę z krystalicznie czystą wodą.',
+    },
+    distanceKm: 25,
+    travelTime: '30 min',
+    tags: { en: ['island', 'boat trip', 'snorkeling'], pl: ['wyspa', 'rejs', 'snorkeling'] },
+    mapsUrl: 'https://maps.google.com/?q=Isla+de+Tabarca,Spain',
+    routeNote: { en: 'Drive to port + ferry', pl: 'Dojazd do portu + rejs' },
+  },
+  murcia: {
+    id: 'murcia',
     name: { en: 'Murcia', pl: 'Murcja' },
     image: '/images/places/Castillo de Monteagudo murcia.webp',
     description: {
-      en: 'Baroque city with stunning cathedral and vibrant food scene',
-      pl: 'Barokowe miasto ze wspaniałą katedrą i bogatą sceną kulinarną'
+      en: 'Cathedral, tapas and a relaxed city atmosphere — a good day away from the coast.',
+      pl: 'Katedra, tapas i spokojny miejski klimat — dobry plan na dzień poza wybrzeżem.',
     },
-    distance: '80km',
-    attractions: ['Cathedral of Murcia', 'Casino', 'Terra Natura'],
+    distanceKm: 80,
     travelTime: '50 min',
-    isTopPick: true,
-    bookings: 920,
-    rating: 4.6,
-    mapsUrl: 'https://maps.google.com/?q=Murcia,Spain'
+    tags: { en: ['cathedral', 'tapas', 'old town'], pl: ['katedra', 'tapas', 'stare miasto'] },
+    mapsUrl: 'https://maps.google.com/?q=Murcia,Spain',
   },
-  {
-    id: 5,
+  cartagena: {
+    id: 'cartagena',
     name: { en: 'Cartagena', pl: 'Kartagena' },
     image: '/images/places/cartagena.webp',
     description: {
-      en: 'Historic port city with Roman ruins and maritime heritage',
-      pl: 'Historyczne miasto portowe z ruinami rzymskimi i morskim dziedzictwem'
+      en: 'Harbour, Roman ruins and sea views — a strong choice for a full-day trip.',
+      pl: 'Port, rzymskie ruiny i morski klimat — świetny kierunek na całodniowy wypad.',
     },
-    distance: '120km',
-    attractions: ['Roman Theater', 'Naval Museum', 'Fortress'],
-    travelTime: '1h 10min',
-    bookings: 780,
-    rating: 4.6,
-    mapsUrl: 'https://maps.google.com/?q=Cartagena,Spain'
+    distanceKm: 120,
+    travelTime: '1h 10 min',
+    tags: { en: ['harbour', 'history', 'Roman theatre'], pl: ['port', 'historia', 'teatr rzymski'] },
+    mapsUrl: 'https://maps.google.com/?q=Cartagena,Spain',
   },
-  {
-    id: 6,
-    name: { en: 'Isla de Tabarca', pl: 'Wyspa Tabarca' },
-    image: '/images/places/isla de Tabarca.webp',
-    description: {
-      en: 'Beautiful island with crystal clear waters, perfect for snorkeling',
-      pl: 'Piękna wyspa z krystalicznie czystą wodą, idealna do snorkelingu'
-    },
-    distance: '25km',
-    attractions: ['Marine Reserve', 'Historic Fortifications', 'Beaches'],
-    travelTime: '30 min',
-    bookings: 650,
-    rating: 4.8,
-    mapsUrl: 'https://maps.google.com/?q=Isla+de+Tabarca,Spain'
-  },
-  {
-    id: 7,
-    name: { en: 'Guadalest', pl: 'Guadalest' },
-    image: '/images/places/guadalest.webp',
-    description: {
-      en: 'Mountain village with stunning castle and reservoir views',
-      pl: 'Górska miejscowość z zapierającym dech w piersiach zamkiem i widokami na zbiornik wodny'
-    },
-    distance: '140km',
-    attractions: ['Castle Museum', 'Reservoir', 'San José Church'],
-    travelTime: '1h 30min',
-    bookings: 580,
-    rating: 4.7,
-    mapsUrl: 'https://maps.google.com/?q=Guadalest,Spain'
-  },
-  {
-    id: 8,
-    name: { en: 'Benidorm', pl: 'Benidorm' },
-    image: '/images/places/benidorm.webp',
-    description: {
-      en: 'Vibrant coastal city with stunning beaches and entertainment',
-      pl: 'Tętniące życiem nadmorskie miasto ze wspaniałymi plażami i rozrywką'
-    },
-    distance: '130km',
-    attractions: ['Levante Beach', 'Terra Mítica', 'Old Town'],
-    travelTime: '1h 20min',
-    bookings: 890,
-    rating: 4.6,
-    mapsUrl: 'https://maps.google.com/?q=Benidorm,Spain'
-  },
-  {
-    id: 9,
+  marmenor: {
+    id: 'marmenor',
     name: { en: 'Mar Menor', pl: 'Mar Menor' },
     image: '/images/places/Mar Menor.webp',
     description: {
-      en: 'Europe\'s largest saltwater lagoon with healing mud baths',
-      pl: 'Największa w Europie laguna słonowodna ze zdrowotnymi kąpielami błotnymi'
+      en: 'Lagoon, sunsets and calmer beaches on the Murcia side.',
+      pl: 'Laguna, zachody słońca i spokojniejsze plaże po stronie Murcji.',
     },
-    distance: '90km',
-    attractions: ['Mud Baths', 'Water Sports', 'Fishing Villages'],
+    distanceKm: 90,
     travelTime: '55 min',
-    bookings: 720,
-    rating: 4.7,
-    mapsUrl: 'https://maps.google.com/?q=Mar+Menor,Spain'
+    tags: { en: ['lagoon', 'beaches', 'sunset'], pl: ['laguna', 'plaże', 'zachód słońca'] },
+    mapsUrl: 'https://maps.google.com/?q=Mar+Menor,Spain',
   },
-  {
-    id: 10,
+  benidorm: {
+    id: 'benidorm',
+    name: { en: 'Benidorm', pl: 'Benidorm' },
+    image: '/images/places/benidorm.webp',
+    description: {
+      en: 'Beaches, viewpoints and the evening energy of a larger coastal city.',
+      pl: 'Plaże, punkty widokowe i wieczorny klimat dużego nadmorskiego miasta.',
+    },
+    distanceKm: 130,
+    travelTime: '1h 20 min',
+    tags: { en: ['beaches', 'skyline', 'city'], pl: ['plaże', 'panorama', 'miasto'] },
+    mapsUrl: 'https://maps.google.com/?q=Benidorm,Spain',
+  },
+  guadalest: {
+    id: 'guadalest',
+    name: { en: 'Guadalest', pl: 'Guadalest' },
+    image: '/images/places/guadalest.webp',
+    description: {
+      en: 'Mountains, castle and some of the best views in the area.',
+      pl: 'Góry, zamek i jedne z najładniejszych widoków w okolicy.',
+    },
+    distanceKm: 140,
+    travelTime: '1h 30 min',
+    tags: { en: ['mountains', 'castle', 'views'], pl: ['góry', 'zamek', 'widoki'] },
+    mapsUrl: 'https://maps.google.com/?q=Guadalest,Spain',
+  },
+  altea: {
+    id: 'altea',
+    name: { en: 'Altea', pl: 'Altea' },
+    image: '/images/places/altea.webp',
+    description: {
+      en: 'White streets, sea views and a calm old-town atmosphere — a beautiful drive beyond the apartment area.',
+      pl: 'Białe uliczki, widok na morze i spokojny klimat starego miasta — idealna trasa na piękny dzień poza apartamentem.',
+    },
+    distanceKm: 55,
+    travelTime: '50 min',
+    tags: { en: ['old town', 'views', 'sea'], pl: ['stare miasto', 'widoki', 'morze'] },
+    mapsUrl: 'https://maps.google.com/?q=Altea,Alicante,Spain',
+  },
+  valencia: {
+    id: 'valencia',
     name: { en: 'Valencia', pl: 'Walencja' },
     image: '/images/places/valencia.webp',
     description: {
-      en: 'Modern city famous for its City of Arts and Sciences, historic center, and birthplace of paella',
-      pl: 'Nowoczesne miasto słynące z Miasta Sztuki i Nauki, historycznego centrum i miejsca narodzin paelli'
+      en: 'A bigger trip: Oceanogràfic, old town and the City of Arts and Sciences.',
+      pl: 'Większa wyprawa: oceanarium, stare miasto i Miasto Sztuki i Nauki.',
     },
-    distance: '170km',
-    attractions: ['City of Arts and Sciences', 'Central Market', 'Valencia Cathedral', 'Turia Gardens'],
-    travelTime: '1h 45min',
-    isTopPick: true,
-    bookings: 1100,
-    rating: 4.9,
-    mapsUrl: 'https://maps.google.com/?q=Valencia,Spain'
-  }
+    distanceKm: 170,
+    travelTime: '1h 45 min',
+    tags: { en: ['Oceanogràfic', 'old town', 'architecture'], pl: ['oceanarium', 'stare miasto', 'architektura'] },
+    mapsUrl: 'https://maps.google.com/?q=Valencia,Spain',
+  },
+};
+
+const groups = [
+  {
+    id: 'easy',
+    title: { en: 'Close and easy', pl: 'Blisko i łatwo' },
+    subtitle: {
+      en: 'Short trips when you want to go beyond the nearest beach.',
+      pl: 'Krótkie wypady, kiedy chcesz ruszyć się dalej niż najbliższa plaża.',
+    },
+    meta: { en: '4 destinations · 15–35 min', pl: '4 kierunki · 15–35 min' },
+    ids: ['alicante', 'elche', 'torrevieja', 'tabarca'],
+  },
+  {
+    id: 'halfday',
+    title: { en: 'Half-day or full-day trips', pl: 'Na pół dnia albo cały dzień' },
+    subtitle: {
+      en: 'Cities, ports and places best explored without rushing.',
+      pl: 'Miasta, porty i miejsca, które najlepiej zwiedzać bez pośpiechu.',
+    },
+    meta: { en: '4 destinations · 50 min–1h20', pl: '4 kierunki · 50 min–1h20' },
+    ids: ['murcia', 'cartagena', 'marmenor', 'benidorm'],
+  },
+  {
+    id: 'adventure',
+    title: { en: 'Bigger adventure', pl: 'Większa przygoda' },
+    subtitle: {
+      en: 'Longer drives for people who really want to see more.',
+      pl: 'Dłuższe trasy dla tych, którzy naprawdę chcą zobaczyć coś więcej.',
+    },
+    meta: { en: '3 destinations · 50 min–1h45', pl: '3 kierunki · 50 min–1h45' },
+    ids: ['guadalest', 'altea', 'valencia'],
+  },
 ];
+
+function DestinationCard({ destination, language, priority }: { destination: Destination; language: 'en' | 'pl'; priority?: boolean }) {
+  return (
+    <motion.article
+      initial={{ opacity: 0, y: 24 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: '-50px' }}
+      transition={{ duration: 0.5 }}
+      className="group flex flex-col bg-[#1A2B49]/50 backdrop-blur-sm rounded-2xl overflow-hidden border border-white/10 hover:border-[#FFD700]/40 transition-all duration-300 shadow-lg hover:-translate-y-1"
+    >
+      <div className="relative h-36 sm:h-40 overflow-hidden">
+        <Image
+          src={destination.image}
+          alt={destination.name[language]}
+          fill
+          className="object-cover group-hover:scale-105 transition-transform duration-500"
+          sizes="(max-width: 640px) 100vw, (max-width: 1280px) 50vw, 25vw"
+          loading={priority ? 'eager' : 'lazy'}
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#0D1B33]/85 via-[#0D1B33]/10 to-transparent" />
+        <h4 className="absolute bottom-3 left-4 right-4 text-lg font-bold text-white drop-shadow">
+          {destination.name[language]}
+        </h4>
+      </div>
+
+      <div className="flex flex-col flex-grow p-4 md:p-5">
+        <p className="text-sm text-white/75 leading-relaxed mb-3 flex-grow">
+          {destination.description[language]}
+        </p>
+
+        <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-white/70 text-xs mb-3">
+          {destination.routeNote ? (
+            <span className="inline-flex items-center gap-1.5">
+              <MapPinIcon className="w-4 h-4 text-[#FFD700]" />
+              {destination.routeNote[language]}
+            </span>
+          ) : (
+            <>
+              <span className="inline-flex items-center gap-1.5">
+                <MapPinIcon className="w-4 h-4 text-[#FFD700]" />
+                {destination.distanceKm} km {language === 'pl' ? 'z Alicante' : 'from Alicante'}
+              </span>
+              <span className="inline-flex items-center gap-1.5">
+                <ClockIcon className="w-4 h-4 text-[#FFD700]" />
+                {destination.travelTime}
+              </span>
+            </>
+          )}
+        </div>
+
+        <div className="flex flex-wrap gap-1.5 mb-4">
+          {destination.tags[language].slice(0, 3).map((tag, i) => (
+            <span key={i} className="px-2.5 py-1 rounded-full text-[11px] font-medium bg-white/10 text-white/80">
+              {tag}
+            </span>
+          ))}
+        </div>
+
+        <a
+          href={destination.mapsUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="mt-auto inline-flex items-center justify-center gap-2 bg-white/10 hover:bg-white/20 text-white text-sm font-semibold px-4 py-2.5 rounded-full transition-all"
+        >
+          <span>{language === 'pl' ? 'Zobacz na mapie' : 'View on map'}</span>
+          <ArrowTopRightOnSquareIcon className="w-4 h-4" />
+        </a>
+      </div>
+    </motion.article>
+  );
+}
 
 export default function DestinationsSection() {
   const { language } = useLanguage();
-  const [currentDestination, setCurrentDestination] = useState(0);
-  const [loadedDestinations, setLoadedDestinations] = useState(false);
-  const [selectedDestination, setSelectedDestination] = useState<number | null>(null);
 
-  // Destinations slider - NO auto-advance, initialized once
-  const [destinationSliderRef, destinationSliderInstance] = useKeenSlider<HTMLDivElement>({
-    loop: true,
-    mode: "snap",
-    slides: { perView: 1, spacing: 0 },
-    initial: 0,
-    drag: true,
-    rubberband: true,
-    defaultAnimation: {
-      duration: 500
-    },
-    created(slider) {
-      setLoadedDestinations(true);
-    },
-    slideChanged(slider) {
-      // Only update React state if it's different from the slider's position
-      const newIndex = slider.track.details.rel;
-      if (currentDestination !== newIndex) {
-        setCurrentDestination(newIndex);
-      }
-    }
-  });
+  // Mobile-only accordion state: first group open by default.
+  const [openGroups, setOpenGroups] = useState<string[]>([groups[0].id]);
+  const toggleGroup = (id: string) =>
+    setOpenGroups((prev) =>
+      prev.includes(id) ? prev.filter((g) => g !== id) : [...prev, id]
+    );
 
-  // Navigation functions for destinations - simplified to only use slider
-  const nextDestination = () => {
-    if (destinationSliderInstance.current) {
-      destinationSliderInstance.current.next();
-    }
+  const scrollToBooking = () => {
+    const booking = document.getElementById('booking');
+    if (booking) booking.scrollIntoView({ behavior: 'smooth' });
   };
 
-  const prevDestination = () => {
-    if (destinationSliderInstance.current) {
-      destinationSliderInstance.current.prev();
-    }
-  };
+  let cardCounter = 0;
 
   return (
-    <section id="destinations" className="relative py-24 bg-gradient-to-b from-[#0D1B33] to-[#1A2B49] overflow-hidden">
-      <div className="absolute inset-0 -z-10">
+    <section
+      id="destinations"
+      className="relative pt-16 md:pt-24 pb-28 md:pb-24 bg-gradient-to-b from-[#0D1B33] to-[#1A2B49] overflow-hidden"
+    >
+      {/* Subtle background pattern (keeps the dark navy mood) */}
+      <div className="absolute inset-0 opacity-[0.04] pointer-events-none">
         <div
-          className={`absolute inset-0 transition-opacity duration-1000 opacity-30`}
-          style={{
-            backgroundImage: `url(${destinations[currentDestination].image})`,
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
-            backgroundRepeat: 'no-repeat',
-            transform: 'scale(1.1)',
-            filter: 'blur(12px)',
-          }}
+          className="absolute inset-0"
+          style={{ backgroundImage: 'url("/images/pattern.svg")', backgroundSize: '40px' }}
         />
-        {/* Gradient overlay */}
-        <div className="absolute inset-0 bg-gradient-to-b from-[#0D1B33]/70 to-[#1A2B49]/70" />
-        <div className="absolute inset-0 bg-black/20" />
       </div>
 
-      <div className="container mx-auto px-4 py-24">
-        <div className="text-center mb-16 relative z-10">
+      <div className="container mx-auto px-4 relative z-10">
+        {/* Header */}
+        <div className="text-center max-w-3xl mx-auto mb-12 md:mb-16">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ delay: 0.2 }}
             className="flex items-center justify-center gap-2 mb-4"
           >
-            <MapPinIcon className="w-6 h-6 text-[#FFD700]" />
-            <span className="text-white/60 uppercase tracking-wider text-sm font-medium">
-              {language === 'pl' ? 'Popularne Destynacje' : 'Popular Destinations'}
+            <MapPinIcon className="w-5 h-5 text-[#FFD700]" />
+            <span className="text-[#FFD700]/90 uppercase tracking-[0.2em] text-xs md:text-sm font-semibold">
+              {language === 'pl' ? 'ODKRYJ COSTA BLANCA' : 'EXPLORE COSTA BLANCA'}
             </span>
           </motion.div>
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-4 bg-clip-text text-transparent bg-gradient-to-r from-white via-white to-[#FFD700]">
-            {language === 'pl' ? 'Popularne trasy z Alicante' : 'Where Do You Want to Go?'}
-          </h2>
-          <p className="text-lg md:text-xl text-white/80 max-w-2xl mx-auto">
+
+          <motion.h2
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.05 }}
+            className="text-3xl md:text-5xl font-bold text-white mb-4"
+          >
+            {language === 'pl' ? 'Zobacz więcej niż okolice apartamentu' : 'See more than your apartment area'}
+          </motion.h2>
+
+          <motion.p
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.1 }}
+            className="text-base md:text-lg text-white/80 leading-relaxed"
+          >
             {language === 'pl'
-              ? 'Miejsca, do których często jadą nasi klienci'
-              : 'Discover the most beautiful places around Alicante'}
-          </p>
+              ? 'Hiszpania wokół Alicante to nie tylko plaża — z autem masz swobodę na spontaniczne wypady, całodzienne wycieczki i miejsca poza utartym szlakiem.'
+              : 'Alicante and Costa Blanca are more than the beach. With a car, you get the freedom for spontaneous stops, day trips and places that are hard to reach comfortably without your own transport.'}
+          </motion.p>
+
+          {/* Value strip */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.15 }}
+            className="mt-6 inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10"
+          >
+            <SparklesIcon className="w-4 h-4 text-[#FFD700] flex-shrink-0" />
+            <span className="text-xs md:text-sm text-white/75">
+              {language === 'pl'
+                ? '1 auto · 11 kierunków · od 15 min do 1h 45 min · plaże · miasta · góry · wyspy'
+                : '1 car · 11 destinations · from 15 min to 1h 45 min · beaches · cities · mountains · islands'}
+            </span>
+          </motion.div>
         </div>
 
-        <div className="max-w-6xl mx-auto relative">
-          {/* Destinations Slider */}
-          <div ref={destinationSliderRef} className="keen-slider">
-            {destinations.map((destination, index) => (
-              <motion.div
-                key={destination.id}
-                className="keen-slider__slide"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.1 }}
+        {/* Mobile: collapsible accordion groups (below md) */}
+        <div className="md:hidden space-y-4">
+          {groups.map((group, groupIndex) => {
+            const isOpen = openGroups.includes(group.id);
+            return (
+              <div
+                key={group.id}
+                className="rounded-2xl border border-white/10 bg-white/5 overflow-hidden"
               >
-                <div className="bg-[#1A2B49]/40 backdrop-blur-sm rounded-2xl overflow-hidden border border-white/10 hover:border-white/20 transition-all duration-300 shadow-xl">
-                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 p-8">
-                    {/* Destination Image */}
-                    <div className="relative h-[400px] lg:h-full min-h-[400px] rounded-xl overflow-hidden shadow-lg order-1">
-                      {/* Navigation Buttons inside image */}
-                      <button
-                        onClick={(e) => {
-                          e.preventDefault();
-                          e.stopPropagation();
-                          prevDestination();
-                        }}
-                        className="absolute left-4 top-1/2 -translate-y-1/2 z-20 bg-white/10 hover:bg-white/20 backdrop-blur-sm text-white p-3 rounded-full transition-all transform hover:scale-110"
-                        aria-label={language === 'pl' ? 'Poprzednia destynacja' : 'Previous destination'}
-                      >
-                        <ChevronLeftIcon className="w-6 h-6" />
-                      </button>
-                      <button
-                        onClick={(e) => {
-                          e.preventDefault();
-                          e.stopPropagation();
-                          nextDestination();
-                        }}
-                        className="absolute right-4 top-1/2 -translate-y-1/2 z-20 bg-white/10 hover:bg-white/20 backdrop-blur-sm text-white p-3 rounded-full transition-all transform hover:scale-110"
-                        aria-label={language === 'pl' ? 'Następna destynacja' : 'Next destination'}
-                      >
-                        <ChevronRightIcon className="w-6 h-6" />
-                      </button>
-                      <Image
-                        src={destination.image}
-                        alt={destination.name[language]}
-                        fill
-                        className="object-cover"
-                        priority={index === 0}
-                        loading={index === 0 ? 'eager' : 'lazy'}
-                      />
-                    </div>
-
-                    {/* Destination Info */}
-                    <div className="flex flex-col justify-between order-2">
-                      <div>
-                        <div className="flex items-center gap-3 mb-4">
-                          <h3 className="text-3xl font-bold text-white">
-                            {destination.name[language]}
-                          </h3>
-                        </div>
-
-                        <p className="text-xl text-white/90 mb-6">
-                          {destination.description[language]}
-                        </p>
-
-                        <div className="space-y-6">
-                          <div className="flex items-center gap-6 text-white/80 text-lg">
-                            <div className="flex items-center gap-2">
-                              <MapPinIcon className="w-6 h-6" />
-                              <span>{destination.distance} {language === 'pl' ? 'od Alicante' : 'from Alicante'}</span>
-                            </div>
-                            <div className="flex items-center gap-2">
-                              <ClockIcon className="w-6 h-6" />
-                              <span>{destination.travelTime}</span>
-                            </div>
-                            {destination.bookings && (
-                              <div className="flex items-center gap-2">
-                                <HeartIcon className="w-6 h-6 text-red-500" />
-                                <span>{destination.bookings}+ {language === 'pl' ? 'wyjazdów' : 'trips'}</span>
-                              </div>
-                            )}
-                          </div>
-
-                          <div className="flex flex-wrap gap-2">
-                            {destination.attractions.map((attraction, idx) => (
-                              <span
-                                key={idx}
-                                className="inline-flex items-center px-4 py-2 rounded-full text-sm font-medium bg-white/10 text-white/90 backdrop-blur-sm"
-                              >
-                                {attraction}
-                              </span>
-                            ))}
-                          </div>
-                        </div>
-                      </div>
-
-                      <div className="flex gap-3 mt-8">
-                        <motion.a
-                          href={destination.mapsUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          whileHover={{ scale: 1.05 }}
-                          whileTap={{ scale: 0.95 }}
-                          className="w-full inline-flex items-center justify-center gap-2 bg-white/20 backdrop-blur-sm text-white px-6 py-3 rounded-full text-lg font-semibold hover:bg-white/30 transition-all"
-                        >
-                          <span>{language === 'pl' ? 'Zobacz na mapie' : 'View on map'}</span>
-                          <ArrowTopRightOnSquareIcon className="w-5 h-5" />
-                        </motion.a>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-
-          {/* Navigation Dots */}
-          {loadedDestinations && destinationSliderInstance.current && (
-            <div className="flex justify-center gap-3 mt-12">
-              {[...Array(destinations.length)].map((_, idx) => (
                 <button
-                  key={idx}
-                  onClick={(e) => {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    if (destinationSliderInstance.current) {
-                      destinationSliderInstance.current.moveToIdx(idx);
-                    }
-                  }}
-                  className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                    currentDestination === idx
-                      ? 'w-12 bg-[#FFD700]'
-                      : 'bg-white/20 hover:bg-white/40'
-                  }`}
-                  aria-label={`Go to destination ${idx + 1}`}
-                />
-              ))}
-            </div>
-          )}
+                  type="button"
+                  onClick={() => toggleGroup(group.id)}
+                  aria-expanded={isOpen}
+                  aria-controls={`group-panel-${group.id}`}
+                  className="flex w-full items-center justify-between gap-4 px-4 py-4 text-left"
+                >
+                  <span className="min-w-0">
+                    <span className="block text-lg font-bold text-white">
+                      {group.title[language]}
+                    </span>
+                    <span className="mt-1 block text-xs text-white/60">
+                      {group.meta[language]}
+                    </span>
+                  </span>
+                  <ChevronDownIcon
+                    className={`w-5 h-5 flex-shrink-0 text-[#FFD700] transition-transform duration-300 ${
+                      isOpen ? 'rotate-180' : ''
+                    }`}
+                  />
+                </button>
+
+                <AnimatePresence initial={false}>
+                  {isOpen && (
+                    <motion.div
+                      id={`group-panel-${group.id}`}
+                      key="panel"
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: 'auto', opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.3, ease: 'easeInOut' }}
+                      className="overflow-hidden"
+                    >
+                      <div className="px-4 pb-5 pt-1 space-y-4">
+                        {group.ids.map((id, cardIndex) => (
+                          <DestinationCard
+                            key={id}
+                            destination={destinations[id]}
+                            language={language}
+                            priority={groupIndex === 0 && cardIndex === 0}
+                          />
+                        ))}
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+            );
+          })}
+        </div>
+
+        {/* Desktop: grouped inspiration board (md+) — unchanged */}
+        <div className="hidden md:block space-y-12 md:space-y-16">
+          {groups.map((group) => {
+            const count = group.ids.length;
+            let gridClass = 'xl:grid-cols-4';
+            if (count <= 2) {
+              gridClass = 'xl:grid-cols-2 xl:max-w-4xl';
+            } else if (count === 3) {
+              gridClass = 'xl:grid-cols-3 xl:max-w-6xl';
+            }
+            return (
+              <div key={group.id}>
+                <div className="mb-6">
+                  <h3 className="text-2xl md:text-3xl font-bold text-white">
+                    {group.title[language]}
+                  </h3>
+                  <p className="text-sm md:text-base text-white/65 mt-1 max-w-2xl">
+                    {group.subtitle[language]}
+                  </p>
+                </div>
+
+                <div
+                  className={`grid grid-cols-1 sm:grid-cols-2 gap-5 md:gap-6 ${gridClass}`}
+                >
+                  {group.ids.map((id) => {
+                    const isFirst = cardCounter === 0;
+                    cardCounter += 1;
+                    return (
+                      <DestinationCard
+                        key={id}
+                        destination={destinations[id]}
+                        language={language}
+                        priority={isFirst}
+                      />
+                    );
+                  })}
+                </div>
+              </div>
+            );
+          })}
+        </div>
+
+        {/* Bottom CTA */}
+        <div className="mt-14 md:mt-20 text-center">
+          <p className="text-lg md:text-xl text-white/85 mb-5">
+            {language === 'pl'
+              ? 'Masz plan na wycieczkę? Sprawdź auto na swoje daty'
+              : 'Planning a day trip? Check a car for your dates'}
+          </p>
+          <motion.button
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            onClick={scrollToBooking}
+            className="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-[#FFD700] to-[#FFB300] text-[#1A2B49] font-bold px-8 py-3.5 rounded-full shadow-lg hover:shadow-xl transition-all"
+          >
+            {language === 'pl' ? 'Sprawdź dostępność' : 'Check availability'}
+          </motion.button>
         </div>
       </div>
     </section>
   );
-} 
+}

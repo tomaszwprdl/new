@@ -117,7 +117,7 @@ export default function MobileNavigation() {
             >
               {/* Logo background */}
               <div className="absolute inset-0 flex items-center justify-center pointer-events-none select-none opacity-10 z-0">
-                <Image src="/images/logo.svg" alt="NowRent Logo" width={180} height={180} className="w-40 h-40" />
+                <Image src="/images/logo.svg" alt="NowRent logo" width={180} height={180} className="w-40 h-40" />
               </div>
               <button
                 className="absolute top-3 right-4 text-gray-400 hover:text-gray-700 z-10"
