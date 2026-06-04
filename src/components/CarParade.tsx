@@ -16,7 +16,7 @@ export default function CarParade() {
     { src: '/images/cars/kompaktowy.png', alt: 'Compact Car' },
     { src: '/images/cars/suv.png', alt: 'SUV' },
     { src: '/images/cars/van.png', alt: 'Van' },
-    { src: '/images/cars/luksusowy.png', alt: 'Luxury Car' },
+    { src: '/images/cars/luksusowy.png', alt: 'Comfort class example car' },
   ];
 
   useEffect(() => {

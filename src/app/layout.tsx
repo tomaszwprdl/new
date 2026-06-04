@@ -137,7 +137,7 @@ export default function RootLayout({
                 { '@type': 'Place', name: 'San Pedro del Pinatar' },
                 { '@type': 'Place', name: 'Costa Blanca South' },
               ],
-              priceRange: '€€',
+              priceRange: '€',
               telephone: '+34 694 229 035',
               email: 'nowrentes@gmail.com',
               sameAs: [

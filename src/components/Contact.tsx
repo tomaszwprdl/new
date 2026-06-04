@@ -11,7 +11,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 const carTypes = [
   { id: 'suv', name: { en: 'SUV', pl: 'SUV' } },
   { id: 'compact', name: { en: 'Compact', pl: 'Kompaktowe' } },
-  { id: 'premium', name: { en: 'Premium', pl: 'Premium' } },
+  { id: 'comfort', name: { en: 'Comfort class', pl: 'Klasa komfortowa' } },
   { id: 'economy', name: { en: 'Economy', pl: 'Ekonomiczny' } },
   { id: 'van', name: { en: 'Van', pl: 'Van' } }
 ];

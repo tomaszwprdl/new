@@ -1,6 +1,23 @@
 import { NextResponse } from 'next/server';
 import nodemailer from 'nodemailer';
 
+const CAR_TYPE_LABELS: Record<string, string> = {
+  economic: 'Economy class',
+  economy: 'Economy class',
+  compact: 'Compact class',
+  suv: 'SUV class',
+  van: '7-seat / Van class',
+  luxury: 'Comfort class',
+  comfort: 'Comfort class',
+  premium: 'Comfort class',
+};
+
+function formatCarType(carType: string | undefined): string {
+  if (!carType) return 'Not specified';
+  const key = carType.trim().toLowerCase();
+  return CAR_TYPE_LABELS[key] ?? carType;
+}
+
 export async function POST(request: Request) {
   try {
     const data = await request.json();
@@ -24,7 +41,7 @@ export async function POST(request: Request) {
     const message = `
       New Car Rental Request:
       
-      Car Type: ${data.carType}
+      Car Type: ${formatCarType(data.carType)}
       
       Pickup Details:
       Location: ${data.pickupLocation}

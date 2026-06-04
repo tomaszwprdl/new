@@ -128,8 +128,8 @@ export const ImageCarousel: React.FC<ImageCarouselProps> = ({ images = defaultIm
       </div>
       <p className="text-lg text-blue-700 mb-8 max-w-2xl text-center mx-auto">
         {language === 'pl' 
-          ? 'Odkryj najpiękniejsze i najbardziej unikalne miejsca do odwiedzenia podczas pobytu na Costa Blanca. Poznaj nasze starannie wybrane destynacje dla niezapomnianych wrażeń!'
-          : 'Discover the most beautiful and unique places to visit during your stay on the Costa Blanca. Explore our handpicked destinations for unforgettable experiences!'}
+          ? 'Miejsca w zasięgu krótkiej jazdy z Alicante — plaże, miasta i wycieczki po Costa Blanca na Twój pobyt.'
+          : 'Places within a short drive from Alicante — beaches, towns and day trips around Costa Blanca for your stay.'}
       </p>
       <div className="w-full flex items-center justify-center">
         {/* Desktop carousel */}

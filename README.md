@@ -1,4 +1,4 @@
-# NowRent - Premium Car Rental in Alicante
+# NowRent — local no-deposit car rental in Alicante & Costa Blanca
 
 ## Required Assets
 
@@ -9,7 +9,7 @@ The following OpenGraph images need to be created and placed in the `/public/ima
    - Main social sharing image
    - Should include:
      - NowRent logo
-     - Tagline: "Premium Car Rental in Alicante"
+     - Tagline: "No-deposit car rental in Alicante & Costa Blanca"
      - High-quality car image
      - Brand colors (#1A2B49)
 
@@ -45,7 +45,7 @@ npm run start
 ```
 
 ## Features
-- Premium car rental service
+- Local no-deposit car rental
 - Multiple language support (EN, PL)
 - Real-time availability
 - Secure booking system

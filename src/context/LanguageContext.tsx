@@ -22,13 +22,13 @@ const translations = {
     'nav.contact': 'Contact',
     
     // Hero Section
-    'hero.title': 'Your Summer. Your Journey. Your Freedom.',
-    'hero.subtitle': 'Explore the Alicante region your way. With NowRent, find the perfect car and enjoy an unforgettable Costa Blanca holiday.',
+    'hero.title': 'No-deposit car rental in Alicante & Costa Blanca',
+    'hero.subtitle': 'A car for your stay in Spain — simple, flexible, and stress-free.',
     'hero.cta.primary': 'Book Your Car',
     'hero.cta.secondary': 'See Our Cars',
     
     // Trust Section
-    'trust.title': 'Trusted by Thousands of Happy Customers',
+    'trust.title': 'Recommended by customers',
     'trust.subtitle': 'At NowRent, we make every journey across Costa Blanca comfortable, safe, and memorable. Trust the local experts and enjoy a worry-free drive – we\'ll handle the rest.',
     'trust.badges.local': '100% Local Service',
     'trust.badges.local.desc': 'We are a local company with deep roots in the community',
@@ -50,13 +50,13 @@ const translations = {
     'nav.contact': 'Kontakt',
     
     // Hero Section
-    'hero.title': 'Twoje Lato.|Twoja Droga.|Twoja&nbsp;Wolność.',
-    'hero.subtitle': 'Odkrywaj region Alicante na własnych zasadach. Z NowRent wynajmiesz idealny samochód i przeżyjesz niezapomniane wakacje na Costa Blanca.',
+    'hero.title': 'Wynajem auta bez kaucji w Alicante i Costa Blanca',
+    'hero.subtitle': 'Auto na pobyt w Hiszpanii — prosto, elastycznie i bez stresu.',
     'hero.cta.primary': 'Zarezerwuj samochód',
     'hero.cta.secondary': 'Zobacz Samochody',
     
     // Trust Section
-    'trust.title': 'Zaufali nam tysiące zadowolonych klientów',
+    'trust.title': 'Polecane przez klientów',
     'trust.subtitle': 'W NowRent dbamy o to, by każda podróż po Costa Blanca była wygodna, bezpieczna i pełna radości. Zaufaj lokalnym ekspertom i ciesz się jazdą bez stresu – my zajmiemy się resztą.',
     'trust.badges.local': '100% Lokalny Serwis',
     'trust.badges.local.desc': 'Jesteśmy lokalną firmą z głębokimi korzeniami w społeczności',
