@@ -6,56 +6,60 @@ import Header from '@/components/Header';
 import MobileNavigation from '@/components/MobileNavigation';
 import MobileOptimizations from '@/components/MobileOptimizations';
 
+const LOADING_SESSION_KEY = 'nowrent-loading-seen';
+const LOADING_DURATION_MS = 1000;
+
 export default function ClientLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const [isLoading, setIsLoading] = useState(true);
+  const [hasMounted, setHasMounted] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+  const [showLoadingOverlay, setShowLoadingOverlay] = useState(false);
 
   useEffect(() => {
-    const checkMobile = () => setIsMobile(window.innerWidth <= 768);
-    checkMobile();
-    window.addEventListener('resize', checkMobile);
-    return () => window.removeEventListener('resize', checkMobile);
+    const mobileQuery = window.matchMedia('(max-width: 768px)');
+    const updateMobile = () => setIsMobile(mobileQuery.matches);
+
+    updateMobile();
+    setHasMounted(true);
+    mobileQuery.addEventListener('change', updateMobile);
+
+    return () => mobileQuery.removeEventListener('change', updateMobile);
   }, []);
 
   useEffect(() => {
-    // Start loading immediately
+    if (!hasMounted || isMobile) return;
+
+    try {
+      if (sessionStorage.getItem(LOADING_SESSION_KEY)) return;
+    } catch {
+      // sessionStorage unavailable — show overlay once this visit
+    }
+
+    setShowLoadingOverlay(true);
     const timer = setTimeout(() => {
-      setIsLoading(false);
-    }, isMobile ? 2000 : 3500);
+      setShowLoadingOverlay(false);
+      try {
+        sessionStorage.setItem(LOADING_SESSION_KEY, '1');
+      } catch {
+        // ignore
+      }
+    }, LOADING_DURATION_MS);
 
     return () => clearTimeout(timer);
-  }, [isMobile]);
+  }, [hasMounted, isMobile]);
 
-  if (isMobile) {
-    // On mobile, skip loading screen and show main layout immediately
-    return (
-      <>
-        <MobileOptimizations />
-        <Header />
-        <MobileNavigation />
-        <main className="min-h-screen bg-white">
-          {children}
-        </main>
-      </>
-    );
-  }
-
-  if (!isLoading) {
-    return (
-      <>
-        <MobileOptimizations />
-        <Header />
-        <MobileNavigation />
-        <main className="min-h-screen bg-white">
-          {children}
-        </main>
-      </>
-    );
-  }
-
-  return <LoadingScreen onLoadingComplete={() => setIsLoading(false)} />;
-} 
+  return (
+    <>
+      <MobileOptimizations />
+      <Header />
+      <MobileNavigation />
+      <main className="min-h-screen bg-white">
+        {children}
+      </main>
+      {showLoadingOverlay && <LoadingScreen />}
+    </>
+  );
+}

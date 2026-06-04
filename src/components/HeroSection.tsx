@@ -2,7 +2,6 @@
 
 import React from 'react';
 import Image from 'next/image';
-import { motion } from 'framer-motion';
 import { useLanguage } from '@/context/LanguageContext';
 import { WalletIcon, ShieldCheckIcon, ChatBubbleLeftRightIcon, StarIcon } from '@heroicons/react/24/outline';
 
@@ -87,51 +86,31 @@ export default function HeroSection() {
             <div className="absolute -top-6 -right-6 w-12 h-12 bg-[#FFD700] rounded-full blur-lg opacity-30" />
             <div className="absolute -bottom-6 -left-6 w-12 h-12 bg-[#87CEEB] rounded-full blur-lg opacity-30" />
 
-            {/* Main Heading */}
-            <motion.h1
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              className="text-3xl md:text-5xl lg:text-5xl xl:text-6xl font-extrabold mb-4 text-center max-w-[90%] xl:max-w-[80%] mx-auto"
-            >
+            {/* Main Heading — plain HTML so text is visible in SSR without waiting for hydration */}
+            <h1 className="text-3xl md:text-5xl lg:text-5xl xl:text-6xl font-extrabold mb-4 text-center max-w-[90%] xl:max-w-[80%] mx-auto">
               <span className="text-gradient">
                 {language === 'pl' 
                   ? 'Wynajem samochodu bez kaucji w Alicante i na Costa Blanca'
                   : 'No-deposit car rental in Alicante & Costa Blanca'}
               </span>
-            </motion.h1>
+            </h1>
 
             {/* Playful Tagline */}
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.1 }}
-              className="text-xl md:text-2xl mb-4 font-bold text-center text-[#FFD700] drop-shadow-lg"
-            >
+            <p className="text-xl md:text-2xl mb-4 font-bold text-center text-[#FFD700] drop-shadow-lg">
               {language === 'pl'
                 ? 'Auto na Twój pobyt w Hiszpanii — prosto i na własnych zasadach'
                 : 'A car for your stay in Spain — simple, flexible, on your terms'}
-            </motion.p>
+            </p>
 
-            {/* Subheading */}
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="text-lg md:text-xl mb-10 font-medium text-white text-center drop-shadow-lg max-w-[95%] xl:max-w-[85%] mx-auto leading-relaxed"
-            >
+            {/* Subheading — LCP candidate; must not start at opacity 0 */}
+            <p className="text-lg md:text-xl mb-10 font-medium text-white text-center drop-shadow-lg max-w-[95%] xl:max-w-[85%] mx-auto leading-relaxed">
               {language === 'pl'
                 ? 'Bez kaucji, bez ukrytych kosztów i bez dopłat do ubezpieczenia. Napisz do nas, a sprawdzimy dostępne auta dla Twojego terminu.'
                 : 'No deposit, no hidden fees and no insurance upsells. Message us with your dates and we’ll check what’s available for your trip.'}
-            </motion.p>
+            </p>
 
             {/* CTA Buttons */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.4 }}
-              className="mb-4 md:mb-8 lg:mb-12 flex flex-col sm:flex-row items-center justify-center gap-4"
-            >
+            <div className="mb-4 md:mb-8 lg:mb-12 flex flex-col sm:flex-row items-center justify-center gap-4">
               {/* Primary CTA - Check availability (WhatsApp first) */}
               <a
                 href="https://wa.me/34694229035"
@@ -155,7 +134,7 @@ export default function HeroSection() {
                   {language === 'pl' ? 'Zadzwoń' : 'Call us'}
                 </span>
               </a>
-            </motion.div>
+            </div>
 
             <span className="text-sm md:text-base text-white/90 text-center block font-medium tracking-wide mb-8">
               {language === 'pl'
@@ -163,22 +142,11 @@ export default function HeroSection() {
                 : 'Alicante Airport · Torrevieja · Orihuela Costa · San Pedro del Pinatar · nearby areas'}
             </span>
 
-            {/* Trust Badges */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.6 }}
-              className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 lg:gap-8"
-            >
+            {/* Trust Badges — CSS float animation only; no opacity-0 entrance */}
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 lg:gap-8">
               {trustBadges.map((badge, index) => (
-                <motion.div
+                <div
                   key={badge.id}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ 
-                    duration: 0.6,
-                    delay: 0.6 + index * 0.1,
-                  }}
                   className={`relative group overflow-hidden rounded-2xl bg-gradient-to-br ${badge.bgColor} 
                   backdrop-blur-lg border border-white/20 p-4 md:p-6
                   hover:border-white/40 transition-all duration-500 animate-float-${index + 1}
@@ -223,9 +191,9 @@ export default function HeroSection() {
                       {language === 'pl' ? badge.pl : badge.en}
                     </span>
                   </div>
-                </motion.div>
+                </div>
               ))}
-            </motion.div>
+            </div>
           </div>
         </div>
       </div>
