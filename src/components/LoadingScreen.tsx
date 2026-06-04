@@ -28,7 +28,7 @@ export default function LoadingScreen() {
           fill
           sizes="300px"
           className="object-contain"
-          priority
+          loading="lazy"
         />
       </motion.div>
 
@@ -56,7 +56,7 @@ export default function LoadingScreen() {
               fill
               sizes="286px"
               className="object-contain"
-              priority
+              loading="lazy"
             />
           </motion.div>
         ))}

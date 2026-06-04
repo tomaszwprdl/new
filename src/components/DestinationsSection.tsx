@@ -204,7 +204,7 @@ const groups = [
   },
 ];
 
-function DestinationCard({ destination, language, priority }: { destination: Destination; language: 'en' | 'pl'; priority?: boolean }) {
+function DestinationCard({ destination, language }: { destination: Destination; language: 'en' | 'pl' }) {
   return (
     <motion.article
       initial={{ opacity: 0, y: 24 }}
@@ -220,7 +220,7 @@ function DestinationCard({ destination, language, priority }: { destination: Des
           fill
           className="object-cover group-hover:scale-105 transition-transform duration-500"
           sizes="(max-width: 640px) 100vw, (max-width: 1280px) 50vw, 25vw"
-          loading={priority ? 'eager' : 'lazy'}
+          loading="lazy"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-[#0D1B33]/85 via-[#0D1B33]/10 to-transparent" />
         <h4 className="absolute bottom-3 left-4 right-4 text-lg font-bold text-white drop-shadow">
@@ -289,8 +289,6 @@ export default function DestinationsSection() {
     const booking = document.getElementById('booking');
     if (booking) booking.scrollIntoView({ behavior: 'smooth' });
   };
-
-  let cardCounter = 0;
 
   return (
     <section
@@ -361,7 +359,7 @@ export default function DestinationsSection() {
 
         {/* Mobile: collapsible accordion groups (below md) */}
         <div className="md:hidden space-y-4">
-          {groups.map((group, groupIndex) => {
+          {groups.map((group) => {
             const isOpen = openGroups.includes(group.id);
             return (
               <div
@@ -402,12 +400,11 @@ export default function DestinationsSection() {
                       className="overflow-hidden"
                     >
                       <div className="px-4 pb-5 pt-1 space-y-4">
-                        {group.ids.map((id, cardIndex) => (
+                        {group.ids.map((id) => (
                           <DestinationCard
                             key={id}
                             destination={destinations[id]}
                             language={language}
-                            priority={groupIndex === 0 && cardIndex === 0}
                           />
                         ))}
                       </div>
@@ -443,18 +440,13 @@ export default function DestinationsSection() {
                 <div
                   className={`grid grid-cols-1 sm:grid-cols-2 gap-5 md:gap-6 ${gridClass}`}
                 >
-                  {group.ids.map((id) => {
-                    const isFirst = cardCounter === 0;
-                    cardCounter += 1;
-                    return (
+                  {group.ids.map((id) => (
                       <DestinationCard
                         key={id}
                         destination={destinations[id]}
                         language={language}
-                        priority={isFirst}
                       />
-                    );
-                  })}
+                  ))}
                 </div>
               </div>
             );

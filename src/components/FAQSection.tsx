@@ -231,9 +231,12 @@ const FAQSection: React.FC = () => {
           );
         })}
       </div>
-      <img 
-        src="/images/graphics/yellow shirt.svg" 
-        alt="Decorative standing figure" 
+      <img
+        src="/images/graphics/yellow shirt.svg"
+        alt=""
+        loading="lazy"
+        decoding="async"
+        aria-hidden="true"
         className="hidden md:block absolute bottom-4 w-40 h-auto pointer-events-none select-none opacity-90 z-10"
         style={{ right: '-5.4cm' }}
       />

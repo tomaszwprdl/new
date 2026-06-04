@@ -101,7 +101,7 @@ export default function Footer() {
                 width={32}
                 height={32}
                 className="h-8 w-auto"
-                priority
+                loading="lazy"
               />
               <span className="text-white text-xl font-semibold">NowRent</span>
             </div>

@@ -195,6 +195,7 @@ export default function ClientFeatures() {
               width={160}
               height={160}
               className="rotate-12"
+              loading="lazy"
               aria-hidden="true"
             />
           </div>
@@ -206,6 +207,7 @@ export default function ClientFeatures() {
               width={140}
               height={140}
               className="-rotate-12"
+              loading="lazy"
               aria-hidden="true"
             />
           </div>
@@ -253,6 +255,8 @@ export default function ClientFeatures() {
               alt=""
               width="160"
               height="256"
+              loading="lazy"
+              decoding="async"
               style={{ display: 'block', width: '160px', height: 'auto' }}
             />
           </div>
@@ -300,6 +304,8 @@ export default function ClientFeatures() {
                   alt=""
                   width="180"
                   height="180"
+                  loading="lazy"
+                  decoding="async"
                   style={{ display: 'block', maxWidth: '100%', height: 'auto' }}
                 />
               </div>

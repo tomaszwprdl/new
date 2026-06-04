@@ -94,13 +94,12 @@ export default function Header() {
               >
                 <div className="absolute inset-0 bg-gold-gradient rounded-full blur-md opacity-50 group-hover:opacity-75 transition-opacity" />
                 <Image
-                  src="/images/logo.svg"
+                  src="/apple-touch-icon.png"
                   alt="NowRent logo"
                   width={32}
                   height={32}
                   className="h-8 w-auto"
-                  priority={true}
-                  loading="eager"
+                  loading="lazy"
                 />
               </motion.div>
               <div className="flex items-baseline">
